@@ -6,8 +6,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 public class SplashActivity extends Activity {
@@ -17,9 +15,7 @@ public class SplashActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		versionNameTextView = (TextView) findViewById(R.id.version_name);
 		try {
 			PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
