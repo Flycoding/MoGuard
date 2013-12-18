@@ -1,6 +1,10 @@
 package com.flyingh.moguard;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
@@ -31,7 +35,7 @@ public class SplashActivity extends Activity {
 				@Override
 				public void run() {
 					try {
-						UpdateInfo info = new UpdateInfoService(SplashActivity.this).getUpdateInfo();
+						final UpdateInfo info = new UpdateInfoService(SplashActivity.this).getUpdateInfo();
 						if (needUpdate(info.getVersion(), packageInfo.versionCode)) {
 							Log.i(TAG, "need update!");
 							handler.post(new Runnable() {
@@ -39,6 +43,21 @@ public class SplashActivity extends Activity {
 								@Override
 								public void run() {
 									Toast.makeText(SplashActivity.this, "need update", Toast.LENGTH_SHORT).show();
+									new AlertDialog.Builder(SplashActivity.this).setIcon(R.drawable.ic_launcher).setTitle("confirm to update?")
+											.setMessage(info.getDescription()).setCancelable(false).setPositiveButton("OK", new OnClickListener() {
+
+												@Override
+												public void onClick(DialogInterface dialog, int which) {
+													Log.i(TAG, "to download the apk...");
+												}
+											}).setNegativeButton("Cancel", new OnClickListener() {
+
+												@Override
+												public void onClick(DialogInterface dialog, int which) {
+													enter();
+												}
+
+											}).show();
 								}
 							});
 						} else {
@@ -63,6 +82,11 @@ public class SplashActivity extends Activity {
 		} catch (NameNotFoundException e) {
 			Log.i(TAG, e.getMessage());
 		}
+	}
+
+	public void enter() {
+		startActivity(new Intent(this, MainActivity.class));
+		finish();
 	}
 
 	@Override
