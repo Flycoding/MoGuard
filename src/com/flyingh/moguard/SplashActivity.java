@@ -119,6 +119,7 @@ public class SplashActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			progressDialog.show();
+			progressDialog.setCancelable(false);
 			progressDialog.setOnKeyListener(new OnKeyListener() {
 
 				@Override
