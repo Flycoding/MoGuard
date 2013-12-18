@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="get_update_information_failed">get update information failed</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="downloading_">Downloading...</string>
+    <string name="canceled">canceled</string>
 
 </resources>
