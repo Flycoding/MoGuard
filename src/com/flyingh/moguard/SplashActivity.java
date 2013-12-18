@@ -21,7 +21,7 @@ public class SplashActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_splash);
 		versionNameTextView = (TextView) findViewById(R.id.version_name);
 		try {
 			final PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
