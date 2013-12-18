@@ -40,6 +40,7 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f040002;
         public static final int app_name=0x7f040001;
+        public static final int cancel_=0x7f040008;
         public static final int canceled=0x7f040007;
         public static final int downloading_=0x7f040006;
         public static final int get_update_information_failed=0x7f040004;
