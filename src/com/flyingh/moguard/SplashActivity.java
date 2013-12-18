@@ -6,11 +6,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -20,6 +22,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -116,6 +119,23 @@ public class SplashActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			progressDialog.show();
+			progressDialog.setOnKeyListener(new OnKeyListener() {
+
+				@Override
+				public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+					switch (event.getAction()) {
+					case KeyEvent.ACTION_UP:
+						if (keyCode == KeyEvent.KEYCODE_BACK) {
+							cancel(true);
+						}
+						break;
+
+					default:
+						break;
+					}
+					return false;
+				}
+			});
 		}
 
 		@Override
@@ -132,6 +152,10 @@ public class SplashActivity extends Activity {
 					byte[] buf = new byte[1024];
 					int len = 0;
 					while ((len = is.read(buf)) != -1) {
+						if (isCancelled()) {
+							file.delete();
+							break;
+						}
 						fos.write(buf, 0, len);
 						publishProgress(contentLength, len);
 					}
@@ -154,9 +178,10 @@ public class SplashActivity extends Activity {
 			progressDialog.setProgress(progressDialog.getProgress() + values[1]);
 		}
 
+		@SuppressLint("NewApi")
 		@Override
-		protected void onCancelled() {
-			super.onCancelled();
+		protected void onCancelled(File result) {
+			super.onCancelled(result);
 			progressDialog.dismiss();
 			Toast.makeText(SplashActivity.this, R.string.canceled, Toast.LENGTH_SHORT).show();
 			enter();
