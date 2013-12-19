@@ -97,11 +97,17 @@ public class SplashActivity extends Activity {
 				}
 			} catch (Exception e) {
 				Log.i(TAG, e.getMessage());
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					Log.i(TAG, e1.getMessage());
+				}
 				handler.post(new Runnable() {
 
 					@Override
 					public void run() {
 						Toast.makeText(SplashActivity.this, R.string.get_update_information_failed, Toast.LENGTH_SHORT).show();
+						enter();
 					}
 				});
 			}
