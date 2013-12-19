@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -24,6 +26,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,14 +44,29 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+		AlphaAnimation animation = new AlphaAnimation(0, 1);
+		animation.setDuration(2000);
+		findViewById(R.id.linear_layout).startAnimation(animation);
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		progressDialog.setMessage(getString(R.string.downloading_));
 		versionNameTextView = (TextView) findViewById(R.id.version_name);
 		try {
-			PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+			final PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
 			versionNameTextView.setText(packageInfo.versionName);
-			new Thread(new CheckUpdateRunnable(packageInfo.versionCode)).start();
+			new Timer().schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					handler.post(new Runnable() {
+
+						@Override
+						public void run() {
+							new Thread(new CheckUpdateRunnable(packageInfo.versionCode)).start();
+						}
+					});
+				}
+			}, 2000);
 		} catch (NameNotFoundException e) {
 			Log.i(TAG, e.getMessage());
 		}
@@ -94,14 +112,10 @@ public class SplashActivity extends Activity {
 					});
 				} else {
 					Log.i(TAG, "no need to update,enter!");
+					enter();
 				}
 			} catch (Exception e) {
 				Log.i(TAG, e.getMessage());
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e1) {
-					Log.i(TAG, e1.getMessage());
-				}
 				handler.post(new Runnable() {
 
 					@Override
