@@ -18,6 +18,8 @@ import android.content.DialogInterface.OnKeyListener;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -62,6 +64,13 @@ public class SplashActivity extends Activity {
 
 						@Override
 						public void run() {
+							ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+							NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+							if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
+								Toast.makeText(SplashActivity.this, "Network is not available...", Toast.LENGTH_SHORT).show();
+								enter();
+								return;
+							}
 							new Thread(new CheckUpdateRunnable(packageInfo.versionCode)).start();
 						}
 					});
