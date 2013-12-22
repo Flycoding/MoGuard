@@ -100,16 +100,16 @@ public class SplashActivity extends Activity {
 
 						@Override
 						public void run() {
-							Toast.makeText(SplashActivity.this, "need update", Toast.LENGTH_SHORT).show();
-							new AlertDialog.Builder(SplashActivity.this).setIcon(R.drawable.ic_launcher).setTitle("confirm to update?")
-									.setMessage(info.getDescription()).setCancelable(false).setPositiveButton("OK", new OnClickListener() {
+							Toast.makeText(SplashActivity.this, R.string.need_update, Toast.LENGTH_SHORT).show();
+							new AlertDialog.Builder(SplashActivity.this).setIcon(R.drawable.ic_launcher).setTitle(R.string.confirm_to_update_)
+									.setMessage(info.getDescription()).setCancelable(false).setPositiveButton(R.string.ok, new OnClickListener() {
 
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
 											Log.i(TAG, "start to download the apk...");
 											new DownloadAsyncTask().execute(info.getUrl());
 										}
-									}).setNegativeButton("Cancel", new OnClickListener() {
+									}).setNegativeButton(R.string.cancel, new OnClickListener() {
 
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
@@ -156,14 +156,15 @@ public class SplashActivity extends Activity {
 					switch (event.getAction()) {
 					case KeyEvent.ACTION_UP:
 						if (keyCode == KeyEvent.KEYCODE_BACK) {
-							new AlertDialog.Builder(SplashActivity.this).setIcon(R.drawable.ic_launcher).setTitle("Cancel?")
-									.setMessage("Are you sure to cancel the download?").setPositiveButton("Confirm", new OnClickListener() {
+							new AlertDialog.Builder(SplashActivity.this).setIcon(R.drawable.ic_launcher).setTitle(R.string.cancel_)
+									.setMessage(R.string.are_you_sure_to_cancel_the_download_)
+									.setPositiveButton(R.string.confirm, new OnClickListener() {
 
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
 											cancel(true);
 										}
-									}).setNegativeButton("Cancel", null).show();
+									}).setNegativeButton(R.string.cancel, null).show();
 
 						}
 						break;

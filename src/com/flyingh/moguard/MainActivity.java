@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,10 +23,10 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flyingh.moguard.util.Const;
 import com.flyingh.vo.Feature;
 
 public class MainActivity extends Activity {
-	private static final String CONFIG_FILE_NAME = "config";
 	private static final String SECURITY_FEATURE_NAME = "security_feature_name";
 	private GridView gridView;
 	private SharedPreferences sp;
@@ -34,7 +35,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		sp = getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE);
+		sp = getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE);
 		gridView = (GridView) findViewById(R.id.grid_view);
 		gridView.setAdapter(new BaseAdapter() {
 			@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -44,6 +45,7 @@ public class MainActivity extends Activity {
 				view.setCompoundDrawablesRelativeWithIntrinsicBounds(0, Feature.getIconId(position), 0, 0);
 				view.setText(sp.contains(SECURITY_FEATURE_NAME) && Feature.SECURITY.ordinal() == position ? sp.getString(SECURITY_FEATURE_NAME, null)
 						: getItem(position));
+				view.setTextColor(Color.BLUE);
 				return view;
 			}
 
