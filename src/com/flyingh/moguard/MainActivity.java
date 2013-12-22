@@ -22,7 +22,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flyingh.vo.Features;
+import com.flyingh.vo.Feature;
 
 public class MainActivity extends Activity {
 	private static final String CONFIG_FILE_NAME = "config";
@@ -41,9 +41,9 @@ public class MainActivity extends Activity {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				TextView view = (TextView) View.inflate(MainActivity.this, R.layout.grid_view_item, null);
-				view.setCompoundDrawablesRelativeWithIntrinsicBounds(0, Features.getIconId(position), 0, 0);
-				view.setText(sp.contains(SECURITY_FEATURE_NAME) && Features.SECURITY.getPosition() == position ? sp.getString(SECURITY_FEATURE_NAME,
-						null) : getItem(position));
+				view.setCompoundDrawablesRelativeWithIntrinsicBounds(0, Feature.getIconId(position), 0, 0);
+				view.setText(sp.contains(SECURITY_FEATURE_NAME) && Feature.SECURITY.ordinal() == position ? sp.getString(SECURITY_FEATURE_NAME, null)
+						: getItem(position));
 				return view;
 			}
 
@@ -54,19 +54,19 @@ public class MainActivity extends Activity {
 
 			@Override
 			public String getItem(int position) {
-				return getResources().getString(Features.getFeatureNameId(position));
+				return getResources().getString(Feature.getFeatureNameId(position));
 			}
 
 			@Override
 			public int getCount() {
-				return Features.values().length;
+				return Feature.values().length;
 			}
 		});
 		gridView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id) {
-				if (Features.SECURITY.getPosition() != position) {
+				if (Feature.SECURITY.ordinal() != position) {
 					return false;
 				}
 				final EditText newFeatureNameEditText = (EditText) View.inflate(MainActivity.this, R.layout.change_security_feature_name, null);
