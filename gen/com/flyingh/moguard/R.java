@@ -24,21 +24,25 @@ public final class R {
         public static final int app3=0x7f020000;
         public static final int atools8=0x7f020001;
         public static final int callmsgsafe2=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int icon=0x7f020004;
-        public static final int logo=0x7f020005;
-        public static final int netmanager6=0x7f020006;
-        public static final int security=0x7f020007;
-        public static final int settings9=0x7f020008;
-        public static final int sysoptimize7=0x7f020009;
-        public static final int taskmanager4=0x7f02000a;
-        public static final int trojan5=0x7f02000b;
+        public static final int dialog=0x7f020003;
+        public static final int dialog_title=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int icon=0x7f020006;
+        public static final int logo=0x7f020007;
+        public static final int netmanager6=0x7f020008;
+        public static final int security=0x7f020009;
+        public static final int settings9=0x7f02000a;
+        public static final int sysoptimize7=0x7f02000b;
+        public static final int taskmanager4=0x7f02000c;
+        public static final int trojan5=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f080004;
+        public static final int action_settings=0x7f080006;
         public static final int feature_name=0x7f080003;
         public static final int grid_view=0x7f080000;
         public static final int linear_layout=0x7f080001;
+        public static final int password=0x7f080004;
+        public static final int repeat_password=0x7f080005;
         public static final int version_name=0x7f080002;
     }
     public static final class layout {
@@ -47,6 +51,7 @@ public final class R {
         public static final int activity_splash=0x7f030002;
         public static final int change_security_feature_name=0x7f030003;
         public static final int grid_view_item=0x7f030004;
+        public static final int set_security_dialog_view=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -67,6 +72,7 @@ public final class R {
         public static final int downloading_=0x7f040006;
         public static final int get_update_information_failed=0x7f040004;
         public static final int hello_world=0x7f040003;
+        public static final int input_password=0x7f04001f;
         public static final int kill_virus=0x7f04000e;
         public static final int main_ui=0x7f040018;
         public static final int need_update=0x7f040019;
@@ -75,7 +81,9 @@ public final class R {
         public static final int ok=0x7f040015;
         public static final int phone_guard=0x7f04000b;
         public static final int please_input_the_feature_s_new_name=0x7f040009;
+        public static final int repeat_password=0x7f040020;
         public static final int security=0x7f04000a;
+        public static final int set_password=0x7f04001e;
         public static final int settings=0x7f040012;
         public static final int system_optimize=0x7f040010;
         public static final int task_manager=0x7f04000d;
@@ -88,11 +96,17 @@ public final class R {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
+
+
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -111,5 +125,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
+        public static final int SecurityDialogTheme=0x7f060002;
     }
 }
