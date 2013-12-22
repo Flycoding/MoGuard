@@ -9,5 +9,7 @@
     <string name="downloading_">Downloading...</string>
     <string name="canceled">canceled</string>
     <string name="cancel_">Cancel?</string>
+    <string name="title_activity_security">SecurityActivity</string>
+    <string name="please_input_the_feature_s_new_name">please input the feature\'s new name</string>
 
 </resources>
