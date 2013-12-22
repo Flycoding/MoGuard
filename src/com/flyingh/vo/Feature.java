@@ -49,4 +49,8 @@ public enum Feature {
 		return getFeature(position).featureNameId;
 	}
 
+	public static Class<?> getActivityClass(int position) {
+		return getFeature(position).activityClass;
+	}
+
 }
