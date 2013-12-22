@@ -67,7 +67,7 @@ public class SplashActivity extends Activity {
 							ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 							NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 							if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
-								Toast.makeText(SplashActivity.this, "Network is not available...", Toast.LENGTH_SHORT).show();
+								Toast.makeText(SplashActivity.this, R.string.network_is_not_available_, Toast.LENGTH_SHORT).show();
 								enter();
 								return;
 							}

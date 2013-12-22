@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.flyingh.vo.Features;
 
 public class MainActivity extends Activity {
+	private static final String CONFIG_FILE_NAME = "config";
 	private static final String SECURITY_FEATURE_NAME = "security_feature_name";
 	private GridView gridView;
 	private SharedPreferences sp;
@@ -33,19 +34,16 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		sp = getSharedPreferences("config", Context.MODE_PRIVATE);
+		sp = getSharedPreferences(CONFIG_FILE_NAME, Context.MODE_PRIVATE);
 		gridView = (GridView) findViewById(R.id.grid_view);
-		final String[] features = getResources().getStringArray(R.array.features);
-		final int[] iconIds = { R.drawable.security, R.drawable.callmsgsafe2, R.drawable.app3, R.drawable.taskmanager4, R.drawable.trojan5,
-				R.drawable.netmanager6, R.drawable.sysoptimize7, R.drawable.atools8, R.drawable.settings9 };
 		gridView.setAdapter(new BaseAdapter() {
 			@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				TextView view = (TextView) View.inflate(MainActivity.this, R.layout.grid_view_item, null);
-				view.setCompoundDrawablesRelativeWithIntrinsicBounds(0, iconIds[position], 0, 0);
+				view.setCompoundDrawablesRelativeWithIntrinsicBounds(0, Features.getIconId(position), 0, 0);
 				view.setText(sp.contains(SECURITY_FEATURE_NAME) && Features.SECURITY.getPosition() == position ? sp.getString(SECURITY_FEATURE_NAME,
-						null) : features[position]);
+						null) : getItem(position));
 				return view;
 			}
 
@@ -56,12 +54,12 @@ public class MainActivity extends Activity {
 
 			@Override
 			public String getItem(int position) {
-				return features[position];
+				return getResources().getString(Features.getFeatureNameId(position));
 			}
 
 			@Override
 			public int getCount() {
-				return features.length;
+				return Features.values().length;
 			}
 		});
 		gridView.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -72,14 +70,14 @@ public class MainActivity extends Activity {
 					return false;
 				}
 				final EditText newFeatureNameEditText = (EditText) View.inflate(MainActivity.this, R.layout.change_security_feature_name, null);
-				new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.ic_launcher).setTitle("Change the feature's name?")
-						.setMessage("Hello world!!!").setView(newFeatureNameEditText).setPositiveButton("OK", new OnClickListener() {
+				new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.ic_launcher).setTitle(R.string.change_the_feature_s_name_)
+						.setView(newFeatureNameEditText).setPositiveButton(R.string.ok, new OnClickListener() {
 
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								String newFeatureName = newFeatureNameEditText.getText().toString().trim();
 								if (TextUtils.isEmpty(newFeatureName)) {
-									Toast.makeText(MainActivity.this, "the feature name should not be empty!", Toast.LENGTH_SHORT).show();
+									Toast.makeText(MainActivity.this, R.string.the_feature_name_should_not_be_empty_, Toast.LENGTH_SHORT).show();
 									return;
 								}
 								TextView textView = (TextView) view;
@@ -88,7 +86,7 @@ public class MainActivity extends Activity {
 								editor.putString(SECURITY_FEATURE_NAME, newFeatureName);
 								editor.commit();
 							}
-						}).setNegativeButton("Cancel", null).show();
+						}).setNegativeButton(R.string.cancel, null).show();
 				return false;
 			}
 		});
