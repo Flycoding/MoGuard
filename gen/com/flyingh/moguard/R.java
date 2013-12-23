@@ -37,12 +37,17 @@ public final class R {
         public static final int trojan5=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f080006;
+        public static final int action_settings=0x7f08000b;
+        public static final int cancel_input_password=0x7f080005;
+        public static final int cancel_set_password=0x7f080009;
+        public static final int confirm_input_password=0x7f080006;
+        public static final int confirm_set_password=0x7f08000a;
         public static final int feature_name=0x7f080003;
         public static final int grid_view=0x7f080000;
+        public static final int input_password=0x7f080004;
         public static final int linear_layout=0x7f080001;
-        public static final int password=0x7f080004;
-        public static final int repeat_password=0x7f080005;
+        public static final int password=0x7f080007;
+        public static final int repeat_password=0x7f080008;
         public static final int version_name=0x7f080002;
     }
     public static final class layout {
@@ -51,7 +56,8 @@ public final class R {
         public static final int activity_splash=0x7f030002;
         public static final int change_security_feature_name=0x7f030003;
         public static final int grid_view_item=0x7f030004;
-        public static final int set_security_dialog_view=0x7f030005;
+        public static final int input_security_password_dialog_view=0x7f030005;
+        public static final int set_security_password_dialog_view=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -88,6 +94,8 @@ public final class R {
         public static final int system_optimize=0x7f040010;
         public static final int task_manager=0x7f04000d;
         public static final int the_feature_name_should_not_be_empty_=0x7f040013;
+        public static final int the_password_and_the_repeat_password_are_not_the_same=0x7f040021;
+        public static final int the_password_or_the_repeat_password_should_not_be_empty=0x7f040022;
         public static final int title_activity_main=0x7f040005;
         public static final int title_activity_security=0x7f040008;
         public static final int update_info_url=0x7f040000;

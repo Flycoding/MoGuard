@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -86,9 +85,7 @@ public class MainActivity extends Activity {
 								}
 								TextView textView = (TextView) view;
 								textView.setText(newFeatureName);
-								Editor editor = sp.edit();
-								editor.putString(SECURITY_FEATURE_NAME, newFeatureName);
-								editor.commit();
+								sp.edit().putString(SECURITY_FEATURE_NAME, newFeatureName).commit();
 							}
 						}).setNegativeButton(R.string.cancel, null).show();
 				return false;
