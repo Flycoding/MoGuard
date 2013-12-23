@@ -24,7 +24,6 @@ public class SecurityActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_security);
 		sp = getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE);
 		if (hasSecurityPasswordSetted()) {
 			Log.i(TAG, "enter password to enter");
