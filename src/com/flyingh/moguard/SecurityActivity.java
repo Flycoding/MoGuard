@@ -89,6 +89,7 @@ public class SecurityActivity extends Activity {
 				}
 				sp.edit().putString(Const.SECURITY_PASSWORD, StringUtils.md5(password)).commit();
 				dialog.dismiss();
+				finish();
 			}
 		});
 		Button cancelButton = (Button) view.findViewById(R.id.cancel_set_password);
