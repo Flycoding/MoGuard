@@ -35,5 +35,6 @@
     <string name="repeat_password">repeat password</string>
     <string name="the_password_and_the_repeat_password_are_not_the_same">the password and the repeat password are not the same</string>
     <string name="the_password_or_the_repeat_password_should_not_be_empty">the password or the repeat password should not be empty</string>
+    <string name="password_is_wrong">password is wrong</string>
 
 </resources>

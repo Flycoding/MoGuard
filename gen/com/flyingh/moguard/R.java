@@ -88,6 +88,7 @@ public final class R {
         public static final int network_is_not_available_=0x7f040017;
         public static final int network_manager=0x7f04000f;
         public static final int ok=0x7f040015;
+        public static final int password_is_wrong=0x7f040023;
         public static final int phone_guard=0x7f04000b;
         public static final int please_input_the_feature_s_new_name=0x7f040009;
         public static final int repeat_password=0x7f040020;

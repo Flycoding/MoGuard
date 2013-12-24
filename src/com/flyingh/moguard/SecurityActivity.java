@@ -55,7 +55,7 @@ public class SecurityActivity extends Activity {
 				EditText passwordEditText = (EditText) view.findViewById(R.id.input_password);
 				String password = passwordEditText.getText().toString().trim();
 				if (!StringUtils.equals(StringUtils.md5(password), sp.getString(Const.SECURITY_PASSWORD, null))) {
-					Toast.makeText(SecurityActivity.this, "password is wrong", Toast.LENGTH_SHORT).show();
+					Toast.makeText(SecurityActivity.this, R.string.password_is_wrong, Toast.LENGTH_SHORT).show();
 					return;
 				}
 				dialog.dismiss();
