@@ -3,6 +3,7 @@ package com.flyingh.moguard;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -34,6 +35,10 @@ public class SecurityActivity extends Activity {
 		}
 	}
 
+	private boolean hasWizardUsed() {
+		return sp.getBoolean(Const.SECURITY_WIZARD_USED, false);
+	}
+
 	private void showInputSecurityPasswordDialog() {
 		final Dialog dialog = new Dialog(this, R.style.SecurityDialogTheme);
 		final View view = View.inflate(this, R.layout.input_security_password_dialog_view, null);
@@ -59,6 +64,13 @@ public class SecurityActivity extends Activity {
 					return;
 				}
 				dialog.dismiss();
+				if (hasWizardUsed()) {
+					Log.i(TAG, "wizard used!");
+					// TODO:
+				} else {
+					Log.i(TAG, "wizard not used!");
+					startActivity(new Intent(SecurityActivity.this, SecurityWizardActivity.class));
+				}
 			}
 		});
 		dialog.setCancelable(false);

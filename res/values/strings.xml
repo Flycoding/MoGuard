@@ -36,5 +36,16 @@
     <string name="the_password_and_the_repeat_password_are_not_the_same">the password and the repeat password are not the same</string>
     <string name="the_password_or_the_repeat_password_should_not_be_empty">the password or the repeat password should not be empty</string>
     <string name="password_is_wrong">password is wrong</string>
+    <string name="title_activity_security_wizard">SecurityWizardActivity</string>
+    <string name="first_process_setup_wizard">1.Setup Wizard 1/4</string>
+    <string name="divide_line">divide line</string>
+    <string name="image">image</string>
+    <string name="alarm_when_sim_changed">Alarm when SIM changed</string>
+    <string name="gps_tracker">GPS tracker</string>
+    <string name="remote_erase_data">Remote erase data</string>
+    <string name="remote_lock_screen">Remote lock screen</string>
+    <string name="process">process</string>
+    <string name="next">Next</string>
+    <string name="welcome_to_use_security_setup_wizard">Welcome to use security setup wizard</string>
 
 </resources>

@@ -46,6 +46,11 @@
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.flyingh.moguard.SecurityWizardActivity"
+            android:label="@string/title_activity_security_wizard" >
+        </activity>
     </application>
 
 </manifest>
