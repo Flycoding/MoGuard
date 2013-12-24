@@ -61,6 +61,7 @@ public class SecurityActivity extends Activity {
 				dialog.dismiss();
 			}
 		});
+		dialog.setCancelable(false);
 		dialog.show();
 	}
 
@@ -100,6 +101,7 @@ public class SecurityActivity extends Activity {
 				finish();
 			}
 		});
+		dialog.setCancelable(false);
 		dialog.show();
 	}
 
