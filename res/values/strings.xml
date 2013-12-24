@@ -46,6 +46,17 @@
     <string name="remote_lock_screen">Remote lock screen</string>
     <string name="process">process</string>
     <string name="next">Next</string>
+    <string name="previous">Previous</string>
     <string name="welcome_to_use_security_setup_wizard">Welcome to use security setup wizard</string>
+    <string name="alarm_will_ring_at_boot_time_when_sim_card_changed">Alarm will ring at boot time when SIM card changed</string>
+    <string name="second_process_setup_wizard">2.Bind phone number 2/4</string>
+    <string name="third_process_setup_wizard">3.Input phone number 3/4</string>
+    <string name="fourth_process_setup_wizard">4.Congratulation,setup OK 4/4</string>
+    <string name="bind">Bind</string>
+    <string name="unbound">Unbound</string>
+    <string name="the_phone_will_send_sms_to_the_phone_number_when_sim_card_changed">the phone will send SMS to the phone number when SIM card changed</string>
+    <string name="select">Select</string>
+    <string name="you_had_better_launch_the_security">You had better launch the security</string>
+    <string name="not_started">Not started</string>
 
 </resources>

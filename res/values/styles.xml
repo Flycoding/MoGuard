@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -59,14 +59,23 @@
         <item name="android:contentDescription">@string/process</item>
     </style>
 
-    <style name="btn_next" parent="android:Widget.Holo.Light.Button">
-        <item name="android:drawableRight">@drawable/next</item>
+    <style name="btn_previous_next" parent="android:Widget.Holo.Light.Button">
         <item name="android:textColor">#0f0</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="btn_next" parent="btn_previous_next">
+        <item name="android:drawableRight">@drawable/next</item>
         <item name="android:text">@string/next</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="btn_previous" parent="btn_previous_next">
+        <item name="android:drawableRight">@drawable/previous</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:text">@string/previous</item>
     </style>
 
     <style name="setup_wizard_title" parent="android:Widget.Holo.Light.TextView">

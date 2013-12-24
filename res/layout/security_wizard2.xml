@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".SecurityWizardActivity" >
+
+    <TextView
+        style="@style/setup_wizard_process_title"
+        android:text="@string/second_process_setup_wizard" />
+
+    <ImageView
+        style="@style/divide_line"
+        android:contentDescription="@string/divide_line" />
+
+    <TextView
+        style="@style/setup_wizard_title"
+        android:text="@string/alarm_will_ring_at_boot_time_when_sim_card_changed" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/unbound"
+            android:textColor="#0f0"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" >
+
+        <ImageView
+            style="@style/presence_offline"
+            android:contentDescription="@string/process"
+            android:src="@android:drawable/presence_offline" />
+
+        <ImageView
+            style="@style/presence_online"
+            android:contentDescription="@string/process"
+            android:src="@android:drawable/presence_online" />
+
+        <ImageView
+            style="@style/presence_offline"
+            android:contentDescription="@string/process"
+            android:src="@android:drawable/presence_offline" />
+
+        <ImageView
+            style="@style/presence_offline"
+            android:contentDescription="@string/process"
+            android:src="@android:drawable/presence_offline" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/image"
+            android:src="@drawable/bind" />
+
+        <Button style="@style/btn_next" />
+
+        <Button style="@style/btn_previous" />
+    </RelativeLayout>
+
+</LinearLayout>
