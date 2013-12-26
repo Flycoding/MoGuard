@@ -69,6 +69,7 @@ public class SecurityActivity extends Activity {
 					// TODO:
 				} else {
 					Log.i(TAG, "wizard not used!");
+					finish();
 					startActivity(new Intent(SecurityActivity.this, SecurityWizardActivity.class));
 				}
 			}

@@ -27,7 +27,7 @@
         android:layout_height="wrap_content" >
 
         <EditText
-            android:id="@+id/binding_phone_number"
+            android:id="@+id/bound_phone_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -78,9 +78,9 @@
             android:contentDescription="@string/image"
             android:src="@drawable/phone" />
 
-        <Button style="@style/btn_next" />
+        <Button style="@style/btn_next" android:onClick="next"/>
 
-        <Button style="@style/btn_previous" />
+        <Button style="@style/btn_previous" android:onClick="previous"/>
     </RelativeLayout>
 
 </LinearLayout>

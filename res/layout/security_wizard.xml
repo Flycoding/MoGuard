@@ -79,7 +79,7 @@
             android:contentDescription="@string/image"
             android:src="@drawable/setup1" />
 
-        <Button style="@style/btn_next" />
+        <Button style="@style/btn_next" android:onClick="next"/>
     </RelativeLayout>
 
 </LinearLayout>

@@ -76,9 +76,14 @@
             android:contentDescription="@string/image"
             android:src="@drawable/ok" />
 
-        <Button style="@style/btn_next" />
+        <Button
+            style="@style/btn_next"
+            android:onClick="set"
+            android:text="@string/set" />
 
-        <Button style="@style/btn_previous" />
+        <Button
+            style="@style/btn_previous"
+            android:onClick="previous" />
     </RelativeLayout>
 
 </LinearLayout>

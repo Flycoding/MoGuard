@@ -47,37 +47,41 @@ public final class R {
         public static final int trojan5=0x7f020017;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000c;
-        public static final int binding_phone_number=0x7f080007;
+        public static final int action_settings=0x7f08000e;
+        public static final int bind_check_box=0x7f080008;
+        public static final int bind_text_view=0x7f080007;
+        public static final int bound_phone_number=0x7f080009;
         public static final int cancel_input_password=0x7f080005;
-        public static final int cancel_set_password=0x7f08000a;
+        public static final int cancel_set_password=0x7f08000c;
         public static final int confirm_input_password=0x7f080006;
-        public static final int confirm_set_password=0x7f08000b;
+        public static final int confirm_set_password=0x7f08000d;
         public static final int feature_name=0x7f080003;
         public static final int grid_view=0x7f080000;
         public static final int input_password=0x7f080004;
         public static final int linear_layout=0x7f080001;
-        public static final int password=0x7f080008;
-        public static final int repeat_password=0x7f080009;
+        public static final int password=0x7f08000a;
+        public static final int repeat_password=0x7f08000b;
         public static final int version_name=0x7f080002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_security=0x7f030001;
-        public static final int activity_splash=0x7f030002;
-        public static final int change_security_feature_name=0x7f030003;
-        public static final int grid_view_item=0x7f030004;
-        public static final int input_security_password_dialog_view=0x7f030005;
-        public static final int security_wizard=0x7f030006;
-        public static final int security_wizard2=0x7f030007;
-        public static final int security_wizard3=0x7f030008;
-        public static final int security_wizard4=0x7f030009;
-        public static final int set_security_password_dialog_view=0x7f03000a;
+        public static final int activity_select_contact=0x7f030002;
+        public static final int activity_splash=0x7f030003;
+        public static final int change_security_feature_name=0x7f030004;
+        public static final int grid_view_item=0x7f030005;
+        public static final int input_security_password_dialog_view=0x7f030006;
+        public static final int security_wizard=0x7f030007;
+        public static final int security_wizard2=0x7f030008;
+        public static final int security_wizard3=0x7f030009;
+        public static final int security_wizard4=0x7f03000a;
+        public static final int set_security_password_dialog_view=0x7f03000b;
     }
     public static final class menu {
         public static final int main=0x7f070000;
         public static final int security=0x7f070001;
         public static final int security_wizard=0x7f070002;
+        public static final int select_contact=0x7f070003;
     }
     public static final class string {
         public static final int action_settings=0x7f040002;
@@ -88,6 +92,7 @@ public final class R {
         public static final int apps=0x7f04000c;
         public static final int are_you_sure_to_cancel_the_download_=0x7f04001b;
         public static final int bind=0x7f040034;
+        public static final int bound=0x7f04003b;
         public static final int cancel=0x7f040014;
         public static final int cancel_=0x7f04001c;
         public static final int canceled=0x7f040007;
@@ -122,6 +127,7 @@ public final class R {
         public static final int second_process_setup_wizard=0x7f040031;
         public static final int security=0x7f04000a;
         public static final int select=0x7f040037;
+        public static final int set=0x7f04003a;
         public static final int set_password=0x7f04001e;
         public static final int settings=0x7f040012;
         public static final int system_optimize=0x7f040010;
@@ -134,6 +140,7 @@ public final class R {
         public static final int title_activity_main=0x7f040005;
         public static final int title_activity_security=0x7f040008;
         public static final int title_activity_security_wizard=0x7f040024;
+        public static final int title_activity_select_contact=0x7f04003c;
         public static final int unbound=0x7f040035;
         public static final int update_info_url=0x7f040000;
         public static final int welcome_to_use_security_setup_wizard=0x7f04002f;
@@ -166,11 +173,13 @@ public final class R {
 
 
 
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
 
 
 

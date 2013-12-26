@@ -58,5 +58,8 @@
     <string name="select">Select</string>
     <string name="you_had_better_launch_the_security">You had better launch the security</string>
     <string name="not_started">Not started</string>
+    <string name="set">Set</string>
+    <string name="bound">Bound</string>
+    <string name="title_activity_select_contact">SelectContactActivity</string>
 
 </resources>
