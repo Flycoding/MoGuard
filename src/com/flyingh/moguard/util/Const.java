@@ -10,5 +10,6 @@ public class Const {
 	public static final String BOUND_PHONE_NUMBER = "bound_phone_number";
 	public static final String SIM_SERIAL_NUMBER = "sim_serial_number";
 	public static final String IS_SIM_SERIAL_NUMBER_BOUND = "is_sim_serial_number_bound";
+	public static final String STATUS_STARTED = "status_started";
 
 }

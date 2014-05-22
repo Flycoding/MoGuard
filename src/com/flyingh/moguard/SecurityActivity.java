@@ -12,7 +12,9 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flyingh.moguard.util.Const;
@@ -21,6 +23,8 @@ import com.flyingh.moguard.util.StringUtils;
 public class SecurityActivity extends Activity {
 	private static final String TAG = "SecurityActivity";
 	private SharedPreferences sp;
+	private CheckBox startOrNotCheckBox;
+	private TextView boundPhoneNumberTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,30 @@ public class SecurityActivity extends Activity {
 			Log.i(TAG, "set security password");
 			showSetSecurityPasswordDialog();
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (boundPhoneNumberTextView != null && startOrNotCheckBox != null) {
+			setInfo();
+		}
+	}
+
+	private void setInfo() {
+		boundPhoneNumberTextView.setText(getString(R.string.bound_phone_number_is_) + sp.getString(Const.BOUND_PHONE_NUMBER, ""));
+		boolean isStarted = sp.getBoolean(Const.STATUS_STARTED, false);
+		startOrNotCheckBox.setChecked(isStarted);
+		startOrNotCheckBox.setText(isStarted ? R.string.started : R.string.not_started);
+	}
+
+	public void startWizard(View view) {
+		startActivity(new Intent(this, SecurityWizardActivity.class));
+	}
+
+	public void startOrNot(View view) {
+		sp.edit().putBoolean(Const.STATUS_STARTED, startOrNotCheckBox.isChecked()).commit();
+		startOrNotCheckBox.setText(startOrNotCheckBox.isChecked() ? R.string.started : R.string.not_started);
 	}
 
 	private boolean hasWizardUsed() {
@@ -54,7 +82,6 @@ public class SecurityActivity extends Activity {
 		});
 		Button confirmInputButton = (Button) view.findViewById(R.id.confirm_input_password);
 		confirmInputButton.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				EditText passwordEditText = (EditText) view.findViewById(R.id.input_password);
@@ -66,7 +93,10 @@ public class SecurityActivity extends Activity {
 				dialog.dismiss();
 				if (hasWizardUsed()) {
 					Log.i(TAG, "wizard used!");
-					// TODO:
+					setContentView(R.layout.activity_security);
+					boundPhoneNumberTextView = (TextView) findViewById(R.id.bound_phone_number_text_view);
+					startOrNotCheckBox = (CheckBox) findViewById(R.id.start_or_not_checkbox);
+					setInfo();
 				} else {
 					Log.i(TAG, "wizard not used!");
 					finish();

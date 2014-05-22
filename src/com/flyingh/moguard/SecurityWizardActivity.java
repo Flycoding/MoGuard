@@ -1,7 +1,10 @@
 package com.flyingh.moguard;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -23,12 +26,40 @@ public class SecurityWizardActivity extends Activity {
 	private int currentProgress = 1;
 	private SharedPreferences sp;
 	private EditText boundPhoneNumberEditText;
+	private TextView startStatusTextView;
+	private CheckBox startOrNotCheckBox;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.security_wizard);
 		sp = getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE);
+	}
+
+	public void startOrNot(View view) {
+		CheckBox checkBox = (CheckBox) view;
+		startStatusTextView.setText(checkBox.isChecked() ? R.string.started : R.string.not_started);
+		sp.edit().putBoolean(Const.STATUS_STARTED, checkBox.isChecked()).commit();
+	}
+
+	public void set(View view) {
+		if (startOrNotCheckBox.isChecked()) {
+			finishSetting();
+		} else {
+			new AlertDialog.Builder(this).setTitle("Confirm?").setMessage("Are you sure not to start?")
+					.setPositiveButton("OK", new OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							finishSetting();
+						}
+					}).setNegativeButton("Cancel", null).show();
+		}
+	}
+
+	private void finishSetting() {
+		sp.edit().putBoolean(Const.SECURITY_WIZARD_USED, true).commit();
+		finish();
 	}
 
 	public void selectContact(View view) {
@@ -104,6 +135,11 @@ public class SecurityWizardActivity extends Activity {
 			break;
 		case 4:
 			setContentView(R.layout.security_wizard4);
+			startStatusTextView = (TextView) findViewById(R.id.start_status);
+			boolean isStarted = sp.getBoolean(Const.STATUS_STARTED, false);
+			startStatusTextView.setText(isStarted ? R.string.started : R.string.not_started);
+			startOrNotCheckBox = (CheckBox) findViewById(R.id.start_or_not_checkbox);
+			startOrNotCheckBox.setChecked(isStarted);
 			break;
 		default:
 			break;
