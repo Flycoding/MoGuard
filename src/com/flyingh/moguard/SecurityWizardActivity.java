@@ -62,7 +62,7 @@ public class SecurityWizardActivity extends Activity {
 	public void bindOrUnBind(View view) {
 		CheckBox checkBox = (CheckBox) view;
 		TextView bindTextView = (TextView) findViewById(R.id.bind_text_view);
-		bindTextView.setText(checkBox.isChecked() ? R.string.bound : R.string.unbound);
+		bindTextView.setText(checkBox.isChecked() ? R.string.sim_bound : R.string.sim_unbound);
 		Editor editor = sp.edit();
 		if (checkBox.isChecked()) {
 			TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -93,7 +93,7 @@ public class SecurityWizardActivity extends Activity {
 			TextView bindTextView = (TextView) findViewById(R.id.bind_text_view);
 			CheckBox bindCheckBox = (CheckBox) findViewById(R.id.bind_check_box);
 			if (sp.getBoolean(Const.IS_SIM_SERIAL_NUMBER_BOUND, false)) {
-				bindTextView.setText(R.string.bound);
+				bindTextView.setText(R.string.sim_bound);
 				bindCheckBox.setChecked(true);
 			}
 			break;

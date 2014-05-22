@@ -15,7 +15,7 @@
     <string name="apps">Apps</string>
     <string name="task_manager">Task Manager</string>
     <string name="kill_virus">Kill Virus</string>
-    <string name="network_manager">Network Manager</string>
+    <string name="network_manager">Network</string>
     <string name="system_optimize">System Optimize</string>
     <string name="advanced_tools">Advanced Tools</string>
     <string name="settings">Settings</string>
@@ -24,7 +24,7 @@
     <string name="ok">OK</string>
     <string name="change_the_feature_s_name_">Change the feature\'s name?</string>
     <string name="network_is_not_available_">Network is not available...</string>
-    <string name="main_ui">Main UI</string>
+    <string name="mogurad">MoGuard</string>
     <string name="need_update">need update</string>
     <string name="confirm_to_update_">confirm to update?</string>
     <string name="are_you_sure_to_cancel_the_download_">Are you sure to cancel the download?</string>
@@ -53,13 +53,13 @@
     <string name="third_process_setup_wizard">3.Input phone number 3/4</string>
     <string name="fourth_process_setup_wizard">4.Congratulation,setup OK 4/4</string>
     <string name="bind">Bind</string>
-    <string name="unbound">Unbound</string>
+    <string name="sim_unbound">SIM Unbound</string>
+    <string name="sim_bound">SIM Bound</string>
     <string name="the_phone_will_send_sms_to_the_phone_number_when_sim_card_changed">the phone will send SMS to the phone number when SIM card changed</string>
     <string name="select">Select</string>
     <string name="you_had_better_launch_the_security">You had better launch the security</string>
     <string name="not_started">Not started</string>
     <string name="set">Set</string>
-    <string name="bound">Bound</string>
     <string name="title_activity_select_contact">SelectContactActivity</string>
 
 </resources>

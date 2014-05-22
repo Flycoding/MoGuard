@@ -44,8 +44,8 @@ public class MainActivity extends Activity {
 			public View getView(int position, View convertView, ViewGroup parent) {
 				TextView view = (TextView) View.inflate(MainActivity.this, R.layout.grid_view_item, null);
 				view.setCompoundDrawablesRelativeWithIntrinsicBounds(0, Feature.getIconId(position), 0, 0);
-				view.setText(sp.contains(SECURITY_FEATURE_NAME) && Feature.SECURITY.ordinal() == position ? sp.getString(SECURITY_FEATURE_NAME, null)
-						: getItem(position));
+				view.setText(sp.contains(SECURITY_FEATURE_NAME) && Feature.SECURITY.ordinal() == position ? sp
+						.getString(SECURITY_FEATURE_NAME, null) : getItem(position));
 				view.setTextColor(Color.BLUE);
 				return view;
 			}
@@ -72,15 +72,18 @@ public class MainActivity extends Activity {
 				if (Feature.SECURITY.ordinal() != position) {
 					return false;
 				}
-				final EditText newFeatureNameEditText = (EditText) View.inflate(MainActivity.this, R.layout.change_security_feature_name, null);
-				new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.ic_launcher).setTitle(R.string.change_the_feature_s_name_)
-						.setView(newFeatureNameEditText).setPositiveButton(R.string.ok, new OnClickListener() {
+				final EditText newFeatureNameEditText = (EditText) View.inflate(MainActivity.this,
+						R.layout.change_security_feature_name, null);
+				new AlertDialog.Builder(MainActivity.this).setIcon(R.drawable.ic_launcher)
+						.setTitle(R.string.change_the_feature_s_name_).setView(newFeatureNameEditText)
+						.setPositiveButton(R.string.ok, new OnClickListener() {
 
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								String newFeatureName = newFeatureNameEditText.getText().toString().trim();
 								if (TextUtils.isEmpty(newFeatureName)) {
-									Toast.makeText(MainActivity.this, R.string.the_feature_name_should_not_be_empty_, Toast.LENGTH_SHORT).show();
+									Toast.makeText(MainActivity.this, R.string.the_feature_name_should_not_be_empty_,
+											Toast.LENGTH_SHORT).show();
 									return;
 								}
 								TextView textView = (TextView) view;
