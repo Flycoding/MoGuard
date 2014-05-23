@@ -11,5 +11,7 @@ public class Const {
 	public static final String SIM_SERIAL_NUMBER = "sim_serial_number";
 	public static final String IS_SIM_SERIAL_NUMBER_BOUND = "is_sim_serial_number_bound";
 	public static final String STATUS_STARTED = "status_started";
+	public static final String REQUEST_LOCATION_CODE = "*#location#*";
+	protected static final String PREVIOUS_LOCATION = "previous_location";
 
 }
