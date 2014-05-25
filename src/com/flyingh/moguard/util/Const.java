@@ -17,5 +17,7 @@ public class Const {
 	public static final String REQUEST_ALARM_CODE = "*#alarm#*";
 	protected static final String PREVIOUS_LOCATION = "previous_location";
 	public static final String DEFAULT_LOCK_PASSWORD = "password";
+	public static final String ADDRESS_DB_NAME = "address.db";
+	public static final int MIN_PHONE_NUMBER_PREFIX = 7;
 
 }

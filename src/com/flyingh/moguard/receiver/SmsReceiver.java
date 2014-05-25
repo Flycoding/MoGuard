@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Build;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
@@ -51,8 +52,17 @@ public class SmsReceiver extends BroadcastReceiver {
 
 	private void requestAlarm(Context context) {
 		MediaPlayer player = MediaPlayer.create(context, R.raw.hay);
+		player.setOnCompletionListener(new OnCompletionListener() {
+
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				mp.release();
+				mp = null;
+			}
+		});
 		player.setVolume(1, 1);
 		player.start();
+
 	}
 
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
@@ -73,8 +83,8 @@ public class SmsReceiver extends BroadcastReceiver {
 			return;
 		}
 		Log.i(TAG, location);
-		String boundPhoneNumber = context.getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE).getString(Const.BOUND_PHONE_NUMBER,
-				"5556");
+		String boundPhoneNumber = context.getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE).getString(
+				Const.BOUND_PHONE_NUMBER, "5556");
 		if (TextUtils.isEmpty(boundPhoneNumber)) {
 			return;
 		}

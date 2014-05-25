@@ -74,5 +74,6 @@
     <string name="title_activity_query_phone_number">QueryPhoneNumberActivity</string>
     <string name="please_input_the_phone_number">Please input the phone number</string>
     <string name="query">Query</string>
+    <string name="the_phone_number_s_length_should_not_less_than_">"the phone number's length should not less than "</string>
 
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="update_info_url">http://10.1.76.30:8080/update_info.xml</string>
+    <string name="update_info_url">http://169.254.31.121:8080/update_info.xml</string>
+    <string name="address_db_url">http://169.254.31.121:8080/address.db</string>
 
 </resources>
