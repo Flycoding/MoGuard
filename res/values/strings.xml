@@ -69,5 +69,10 @@
     <string name="send_lock_to_request_lock_the_device">send *#lock#* to request lock the device</string>
     <string name="send_wipe_to_request_wipe_data">send *#wipe#* to request wipe data</string>
     <string name="send_alarm_to_request_alarm">send *#alarm#* to request alarm</string>
+    <string name="title_activity_advanced_tools">AdvancedToolsActivity</string>
+    <string name="query_phone_number_attribution">Query phone number attribution</string>
+    <string name="title_activity_query_phone_number">QueryPhoneNumberActivity</string>
+    <string name="please_input_the_phone_number">Please input the phone number</string>
+    <string name="query">Query</string>
 
 </resources>

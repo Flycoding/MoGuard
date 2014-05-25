@@ -83,6 +83,15 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.flyingh.moguard.AdvancedToolsActivity"
+            android:label="@string/title_activity_advanced_tools" >
+        </activity>
+        <activity
+            android:name="com.flyingh.moguard.QueryPhoneNumberActivity"
+            android:label="@string/title_activity_query_phone_number" >
+        </activity>
     </application>
 
 </manifest>

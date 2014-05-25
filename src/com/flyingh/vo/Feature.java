@@ -1,5 +1,6 @@
 package com.flyingh.vo;
 
+import com.flyingh.moguard.AdvancedToolsActivity;
 import com.flyingh.moguard.R;
 import com.flyingh.moguard.SecurityActivity;
 
@@ -12,7 +13,7 @@ public enum Feature {
 	KILL_VIRUS(R.drawable.trojan5, R.string.kill_virus, null),
 	NETWORK_MANAGER(R.drawable.netmanager6, R.string.network_manager, null),
 	SYSTEM_OPTIMIZE(R.drawable.sysoptimize7, R.string.system_optimize, null),
-	ADVANCED_TOOLS(R.drawable.atools8, R.string.advanced_tools, null),
+	ADVANCED_TOOLS(R.drawable.atools8, R.string.advanced_tools, AdvancedToolsActivity.class),
 	SETTINGS(R.drawable.settings9, R.string.settings, null);
 	//@formatter:on
 	private int iconId;
