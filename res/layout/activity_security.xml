@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/bound_phone_number_is_"
         android:textColor="#0f0"
-        android:textSize="30sp" />
+        android:textSize="15sp" />
 
     <CheckBox
         android:id="@+id/start_or_not_checkbox"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:onClick="startOrNot"
         android:textColor="#0f0"
-        android:textSize="30sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -33,6 +33,41 @@
         android:onClick="startWizard"
         android:text="@string/start_the_setup_wizard"
         android:textColor="#0f0"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/when_the_device_is_missing_send_code_to_the_phone_"
+        android:textColor="#0f0"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_location_to_request_location"
+        android:textColor="#0f0"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_lock_to_request_lock_the_device"
+        android:textColor="#0f0"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_wipe_to_request_wipe_data"
+        android:textColor="#0f0"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_alarm_to_request_alarm"
+        android:textColor="#0f0"
+        android:textSize="12sp" />
 
 </LinearLayout>

@@ -12,6 +12,10 @@ public class Const {
 	public static final String IS_SIM_SERIAL_NUMBER_BOUND = "is_sim_serial_number_bound";
 	public static final String STATUS_STARTED = "status_started";
 	public static final String REQUEST_LOCATION_CODE = "*#location#*";
+	public static final String REQUEST_LOCK_CODE = "*#lock#*";
+	public static final String REQUEST_WIPE_CODE = "*#wipe#*";
+	public static final String REQUEST_ALARM_CODE = "*#alarm#*";
 	protected static final String PREVIOUS_LOCATION = "previous_location";
+	public static final String DEFAULT_LOCK_PASSWORD = "password";
 
 }

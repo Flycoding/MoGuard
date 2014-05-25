@@ -1,8 +1,8 @@
 package com.flyingh.moguard.util;
 
+import java.math.BigInteger;
 import java.security.MessageDigest;
 
-import android.util.Base64;
 import android.util.Log;
 
 public class StringUtils {
@@ -14,7 +14,7 @@ public class StringUtils {
 
 	public static String md5(String password) {
 		try {
-			return Base64.encodeToString(MessageDigest.getInstance("MD5").digest(password.getBytes("UTF-8")), Base64.DEFAULT);
+			return String.format("%032x", new BigInteger(1, MessageDigest.getInstance("MD5").digest(password.getBytes())));
 		} catch (Exception e) {
 			Log.i(TAG, e.getMessage());
 		}

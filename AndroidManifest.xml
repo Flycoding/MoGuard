@@ -74,6 +74,15 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+        <receiver android:name="com.flyingh.moguard.receiver.SecurityDeviceAdminReceiver" >
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/security_device_admin" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

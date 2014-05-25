@@ -64,5 +64,10 @@
     <string name="started">Started</string>
     <string name="bound_phone_number_is_">Bound phone number is:</string>
     <string name="start_the_setup_wizard">start the setup wizard</string>
+    <string name="send_location_to_request_location">send *#location#* to request location</string>
+    <string name="when_the_device_is_missing_send_code_to_the_phone_">When the device is missing,send code to the phone:</string>
+    <string name="send_lock_to_request_lock_the_device">send *#lock#* to request lock the device</string>
+    <string name="send_wipe_to_request_wipe_data">send *#wipe#* to request wipe data</string>
+    <string name="send_alarm_to_request_alarm">send *#alarm#* to request alarm</string>
 
 </resources>

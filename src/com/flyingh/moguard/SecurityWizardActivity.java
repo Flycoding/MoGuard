@@ -2,6 +2,8 @@ package com.flyingh.moguard;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -19,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.flyingh.moguard.receiver.SecurityDeviceAdminReceiver;
 import com.flyingh.moguard.util.Const;
 
 public class SecurityWizardActivity extends Activity {
@@ -59,6 +62,13 @@ public class SecurityWizardActivity extends Activity {
 
 	private void finishSetting() {
 		sp.edit().putBoolean(Const.SECURITY_WIZARD_USED, true).commit();
+		DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+		ComponentName componentName = new ComponentName(this, SecurityDeviceAdminReceiver.class);
+		if (!dpm.isAdminActive(componentName)) {
+			Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+			intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
+			startActivity(intent);
+		}
 		finish();
 	}
 
