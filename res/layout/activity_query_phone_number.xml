@@ -11,14 +11,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/please_input_the_phone_number"
+        android:text="@string/please_input_the_phone_number_or_area_number"
         android:textColor="#0f0" />
 
     <EditText
+        android:id="@+id/queryParamEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
-        android:id="@+id/phoneNumberEditText"
         android:textColor="#0f0" />
 
     <Button

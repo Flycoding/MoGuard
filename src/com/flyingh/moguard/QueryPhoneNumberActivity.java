@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,13 +22,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.flyingh.engine.QueryNumberService;
 import com.flyingh.moguard.util.Const;
 
 public class QueryPhoneNumberActivity extends Activity {
 	protected static final Integer ERROR = -1;
 	private ProgressDialog dialog;
-	private EditText phoneNumberEditText;
+	private EditText queryParamEditText;
+	private TextView resultTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,8 @@ public class QueryPhoneNumberActivity extends Activity {
 		if (!isAddressDbExists()) {
 			downloadDb();
 		}
-		phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
+		queryParamEditText = (EditText) findViewById(R.id.queryParamEditText);
+		resultTextView = (TextView) findViewById(R.id.resultTextView);
 	}
 
 	private void downloadDb() {
@@ -128,12 +134,14 @@ public class QueryPhoneNumberActivity extends Activity {
 	}
 
 	public void query(View view) {
-		String phoneNumber = phoneNumberEditText.getText().toString().trim();
-		if (TextUtils.isEmpty(phoneNumber) || phoneNumber.length() < Const.MIN_PHONE_NUMBER_PREFIX) {
-			Toast.makeText(this, R.string.the_phone_number_s_length_should_not_less_than_ + Const.MIN_PHONE_NUMBER_PREFIX,
-					Toast.LENGTH_SHORT).show();
-			phoneNumberEditText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake));
+		String queryParam = queryParamEditText.getText().toString().trim();
+		if (TextUtils.isEmpty(queryParam)) {
+			Toast.makeText(this, R.string.the_phone_number_should_not_be_empty, Toast.LENGTH_SHORT).show();
+			queryParamEditText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake));
+			return;
 		}
+		String result = QueryNumberService.query(this, queryParam);
+		resultTextView.setText(TextUtils.isEmpty(result) ? getString(R.string.no_result) : result);
 	}
 
 	@Override

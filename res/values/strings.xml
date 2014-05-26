@@ -72,8 +72,13 @@
     <string name="title_activity_advanced_tools">AdvancedToolsActivity</string>
     <string name="query_phone_number_attribution">Query phone number attribution</string>
     <string name="title_activity_query_phone_number">QueryPhoneNumberActivity</string>
-    <string name="please_input_the_phone_number">Please input the phone number</string>
     <string name="query">Query</string>
     <string name="the_phone_number_s_length_should_not_less_than_">"the phone number's length should not less than "</string>
+    <string name="the_phone_number_should_not_be_empty">the phone number should not be empty</string>
+    <string name="area_">Area:</string>
+    <string name="city_">City:</string>
+    <string name="cardtype_">CardType:</string>
+    <string name="no_result">No result</string>
+    <string name="please_input_the_phone_number_or_area_number">Please input the phone number or area number</string>
 
 </resources>
