@@ -80,5 +80,11 @@
     <string name="cardtype_">CardType:</string>
     <string name="no_result">No result</string>
     <string name="please_input_the_phone_number_or_area_number">Please input the phone number or area number</string>
+    <string name="phone_nubmer_attribution_setup">Phone nubmer attribution setup</string>
+    <string name="start_service">Start service</string>
+    <string name="show_short_information">Show short information</string>
+    <string name="show_detail_information">Show detail information</string>
+    <string name="service_started">Service started</string>
+    <string name="service_not_starts">Service not starts</string>
 
 </resources>

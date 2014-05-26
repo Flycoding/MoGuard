@@ -19,5 +19,7 @@ public class Const {
 	public static final String DEFAULT_LOCK_PASSWORD = "password";
 	public static final String ADDRESS_DB_NAME = "address.db";
 	public static final int MIN_PHONE_NUMBER_PREFIX = 7;
+	public static final String SHOW_DEFAIL_INFO = "show_defail_info";
+	public static final String PHONE_NUMBER_ATTRIBUTION_SERVICE_STARTED = "phone_number_attribution_service_started";
 
 }

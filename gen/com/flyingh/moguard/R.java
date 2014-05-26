@@ -62,27 +62,31 @@ public final class R {
         public static final int trojan5=0x7f02001b;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0014;
-        public static final int bind_check_box=0x7f0b000d;
-        public static final int bind_text_view=0x7f0b000c;
-        public static final int bound_phone_number=0x7f0b000e;
-        public static final int bound_phone_number_text_view=0x7f0b0004;
-        public static final int cancel_input_password=0x7f0b000a;
-        public static final int cancel_set_password=0x7f0b0012;
-        public static final int confirm_input_password=0x7f0b000b;
-        public static final int confirm_set_password=0x7f0b0013;
+        public static final int action_settings=0x7f0b0018;
+        public static final int bind_check_box=0x7f0b0011;
+        public static final int bind_text_view=0x7f0b0010;
+        public static final int bound_phone_number=0x7f0b0012;
+        public static final int bound_phone_number_text_view=0x7f0b0008;
+        public static final int cancel_input_password=0x7f0b000e;
+        public static final int cancel_set_password=0x7f0b0016;
+        public static final int confirm_input_password=0x7f0b000f;
+        public static final int confirm_set_password=0x7f0b0017;
         public static final int container=0x7f0b0000;
-        public static final int feature_name=0x7f0b0008;
-        public static final int grid_view=0x7f0b0001;
-        public static final int input_password=0x7f0b0009;
-        public static final int linear_layout=0x7f0b0006;
-        public static final int password=0x7f0b0010;
-        public static final int queryParamEditText=0x7f0b0002;
-        public static final int repeat_password=0x7f0b0011;
-        public static final int resultTextView=0x7f0b0003;
-        public static final int start_or_not_checkbox=0x7f0b0005;
-        public static final int start_status=0x7f0b000f;
-        public static final int version_name=0x7f0b0007;
+        public static final int feature_name=0x7f0b000c;
+        public static final int grid_view=0x7f0b0005;
+        public static final int input_password=0x7f0b000d;
+        public static final int linear_layout=0x7f0b000a;
+        public static final int password=0x7f0b0014;
+        public static final int queryParamEditText=0x7f0b0006;
+        public static final int repeat_password=0x7f0b0015;
+        public static final int resultTextView=0x7f0b0007;
+        public static final int serviceStatusTextView=0x7f0b0001;
+        public static final int showDetailOrNotCheckBox=0x7f0b0004;
+        public static final int showInfoTextView=0x7f0b0003;
+        public static final int startOrNotCheckBox=0x7f0b0002;
+        public static final int start_or_not_checkbox=0x7f0b0009;
+        public static final int start_status=0x7f0b0013;
+        public static final int version_name=0x7f0b000b;
     }
     public static final class layout {
         public static final int activity_advanced_tools=0x7f030000;
@@ -151,6 +155,7 @@ public final class R {
         public static final int ok=0x7f070016;
         public static final int password_is_wrong=0x7f070024;
         public static final int phone_guard=0x7f07000c;
+        public static final int phone_nubmer_attribution_setup=0x7f070051;
         public static final int please_input_the_feature_s_new_name=0x7f07000a;
         public static final int please_input_the_phone_number_or_area_number=0x7f070050;
         public static final int previous=0x7f07002f;
@@ -167,11 +172,16 @@ public final class R {
         public static final int send_location_to_request_location=0x7f070041;
         public static final int send_lock_to_request_lock_the_device=0x7f070043;
         public static final int send_wipe_to_request_wipe_data=0x7f070044;
+        public static final int service_not_starts=0x7f070056;
+        public static final int service_started=0x7f070055;
         public static final int set=0x7f07003c;
         public static final int set_password=0x7f07001f;
         public static final int settings=0x7f070013;
+        public static final int show_detail_information=0x7f070054;
+        public static final int show_short_information=0x7f070053;
         public static final int sim_bound=0x7f070037;
         public static final int sim_unbound=0x7f070036;
+        public static final int start_service=0x7f070052;
         public static final int start_the_setup_wizard=0x7f070040;
         public static final int started=0x7f07003e;
         public static final int system_optimize=0x7f070011;

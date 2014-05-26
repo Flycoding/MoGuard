@@ -47,15 +47,6 @@
             android:name="com.flyingh.moguard.SecurityActivity"
             android:label="@string/title_activity_security" >
         </activity>
-
-        <receiver
-            android:name="com.flyingh.moguard.receiver.PhoneCallReceiver"
-            android:exported="true" >
-            <intent-filter android:priority="1000" >
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
-            </intent-filter>
-        </receiver>
-
         <activity
             android:name="com.flyingh.moguard.SecurityWizardActivity"
             android:label="@string/title_activity_security_wizard" >
@@ -64,7 +55,25 @@
             android:name="com.flyingh.moguard.SelectContactActivity"
             android:label="@string/title_activity_select_contact" >
         </activity>
+        <activity
+            android:name="com.flyingh.moguard.AdvancedToolsActivity"
+            android:label="@string/title_activity_advanced_tools" >
+        </activity>
+        <activity
+            android:name="com.flyingh.moguard.QueryPhoneNumberActivity"
+            android:label="@string/title_activity_query_phone_number" >
+        </activity>
 
+        <service android:name="com.flyingh.engine.service.PhoneNumberAttributionService" >
+        </service>
+
+        <receiver
+            android:name="com.flyingh.moguard.receiver.PhoneCallReceiver"
+            android:exported="true" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
         <receiver android:name="com.flyingh.moguard.receiver.BootCompletedReceiver" >
             <intent-filter android:priority="1000" >
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -84,15 +93,6 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
-
-        <activity
-            android:name="com.flyingh.moguard.AdvancedToolsActivity"
-            android:label="@string/title_activity_advanced_tools" >
-        </activity>
-        <activity
-            android:name="com.flyingh.moguard.QueryPhoneNumberActivity"
-            android:label="@string/title_activity_query_phone_number" >
-        </activity>
     </application>
 
 </manifest>
