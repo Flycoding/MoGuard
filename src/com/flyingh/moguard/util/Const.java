@@ -22,5 +22,7 @@ public class Const {
 	public static final String SHOW_DEFAIL_INFO = "show_defail_info";
 	public static final String PHONE_NUMBER_ATTRIBUTION_SERVICE_STARTED = "phone_number_attribution_service_started";
 	public static final String PHONE_NUMBER_ATTRIBUTION_BACKGROUND = "phone_number_attribution_background";
+	public static final String LAST_ATTRIBUTION_POSITION_X = "last_attribution_position_x";
+	public static final String LAST_ATTRIBUTION_POSITION_Y = "last_attribution_position_y";
 
 }

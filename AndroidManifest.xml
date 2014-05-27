@@ -93,6 +93,11 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.flyingh.moguard.PhoneAttributionPositionActivity"
+            android:label="@string/title_activity_phone_attribution_position" >
+        </activity>
     </application>
 
 </manifest>

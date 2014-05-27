@@ -84,6 +84,10 @@ public class AdvancedToolsActivity extends Activity {
 		}).show();
 	}
 
+	public void setPhoneAttributionPosition(View view) {
+		startActivity(new Intent(this, PhoneAttributionPositionActivity.class));
+	}
+
 	public void queryPhoneNumber(View view) {
 		startActivity(new Intent(this, QueryPhoneNumberActivity.class));
 	}

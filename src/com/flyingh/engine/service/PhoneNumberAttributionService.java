@@ -50,12 +50,7 @@ public class PhoneNumberAttributionService extends Service {
 					if (TextUtils.isEmpty(result)) {
 						return;
 					}
-					view = new TextView(PhoneNumberAttributionService.this);
-					view.setGravity(Gravity.CENTER);
-					view.setText(result);
-					view.setTextColor(Color.YELLOW);
-					view.setBackgroundColor(sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_BACKGROUND, Color.GREEN));
-					windowManager.addView(view, getParams());
+					addView(result);
 					break;
 				case TelephonyManager.CALL_STATE_OFFHOOK:
 					removeView();
@@ -63,6 +58,15 @@ public class PhoneNumberAttributionService extends Service {
 				default:
 					break;
 				}
+			}
+
+			private void addView(String result) {
+				view = new TextView(PhoneNumberAttributionService.this);
+				view.setGravity(Gravity.CENTER);
+				view.setText(result);
+				view.setTextColor(Color.YELLOW);
+				view.setBackgroundColor(sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_BACKGROUND, Color.GREEN));
+				windowManager.addView(view, getParams());
 			}
 
 			private void removeView() {
@@ -82,6 +86,8 @@ public class PhoneNumberAttributionService extends Service {
 				params.setTitle("Toast");
 				params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
 						| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+				params.x = sp.getInt(Const.LAST_ATTRIBUTION_POSITION_X, 0);
+				params.y = sp.getInt(Const.LAST_ATTRIBUTION_POSITION_Y, 0);
 				return params;
 			}
 		};

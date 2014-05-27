@@ -91,5 +91,9 @@
     <string name="red">Red</string>
     <string name="green">Green</string>
     <string name="blue">Blue</string>
+    <string name="set_phone_attribution_position">Set phone attribution position</string>
+    <string name="title_activity_phone_attribution_position">PhoneAttributionPositionActivity</string>
+    <string name="phone_number_attribution_information">phone number attribution information</string>
+    <string name="drag_to_the_position_you_like">drag to the position you like</string>
 
 </resources>
