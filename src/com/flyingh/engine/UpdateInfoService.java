@@ -2,6 +2,7 @@ package com.flyingh.engine;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -14,7 +15,7 @@ import com.flyingh.moguard.R;
 import com.flyingh.vo.UpdateInfo;
 
 public class UpdateInfoService {
-	private Context context;
+	private final Context context;
 
 	public UpdateInfoService(Context context) {
 		this.context = context;
@@ -51,7 +52,11 @@ public class UpdateInfoService {
 
 	private InputStream getInputStream() throws IOException {
 		String updateInfoUrl = context.getResources().getString(R.string.update_info_url);
-		return new URL(updateInfoUrl).openStream();
+		URL url = new URL(updateInfoUrl);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setConnectTimeout(2000);
+		return conn.getInputStream();
 	}
 
 }

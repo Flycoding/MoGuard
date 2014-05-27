@@ -86,5 +86,10 @@
     <string name="show_detail_information">Show detail information</string>
     <string name="service_started">Service started</string>
     <string name="service_not_starts">Service not starts</string>
+    <string name="select_phone_attribution_style">Select phone attribution style</string>
+    <string name="select_phone_number_attribution_style_">Select phone number attribution style:</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
 
 </resources>

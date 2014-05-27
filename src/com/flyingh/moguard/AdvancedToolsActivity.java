@@ -1,9 +1,13 @@
 package com.flyingh.moguard;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,8 +61,7 @@ public class AdvancedToolsActivity extends Activity {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				sp.edit().putBoolean(Const.SHOW_DEFAIL_INFO, isChecked).commit();
-				showInfoTextView
-						.setText(isChecked ? R.string.show_detail_information : R.string.show_short_information);
+				showInfoTextView.setText(isChecked ? R.string.show_detail_information : R.string.show_short_information);
 				showDetailOrNotCheckBox.setChecked(isChecked);
 			}
 		});
@@ -66,6 +69,19 @@ public class AdvancedToolsActivity extends Activity {
 			showInfoTextView.setText(R.string.show_detail_information);
 			showDetailOrNotCheckBox.setChecked(true);
 		}
+	}
+
+	public void selectPhoneAttributionStyle(View view) {
+		String[] items = new String[] { getString(R.string.red), getString(R.string.green), getString(R.string.blue) };
+		final int[] colors = { Color.RED, Color.GREEN, Color.BLUE };
+		new AlertDialog.Builder(this).setTitle(R.string.select_phone_number_attribution_style_).setSingleChoiceItems(items, 1, new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				sp.edit().putInt(Const.PHONE_NUMBER_ATTRIBUTION_BACKGROUND, colors[which]).commit();
+				dialog.dismiss();
+			}
+		}).show();
 	}
 
 	public void queryPhoneNumber(View view) {

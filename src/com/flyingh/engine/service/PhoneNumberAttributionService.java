@@ -46,15 +46,15 @@ public class PhoneNumberAttributionService extends Service {
 					removeView();
 					break;
 				case TelephonyManager.CALL_STATE_RINGING:
-					String result = handleResult(QueryNumberService.query(PhoneNumberAttributionService.this,
-							incomingNumber));
+					String result = handleResult(QueryNumberService.query(PhoneNumberAttributionService.this, incomingNumber));
 					if (TextUtils.isEmpty(result)) {
 						return;
 					}
 					view = new TextView(PhoneNumberAttributionService.this);
 					view.setGravity(Gravity.CENTER);
 					view.setText(result);
-					view.setTextColor(Color.GREEN);
+					view.setTextColor(Color.YELLOW);
+					view.setBackgroundColor(sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_BACKGROUND, Color.GREEN));
 					windowManager.addView(view, getParams());
 					break;
 				case TelephonyManager.CALL_STATE_OFFHOOK:
@@ -80,8 +80,8 @@ public class PhoneNumberAttributionService extends Service {
 				// params.windowAnimations = com.android.internal.R.style.Animation_Toast;
 				params.type = WindowManager.LayoutParams.TYPE_TOAST;
 				params.setTitle("Toast");
-				params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-						| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+				params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+						| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
 				return params;
 			}
 		};

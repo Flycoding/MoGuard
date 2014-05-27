@@ -126,6 +126,7 @@ public final class R {
         public static final int are_you_sure_to_cancel_the_download_=0x7f07001c;
         public static final int area_=0x7f07004c;
         public static final int bind=0x7f070035;
+        public static final int blue=0x7f07005b;
         public static final int bound_phone_number_is_=0x7f07003f;
         public static final int cancel=0x7f070015;
         public static final int cancel_=0x7f07001d;
@@ -141,6 +142,7 @@ public final class R {
         public static final int fourth_process_setup_wizard=0x7f070034;
         public static final int get_update_information_failed=0x7f070005;
         public static final int gps_tracker=0x7f07002a;
+        public static final int green=0x7f07005a;
         public static final int hello_world=0x7f070004;
         public static final int image=0x7f070028;
         public static final int input_password=0x7f070020;
@@ -162,12 +164,15 @@ public final class R {
         public static final int process=0x7f07002d;
         public static final int query=0x7f070049;
         public static final int query_phone_number_attribution=0x7f070047;
+        public static final int red=0x7f070059;
         public static final int remote_erase_data=0x7f07002b;
         public static final int remote_lock_screen=0x7f07002c;
         public static final int repeat_password=0x7f070021;
         public static final int second_process_setup_wizard=0x7f070032;
         public static final int security=0x7f07000b;
         public static final int select=0x7f070039;
+        public static final int select_phone_attribution_style=0x7f070057;
+        public static final int select_phone_number_attribution_style_=0x7f070058;
         public static final int send_alarm_to_request_alarm=0x7f070045;
         public static final int send_location_to_request_location=0x7f070041;
         public static final int send_lock_to_request_lock_the_device=0x7f070043;
