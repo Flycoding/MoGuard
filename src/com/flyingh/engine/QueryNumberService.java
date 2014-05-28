@@ -21,14 +21,32 @@ public class QueryNumberService {
 			return queryPhoneNumber(context, queryParam);
 		} else if (isAreaNumber(queryParam)) {
 			return queryAreaNumber(context, queryParam);
+		} else if (isTelephoneNumber(queryParam)) {
+			return queryTelephoneNumber(context, queryParam);
 		}
 		return null;
 	}
 
+	private static String queryTelephoneNumber(Context context, String queryParam) {
+		SQLiteDatabase db = openDbReadOnly();
+		Cursor cursor = db.query(TABLE_NAME, new String[] { COLUMN_CITY }, COLUMN_AREA + " in (?,?)", new String[] { queryParam.substring(0, 3),
+				queryParam.substring(0, 4) }, null, null, null);
+		StringBuilder sb = new StringBuilder();
+		if (cursor.moveToFirst()) {
+			sb.append(context.getString(R.string.city_)).append(cursor.getString(cursor.getColumnIndex(COLUMN_CITY)));
+		}
+		cursor.close();
+		db.close();
+		return sb.toString();
+	}
+
+	private static boolean isTelephoneNumber(String queryParam) {
+		return queryParam.matches("\\d{10,11}");
+	}
+
 	private static String queryAreaNumber(Context context, String queryParam) {
 		SQLiteDatabase db = openDbReadOnly();
-		Cursor cursor = db.query(TABLE_NAME, new String[] { COLUMN_CITY }, COLUMN_AREA + "=?",
-				new String[] { queryParam }, null, null, null);
+		Cursor cursor = db.query(TABLE_NAME, new String[] { COLUMN_CITY }, COLUMN_AREA + "=?", new String[] { queryParam }, null, null, null);
 		StringBuilder sb = new StringBuilder();
 		if (cursor.moveToFirst()) {
 			sb.append(context.getString(R.string.city_)).append(cursor.getString(cursor.getColumnIndex(COLUMN_CITY)));
@@ -40,17 +58,13 @@ public class QueryNumberService {
 
 	private static String queryPhoneNumber(Context context, String queryParam) {
 		SQLiteDatabase db = openDbReadOnly();
-		Cursor cursor = db.query(TABLE_NAME, new String[] { COLUMN_AREA, COLUMN_CITY, COLUMN_CARDTYPE },
-				COLUMN_MOBILEPREFIX + "=?", new String[] { queryParam.substring(0, Const.MIN_PHONE_NUMBER_PREFIX) },
-				null, null, null);
+		Cursor cursor = db.query(TABLE_NAME, new String[] { COLUMN_AREA, COLUMN_CITY, COLUMN_CARDTYPE }, COLUMN_MOBILEPREFIX + "=?",
+				new String[] { queryParam.substring(0, Const.MIN_PHONE_NUMBER_PREFIX) }, null, null, null);
 		StringBuilder sb = new StringBuilder();
 		if (cursor.moveToFirst()) {
-			sb.append(context.getString(R.string.area_)).append(cursor.getString(cursor.getColumnIndex(COLUMN_AREA)))
-					.append("\n");
-			sb.append(context.getString(R.string.city_)).append(cursor.getString(cursor.getColumnIndex(COLUMN_CITY)))
-					.append("\n");
-			sb.append(context.getString(R.string.cardtype_)).append(
-					cursor.getString(cursor.getColumnIndex(COLUMN_CARDTYPE)));
+			sb.append(context.getString(R.string.area_)).append(cursor.getString(cursor.getColumnIndex(COLUMN_AREA))).append("\n");
+			sb.append(context.getString(R.string.city_)).append(cursor.getString(cursor.getColumnIndex(COLUMN_CITY))).append("\n");
+			sb.append(context.getString(R.string.cardtype_)).append(cursor.getString(cursor.getColumnIndex(COLUMN_CARDTYPE)));
 		}
 		cursor.close();
 		db.close();
@@ -58,8 +72,8 @@ public class QueryNumberService {
 	}
 
 	private static SQLiteDatabase openDbReadOnly() {
-		return SQLiteDatabase.openDatabase(Environment.getExternalStorageDirectory() + "/" + Const.ADDRESS_DB_NAME,
-				null, SQLiteDatabase.OPEN_READONLY);
+		return SQLiteDatabase.openDatabase(Environment.getExternalStorageDirectory() + "/" + Const.ADDRESS_DB_NAME, null,
+				SQLiteDatabase.OPEN_READONLY);
 	}
 
 	private static boolean isAreaNumber(String queryParam) {

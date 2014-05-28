@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.flyingh.engine.QueryNumberService;
+import com.flyingh.moguard.AdvancedToolsActivity;
 import com.flyingh.moguard.util.Const;
 
 public class PhoneNumberAttributionService extends Service {
@@ -65,7 +66,8 @@ public class PhoneNumberAttributionService extends Service {
 				view.setGravity(Gravity.CENTER);
 				view.setText(result);
 				view.setTextColor(Color.YELLOW);
-				view.setBackgroundColor(sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_BACKGROUND, Color.GREEN));
+				view.setBackgroundResource(sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_BACKGROUND,
+						AdvancedToolsActivity.DEFAULT_SELECT_BACKGROUND_DRAWABLE_RES_ID));
 				windowManager.addView(view, getParams());
 			}
 
@@ -88,6 +90,9 @@ public class PhoneNumberAttributionService extends Service {
 						| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
 				params.x = sp.getInt(Const.LAST_ATTRIBUTION_POSITION_X, 0);
 				params.y = sp.getInt(Const.LAST_ATTRIBUTION_POSITION_Y, 0);
+				params.width = sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_WIDTH, WindowManager.LayoutParams.WRAP_CONTENT);
+				params.height = sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_HEIGHT, WindowManager.LayoutParams.WRAP_CONTENT);
+
 				return params;
 			}
 		};

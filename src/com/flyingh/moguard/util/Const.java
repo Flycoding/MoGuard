@@ -24,5 +24,10 @@ public class Const {
 	public static final String PHONE_NUMBER_ATTRIBUTION_BACKGROUND = "phone_number_attribution_background";
 	public static final String LAST_ATTRIBUTION_POSITION_X = "last_attribution_position_x";
 	public static final String LAST_ATTRIBUTION_POSITION_Y = "last_attribution_position_y";
+	public static final String LAST_HINT_POSITION_X = "last_hint_position_x";
+	public static final String LAST_HINT_POSITION_Y = "last_hint_position_y";
+	public static final String PHONE_NUMBER_ATTRIBUTION_BACKGROUND_INDEX = "phone_number_attribution_background_index";
+	public static final String PHONE_NUMBER_ATTRIBUTION_WIDTH = "phone_number_attribution_width";
+	public static final String PHONE_NUMBER_ATTRIBUTION_HEIGHT = "phone_number_attribution_height";
 
 }

@@ -38,28 +38,33 @@ public final class R {
         public static final int button_not_pressed_shape=0x7f020003;
         public static final int button_pressed_shape=0x7f020004;
         public static final int button_selector=0x7f020005;
-        public static final int callmsgsafe2=0x7f020006;
-        public static final int dialog=0x7f020007;
-        public static final int dialog_title=0x7f020008;
-        public static final int divide_line=0x7f020009;
-        public static final int feature_item_not_selected=0x7f02000a;
-        public static final int feature_item_selected=0x7f02000b;
-        public static final int feature_item_selector=0x7f02000c;
-        public static final int ic_launcher=0x7f02000d;
-        public static final int icon=0x7f02000e;
-        public static final int logo=0x7f02000f;
-        public static final int main_title_background=0x7f020010;
-        public static final int netmanager6=0x7f020011;
-        public static final int next=0x7f020012;
-        public static final int ok=0x7f020013;
-        public static final int phone=0x7f020014;
-        public static final int previous=0x7f020015;
-        public static final int security=0x7f020016;
-        public static final int settings9=0x7f020017;
-        public static final int setup1=0x7f020018;
-        public static final int sysoptimize7=0x7f020019;
-        public static final int taskmanager4=0x7f02001a;
-        public static final int trojan5=0x7f02001b;
+        public static final int call_locate_blue=0x7f020006;
+        public static final int call_locate_gray=0x7f020007;
+        public static final int call_locate_green=0x7f020008;
+        public static final int call_locate_orange=0x7f020009;
+        public static final int call_locate_white=0x7f02000a;
+        public static final int callmsgsafe2=0x7f02000b;
+        public static final int dialog=0x7f02000c;
+        public static final int dialog_title=0x7f02000d;
+        public static final int divide_line=0x7f02000e;
+        public static final int feature_item_not_selected=0x7f02000f;
+        public static final int feature_item_selected=0x7f020010;
+        public static final int feature_item_selector=0x7f020011;
+        public static final int ic_launcher=0x7f020012;
+        public static final int icon=0x7f020013;
+        public static final int logo=0x7f020014;
+        public static final int main_title_background=0x7f020015;
+        public static final int netmanager6=0x7f020016;
+        public static final int next=0x7f020017;
+        public static final int ok=0x7f020018;
+        public static final int phone=0x7f020019;
+        public static final int previous=0x7f02001a;
+        public static final int security=0x7f02001b;
+        public static final int settings9=0x7f02001c;
+        public static final int setup1=0x7f02001d;
+        public static final int sysoptimize7=0x7f02001e;
+        public static final int taskmanager4=0x7f02001f;
+        public static final int trojan5=0x7f020020;
     }
     public static final class id {
         public static final int action_settings=0x7f0b001a;
@@ -75,10 +80,10 @@ public final class R {
         public static final int feature_name=0x7f0b000e;
         public static final int grid_view=0x7f0b0005;
         public static final int hintTextView=0x7f0b0007;
+        public static final int imageView=0x7f0b0006;
         public static final int input_password=0x7f0b000f;
         public static final int linear_layout=0x7f0b000c;
         public static final int password=0x7f0b0016;
-        public static final int positionTextView=0x7f0b0006;
         public static final int queryParamEditText=0x7f0b0008;
         public static final int repeat_password=0x7f0b0017;
         public static final int resultTextView=0x7f0b0009;
@@ -147,6 +152,7 @@ public final class R {
         public static final int fourth_process_setup_wizard=0x7f070034;
         public static final int get_update_information_failed=0x7f070005;
         public static final int gps_tracker=0x7f07002a;
+        public static final int gray=0x7f070061;
         public static final int green=0x7f07005a;
         public static final int hello_world=0x7f070004;
         public static final int image=0x7f070028;
@@ -160,9 +166,11 @@ public final class R {
         public static final int no_result=0x7f07004f;
         public static final int not_started=0x7f07003b;
         public static final int ok=0x7f070016;
+        public static final int orange=0x7f070063;
         public static final int password_is_wrong=0x7f070024;
         public static final int phone_guard=0x7f07000c;
         public static final int phone_nubmer_attribution_setup=0x7f070051;
+        public static final int phone_number_attribution_background=0x7f070060;
         public static final int phone_number_attribution_information=0x7f07005e;
         public static final int please_input_the_feature_s_new_name=0x7f07000a;
         public static final int please_input_the_phone_number_or_area_number=0x7f070050;
@@ -215,6 +223,7 @@ public final class R {
         public static final int update_info_url=0x7f070000;
         public static final int welcome_to_use_security_setup_wizard=0x7f070030;
         public static final int when_the_device_is_missing_send_code_to_the_phone_=0x7f070042;
+        public static final int white=0x7f070062;
         public static final int you_had_better_launch_the_security=0x7f07003a;
     }
     public static final class style {
