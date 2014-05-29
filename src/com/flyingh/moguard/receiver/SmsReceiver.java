@@ -13,16 +13,19 @@ import android.telephony.SmsMessage;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.flyingh.dao.BlacklistDao;
 import com.flyingh.moguard.R;
 import com.flyingh.moguard.util.Const;
 import com.flyingh.moguard.util.LocationUtil;
 
 public class SmsReceiver extends BroadcastReceiver {
 	private static final String TAG = "SmsReceiver";
+	private BlacklistDao dao;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Object[] pdus = (Object[]) intent.getExtras().get("pdus");
+		dao = new BlacklistDao(context);
 		for (Object pdu : pdus) {
 			SmsMessage message = SmsMessage.createFromPdu((byte[]) pdu);
 			String messageBody = message.getMessageBody();
@@ -45,6 +48,11 @@ public class SmsReceiver extends BroadcastReceiver {
 				break;
 			default:
 				break;
+			}
+			String originatingAddress = message.getOriginatingAddress();
+			if (dao.isExists(originatingAddress)) {
+				Log.i(TAG, "block the number:" + originatingAddress);
+				abortBroadcast();
 			}
 			return;
 		}
