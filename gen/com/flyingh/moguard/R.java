@@ -77,6 +77,7 @@ public final class R {
         public static final int confirm_input_password=0x7f0b0013;
         public static final int confirm_set_password=0x7f0b001b;
         public static final int container=0x7f0b0000;
+        public static final int deleteMenuItem=0x7f0b001e;
         public static final int feature_name=0x7f0b0010;
         public static final int grid_view=0x7f0b0006;
         public static final int hintTextView=0x7f0b0008;
@@ -95,6 +96,7 @@ public final class R {
         public static final int startOrNotCheckBox=0x7f0b0002;
         public static final int start_or_not_checkbox=0x7f0b000c;
         public static final int start_status=0x7f0b0017;
+        public static final int updateMenuItem=0x7f0b001d;
         public static final int version_name=0x7f0b000e;
     }
     public static final class layout {
@@ -118,12 +120,13 @@ public final class R {
     }
     public static final class menu {
         public static final int advanced_tools=0x7f0a0000;
-        public static final int main=0x7f0a0001;
-        public static final int phone_attribution_position=0x7f0a0002;
-        public static final int query_phone_number=0x7f0a0003;
-        public static final int security=0x7f0a0004;
-        public static final int security_wizard=0x7f0a0005;
-        public static final int select_contact=0x7f0a0006;
+        public static final int blacklist_item_context_menu=0x7f0a0001;
+        public static final int main=0x7f0a0002;
+        public static final int phone_attribution_position=0x7f0a0003;
+        public static final int query_phone_number=0x7f0a0004;
+        public static final int security=0x7f0a0005;
+        public static final int security_wizard=0x7f0a0006;
+        public static final int select_contact=0x7f0a0007;
     }
     public static final class raw {
         public static final int hay=0x7f060000;
@@ -131,6 +134,9 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f070003;
         public static final int add=0x7f070066;
+        public static final int add_a_number_to_blacklist=0x7f070069;
+        public static final int add_fail_the_number_may_already_exists=0x7f07006b;
+        public static final int add_success=0x7f07006a;
         public static final int address_db_url=0x7f070001;
         public static final int advanced_tools=0x7f070012;
         public static final int alarm_when_sim_changed=0x7f070029;
@@ -138,6 +144,7 @@ public final class R {
         public static final int app_name=0x7f070002;
         public static final int apps=0x7f07000d;
         public static final int are_you_sure_to_cancel_the_download_=0x7f07001c;
+        public static final int are_you_sure_to_remove_the_blocking_number_=0x7f07006c;
         public static final int area_=0x7f07004c;
         public static final int bind=0x7f070035;
         public static final int blacklist=0x7f070067;
@@ -151,6 +158,8 @@ public final class R {
         public static final int city_=0x7f07004d;
         public static final int confirm=0x7f07001e;
         public static final int confirm_to_update_=0x7f07001b;
+        public static final int delete=0x7f070070;
+        public static final int delete_success=0x7f07006d;
         public static final int divide_line=0x7f070027;
         public static final int downloading_=0x7f070007;
         public static final int drag_to_the_position_you_like=0x7f07005f;
@@ -163,6 +172,7 @@ public final class R {
         public static final int hello_world=0x7f070004;
         public static final int image=0x7f070028;
         public static final int input_password=0x7f070020;
+        public static final int input_the_new_number=0x7f070072;
         public static final int kill_virus=0x7f07000f;
         public static final int mogurad=0x7f070019;
         public static final int need_update=0x7f07001a;
@@ -178,6 +188,7 @@ public final class R {
         public static final int phone_nubmer_attribution_setup=0x7f070051;
         public static final int phone_number_attribution_background=0x7f070060;
         public static final int phone_number_attribution_information=0x7f07005e;
+        public static final int please_input_a_number_to_block=0x7f070068;
         public static final int please_input_the_feature_s_new_name=0x7f07000a;
         public static final int please_input_the_phone_number_or_area_number=0x7f070050;
         public static final int previous=0x7f07002f;
@@ -214,6 +225,7 @@ public final class R {
         public static final int task_manager=0x7f07000e;
         public static final int the_feature_name_should_not_be_empty_=0x7f070014;
         public static final int the_number_is_exists=0x7f070064;
+        public static final int the_number_should_not_be_empty=0x7f07006e;
         public static final int the_password_and_the_repeat_password_are_not_the_same=0x7f070022;
         public static final int the_password_or_the_repeat_password_should_not_be_empty=0x7f070023;
         public static final int the_phone_number_s_length_should_not_less_than_=0x7f07004a;
@@ -228,7 +240,11 @@ public final class R {
         public static final int title_activity_security=0x7f070009;
         public static final int title_activity_security_wizard=0x7f070025;
         public static final int title_activity_select_contact=0x7f07003d;
+        public static final int update=0x7f07006f;
+        public static final int update_fail_the_number_may_already_exist=0x7f070074;
         public static final int update_info_url=0x7f070000;
+        public static final int update_success=0x7f070073;
+        public static final int update_the_number=0x7f070071;
         public static final int welcome_to_use_security_setup_wizard=0x7f070030;
         public static final int when_the_device_is_missing_send_code_to_the_phone_=0x7f070042;
         public static final int white=0x7f070062;

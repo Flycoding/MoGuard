@@ -103,5 +103,18 @@
     <string name="title_activity_blacklist">BlacklistActivity</string>
     <string name="add">Add</string>
     <string name="blacklist">Blacklist</string>
+    <string name="please_input_a_number_to_block">please input a number to block</string>
+    <string name="add_a_number_to_blacklist">add a number to blacklist</string>
+    <string name="add_success">add success</string>
+    <string name="add_fail_the_number_may_already_exists">add fail,the number may already exists</string>
+    <string name="are_you_sure_to_remove_the_blocking_number_">Are you sure to remove the blocking number?</string>
+    <string name="delete_success">delete success</string>
+    <string name="the_number_should_not_be_empty">the number should not be empty</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="update_the_number">update the number</string>
+    <string name="input_the_new_number">input the new number</string>
+    <string name="update_success">update success</string>
+    <string name="update_fail_the_number_may_already_exist">update fail,the number may already exist</string>
 
 </resources>

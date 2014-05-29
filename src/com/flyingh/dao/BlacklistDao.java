@@ -45,10 +45,14 @@ public class BlacklistDao {
 		}
 	}
 
-	public void update(String oldNumber, String newNumber) {
+	public boolean update(String oldNumber, String newNumber) {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
+			if (isExists(db, newNumber)) {
+				return false;
+			}
 			db.execSQL("update blacklist set number=? where number=?", new String[] { newNumber, oldNumber });
+			return true;
 		} finally {
 			db.close();
 		}
