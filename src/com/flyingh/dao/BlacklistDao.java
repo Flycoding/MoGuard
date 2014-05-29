@@ -17,7 +17,7 @@ public class BlacklistDao {
 	public boolean add(String number) {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
-			if (isExists(db, number)) {
+			if (isExists(number)) {
 				return false;
 			}
 			db.execSQL("insert into blacklist(number) values(?)", new String[] { number });
@@ -27,7 +27,8 @@ public class BlacklistDao {
 		}
 	}
 
-	private boolean isExists(SQLiteDatabase db, String number) {
+	public boolean isExists(String number) {
+		SQLiteDatabase db = helper.getReadableDatabase();
 		Cursor cursor = db.rawQuery("select * from blacklist where number=?", new String[] { number });
 		try {
 			return cursor.moveToFirst();
@@ -48,7 +49,7 @@ public class BlacklistDao {
 	public boolean update(String oldNumber, String newNumber) {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
-			if (isExists(db, newNumber)) {
+			if (isExists(newNumber)) {
 				return false;
 			}
 			db.execSQL("update blacklist set number=? where number=?", new String[] { newNumber, oldNumber });

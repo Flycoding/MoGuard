@@ -7,7 +7,7 @@ public class BlacklistDaoTest extends AndroidTestCase {
 	public void testAdd() {
 		BlacklistDao dao = new BlacklistDao(getContext());
 		for (int i = 0; i < 10; i++) {
-			dao.add("1581234567" + i);
+			dao.add("10" + i);
 		}
 	}
 

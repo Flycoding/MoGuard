@@ -26,7 +26,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
+
 import com.flyingh.dao.BlacklistDao;
+import com.flyingh.engine.service.PhoneNumberAttributionService;
 import com.flyingh.vo.Feature;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -53,6 +55,10 @@ public class BlacklistActivity extends Activity implements LoaderCallbacks<Curso
 		registerForContextMenu(listView);
 		loaderManager = getLoaderManager();
 		loaderManager.initLoader(LOADER_ID, null, this);
+		String incomingNumber = getIntent().getStringExtra(PhoneNumberAttributionService.INCOMING_NUMBER);
+		if (!TextUtils.isEmpty(incomingNumber)) {
+			showAddToBlacklistDialog(incomingNumber);
+		}
 	}
 
 	@Override
@@ -129,9 +135,14 @@ public class BlacklistActivity extends Activity implements LoaderCallbacks<Curso
 	}
 
 	public void add(View view) {
+		showAddToBlacklistDialog("");
+	}
+
+	private void showAddToBlacklistDialog(String number) {
 		final EditText editText = new EditText(this);
 		editText.setTextColor(Color.RED);
 		editText.setInputType(InputType.TYPE_CLASS_PHONE);
+		editText.setText(number);
 		new AlertDialog.Builder(this).setIcon(Feature.PHONE_GUARD.getIconId())
 				.setTitle(R.string.add_a_number_to_blacklist).setMessage(R.string.please_input_a_number_to_block)
 				.setView(editText).setPositiveButton(R.string.add, new OnClickListener() {
