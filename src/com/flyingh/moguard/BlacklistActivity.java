@@ -47,7 +47,8 @@ public class BlacklistActivity extends Activity implements LoaderCallbacks<Curso
 		setContentView(R.layout.activity_blacklist);
 		dao = new BlacklistDao(this);
 		listView = (ListView) findViewById(R.id.listView);
-		adapter = new SimpleCursorAdapter(this, R.layout.blacklist_item, null, new String[] { COLUMN_NUMBER }, new int[] { R.id.number }, 0);
+		adapter = new SimpleCursorAdapter(this, R.layout.blacklist_item, null, new String[] { COLUMN_NUMBER },
+				new int[] { R.id.number }, 0);
 		listView.setAdapter(adapter);
 		registerForContextMenu(listView);
 		loaderManager = getLoaderManager();
@@ -82,6 +83,7 @@ public class BlacklistActivity extends Activity implements LoaderCallbacks<Curso
 
 	private void doDelete(final String number) {
 		dao.delete(number);
+		Toast.makeText(this, R.string.delete_success, Toast.LENGTH_SHORT).show();
 		loaderManager.restartLoader(LOADER_ID, null, this);
 	}
 
@@ -90,8 +92,8 @@ public class BlacklistActivity extends Activity implements LoaderCallbacks<Curso
 		editText.setInputType(InputType.TYPE_CLASS_PHONE);
 		editText.setText(number);
 		editText.setSelectAllOnFocus(true);
-		new AlertDialog.Builder(this).setTitle(R.string.update_the_number).setMessage(R.string.input_the_new_number).setView(editText)
-				.setCancelable(false).setPositiveButton(R.string.update, new OnClickListener() {
+		new AlertDialog.Builder(this).setTitle(R.string.update_the_number).setMessage(R.string.input_the_new_number)
+				.setView(editText).setCancelable(false).setPositiveButton(R.string.update, new OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -103,7 +105,8 @@ public class BlacklistActivity extends Activity implements LoaderCallbacks<Curso
 							loaderManager.restartLoader(LOADER_ID, null, BlacklistActivity.this);
 							Toast.makeText(getApplicationContext(), R.string.update_success, Toast.LENGTH_SHORT).show();
 						} else {
-							Toast.makeText(BlacklistActivity.this, R.string.update_fail_the_number_may_already_exist, Toast.LENGTH_SHORT).show();
+							Toast.makeText(BlacklistActivity.this, R.string.update_fail_the_number_may_already_exist,
+									Toast.LENGTH_SHORT).show();
 						}
 					}
 				}).setNegativeButton(R.string.cancel, null).show();
@@ -111,7 +114,8 @@ public class BlacklistActivity extends Activity implements LoaderCallbacks<Curso
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		return new CursorLoader(BlacklistActivity.this, Uri.parse("content://com.flyingh.moguard.blacklistprovider/all"), null, null, null, null);
+		return new CursorLoader(BlacklistActivity.this,
+				Uri.parse("content://com.flyingh.moguard.blacklistprovider/all"), null, null, null, null);
 	}
 
 	@Override
@@ -128,21 +132,24 @@ public class BlacklistActivity extends Activity implements LoaderCallbacks<Curso
 		final EditText editText = new EditText(this);
 		editText.setTextColor(Color.RED);
 		editText.setInputType(InputType.TYPE_CLASS_PHONE);
-		new AlertDialog.Builder(this).setIcon(Feature.PHONE_GUARD.getIconId()).setTitle(R.string.add_a_number_to_blacklist)
-				.setMessage(R.string.please_input_a_number_to_block).setView(editText).setPositiveButton(R.string.add, new OnClickListener() {
+		new AlertDialog.Builder(this).setIcon(Feature.PHONE_GUARD.getIconId())
+				.setTitle(R.string.add_a_number_to_blacklist).setMessage(R.string.please_input_a_number_to_block)
+				.setView(editText).setPositiveButton(R.string.add, new OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String number = editText.getText().toString().trim();
 						if (TextUtils.isEmpty(number)) {
-							Toast.makeText(getApplicationContext(), R.string.the_number_should_not_be_empty, Toast.LENGTH_SHORT).show();
+							Toast.makeText(getApplicationContext(), R.string.the_number_should_not_be_empty,
+									Toast.LENGTH_SHORT).show();
 							return;
 						}
 						if (dao.add(number)) {
 							Toast.makeText(getApplicationContext(), R.string.add_success, Toast.LENGTH_SHORT).show();
 							loaderManager.restartLoader(LOADER_ID, null, BlacklistActivity.this);
 						} else {
-							Toast.makeText(getApplicationContext(), R.string.add_fail_the_number_may_already_exists, Toast.LENGTH_SHORT).show();
+							Toast.makeText(getApplicationContext(), R.string.add_fail_the_number_may_already_exists,
+									Toast.LENGTH_SHORT).show();
 						}
 					}
 				}).setNegativeButton(R.string.cancel, null).show();
