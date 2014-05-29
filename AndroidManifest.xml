@@ -99,12 +99,23 @@
             </intent-filter>
         </receiver>
 
+        <provider
+            android:name="com.flyingh.moguard.provider.BlacklistProvider"
+            android:authorities="com.flyingh.moguard.blacklistprovider"
+            android:exported="false" >
+        </provider>
+
         <activity
             android:name="com.flyingh.moguard.PhoneAttributionPositionActivity"
             android:label="@string/title_activity_phone_attribution_position" >
         </activity>
 
         <uses-library android:name="android.test.runner" />
+
+        <activity
+            android:name="com.flyingh.moguard.BlacklistActivity"
+            android:label="@string/title_activity_blacklist" >
+        </activity>
     </application>
 
 </manifest>

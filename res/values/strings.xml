@@ -100,5 +100,8 @@
     <string name="white">White</string>
     <string name="orange">Orange</string>
     <string name="the_number_is_exists">the number is exists</string>
+    <string name="title_activity_blacklist">BlacklistActivity</string>
+    <string name="add">Add</string>
+    <string name="blacklist">Blacklist</string>
 
 </resources>

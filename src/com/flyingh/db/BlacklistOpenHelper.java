@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BlacklistOpenHelper extends SQLiteOpenHelper {
 
+	public static final String TABLE_NAME = "blacklist";
+
 	public BlacklistOpenHelper(Context context) {
 		super(context, "blacklist.db", null, 1);
 	}

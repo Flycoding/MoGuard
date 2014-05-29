@@ -1,13 +1,14 @@
 package com.flyingh.vo;
 
 import com.flyingh.moguard.AdvancedToolsActivity;
+import com.flyingh.moguard.BlacklistActivity;
 import com.flyingh.moguard.R;
 import com.flyingh.moguard.SecurityActivity;
 
 public enum Feature {
 	//@formatter:off
 	SECURITY(R.drawable.security, R.string.security, SecurityActivity.class),
-	PHONE_GUARD (R.drawable.callmsgsafe2, R.string.phone_guard, null),
+	PHONE_GUARD (R.drawable.callmsgsafe2, R.string.phone_guard, BlacklistActivity.class),
 	APPS(R.drawable.app3, R.string.apps, null),
 	TASK_MANAGER(R.drawable.taskmanager4, R.string.task_manager, null),
 	KILL_VIRUS(R.drawable.trojan5, R.string.kill_virus, null),
