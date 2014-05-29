@@ -12,12 +12,16 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.ContentObserver;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.provider.CallLog.Calls;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -64,13 +68,12 @@ public class PhoneNumberAttributionService extends Service {
 			private long endRingingTime;
 
 			@Override
-			public void onCallStateChanged(int state, String incomingNumber) {
+			public void onCallStateChanged(int state, final String incomingNumber) {
 				super.onCallStateChanged(state, incomingNumber);
 				switch (state) {
 				case TelephonyManager.CALL_STATE_IDLE:
 					endRingingTime = System.currentTimeMillis();
-					boolean isRingOneTimeCall = startRingingTime > 0 && endRingingTime > startRingingTime
-							&& endRingingTime - startRingingTime < 5000;
+					boolean isRingOneTimeCall = startRingingTime > 0 && endRingingTime > startRingingTime && endRingingTime - startRingingTime < 5000;
 					if (isRingOneTimeCall) {
 						startRingingTime = 0;
 						showNotification(incomingNumber);
@@ -81,10 +84,21 @@ public class PhoneNumberAttributionService extends Service {
 					startRingingTime = System.currentTimeMillis();
 					if (isInBlacklist(incomingNumber)) {
 						endCall();
+						getContentResolver().registerContentObserver(Calls.CONTENT_URI, true, new ContentObserver(new Handler()) {
+							@Override
+							public void onChange(boolean selfChange) {
+								Cursor cursor = getContentResolver().query(Calls.CONTENT_URI, null, Calls.NUMBER + "=?",
+										new String[] { incomingNumber }, null);
+								if (cursor.moveToFirst()) {
+									getContentResolver().delete(Calls.CONTENT_URI, Calls._ID + "=?",
+											new String[] { cursor.getString(cursor.getColumnIndex(Calls._ID)) });
+									getContentResolver().unregisterContentObserver(this);
+								}
+							}
+						});
 						return;
 					}
-					String result = handleResult(QueryNumberService.query(PhoneNumberAttributionService.this,
-							incomingNumber));
+					String result = handleResult(QueryNumberService.query(PhoneNumberAttributionService.this, incomingNumber));
 					if (TextUtils.isEmpty(result)) {
 						return;
 					}
@@ -123,13 +137,12 @@ public class PhoneNumberAttributionService extends Service {
 				// params.windowAnimations = com.android.internal.R.style.Animation_Toast;
 				params.type = WindowManager.LayoutParams.TYPE_TOAST;
 				params.setTitle("Toast");
-				params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-						| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+				params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+						| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
 				params.x = sp.getInt(Const.LAST_ATTRIBUTION_POSITION_X, 0);
 				params.y = sp.getInt(Const.LAST_ATTRIBUTION_POSITION_Y, 0);
 				params.width = sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_WIDTH, WindowManager.LayoutParams.WRAP_CONTENT);
-				params.height = sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_HEIGHT,
-						WindowManager.LayoutParams.WRAP_CONTENT);
+				params.height = sp.getInt(Const.PHONE_NUMBER_ATTRIBUTION_HEIGHT, WindowManager.LayoutParams.WRAP_CONTENT);
 				return params;
 			}
 		};
@@ -141,17 +154,11 @@ public class PhoneNumberAttributionService extends Service {
 	protected void showNotification(String incomingNumber) {
 		Intent intent = new Intent(this, BlacklistActivity.class);
 		intent.putExtra(INCOMING_NUMBER, incomingNumber);
-		Notification notification = new Notification.Builder(this)
-				.setTicker("block a call")
-				.setContentTitle("catch a call ringing one time")
-				.setContentText(incomingNumber)
-				.setSubText("click to add to blacklist")
-				.setContentInfo(
-						String.format(DateUtils.isToday(System.currentTimeMillis()) ? "%tT" : "%1$tF %1$tT",
-								Calendar.getInstance())).setAutoCancel(true)
-				.setContentIntent(PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT))
-				.setDefaults(Notification.DEFAULT_LIGHTS)
-				.setLargeIcon(BitmapFactory.decodeResource(getResources(), Feature.PHONE_GUARD.getIconId()))
+		Notification notification = new Notification.Builder(this).setTicker("block a call").setContentTitle("catch a call ringing one time")
+				.setContentText(incomingNumber).setSubText("click to add to blacklist")
+				.setContentInfo(String.format(DateUtils.isToday(System.currentTimeMillis()) ? "%tT" : "%1$tF %1$tT", Calendar.getInstance()))
+				.setAutoCancel(true).setContentIntent(PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT))
+				.setDefaults(Notification.DEFAULT_LIGHTS).setLargeIcon(BitmapFactory.decodeResource(getResources(), Feature.PHONE_GUARD.getIconId()))
 				.setSmallIcon(android.R.drawable.star_on).setWhen(System.currentTimeMillis()).build();
 		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		notificationManager.notify(0, notification);
@@ -163,8 +170,8 @@ public class PhoneNumberAttributionService extends Service {
 			getServiceMethod.setAccessible(true);
 			IBinder binder = (IBinder) getServiceMethod.invoke(null, NOTIFICATION_SERVICE);
 			ITelephony.Stub.asInterface(binder).endCall();
-		} catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | RemoteException e) {
+		} catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| RemoteException e) {
 			Log.i(TAG, e.getMessage());
 		}
 	}
