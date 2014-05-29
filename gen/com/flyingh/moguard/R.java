@@ -207,6 +207,7 @@ public final class R {
         public static final int system_optimize=0x7f070011;
         public static final int task_manager=0x7f07000e;
         public static final int the_feature_name_should_not_be_empty_=0x7f070014;
+        public static final int the_number_is_exists=0x7f070064;
         public static final int the_password_and_the_repeat_password_are_not_the_same=0x7f070022;
         public static final int the_password_or_the_repeat_password_should_not_be_empty=0x7f070023;
         public static final int the_phone_number_s_length_should_not_less_than_=0x7f07004a;
