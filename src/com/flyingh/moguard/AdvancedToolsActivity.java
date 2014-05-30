@@ -1,15 +1,20 @@
 package com.flyingh.moguard;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -37,6 +42,8 @@ import com.flyingh.engine.service.PhoneNumberAttributionService;
 import com.flyingh.moguard.util.Const;
 
 public class AdvancedToolsActivity extends Activity {
+
+	private static final String COUNT = "count";
 
 	private static final String TAG = "AdvancedToolsActivity";
 
@@ -132,9 +139,9 @@ public class AdvancedToolsActivity extends Activity {
 					serializer.setOutput(new FileOutputStream(new File(Environment.getExternalStorageDirectory(), BACKUP_SMS_FILE_NAME)), "UTF-8");
 					serializer.startDocument("UTF-8", true);
 					serializer.startTag(null, SMSES);
-					serializer.startTag(null, "count");
+					serializer.startTag(null, COUNT);
 					serializer.text(String.valueOf(cursor.getCount()));
-					serializer.endTag(null, "count");
+					serializer.endTag(null, COUNT);
 					while (cursor.moveToNext()) {
 						try {
 							serializer.startTag(null, SMS);
@@ -162,16 +169,16 @@ public class AdvancedToolsActivity extends Activity {
 					}
 					serializer.endTag(null, SMSES);
 					serializer.endDocument();
+					cursor.close();
 				} catch (IllegalArgumentException | IllegalStateException | IOException e) {
 					Log.i(TAG, e.getMessage());
 				}
-				cursor.close();
 				return null;
 			}
 
 			@Override
 			protected void onPostExecute(Void result) {
-				Toast.makeText(getApplicationContext(), "backup success", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), R.string.backup_success, Toast.LENGTH_SHORT).show();
 				progressDialog.dismiss();
 				progressDialog = null;
 			}
@@ -179,6 +186,84 @@ public class AdvancedToolsActivity extends Activity {
 	}
 
 	public void restoreSms(View view) {
+		new AsyncTask<Void, Integer, Void>() {
+			@Override
+			protected void onPreExecute() {
+				progressDialog = new ProgressDialog(AdvancedToolsActivity.this);
+				progressDialog.setTitle(getString(R.string.restoring_));
+				progressDialog.setMessage(getString(R.string.current_progress_));
+				progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				progressDialog.show();
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				XmlPullParser parser = Xml.newPullParser();
+				try {
+					parser.setInput(new FileInputStream(new File(Environment.getExternalStorageDirectory(), BACKUP_SMS_FILE_NAME)), "UTF-8");
+					int eventType = parser.getEventType();
+					ContentResolver contentResolver = getContentResolver();
+					ContentValues values = new ContentValues();
+					while (eventType != XmlPullParser.END_DOCUMENT) {
+						switch (eventType) {
+						case XmlPullParser.START_TAG:
+							if (COUNT.equals(parser.getName())) {
+								progressDialog.setMax(Integer.valueOf(parser.nextText()));
+							} else if (ADDRESS.equals(parser.getName())) {
+								values.put(ADDRESS, parser.nextText());
+							} else if (TYPE.equals(parser.getName())) {
+								values.put(TYPE, parser.nextText());
+							} else if (DATE.equals(parser.getName())) {
+								values.put(DATE, parser.nextText());
+							} else if (BODY.equals(parser.getName())) {
+								values.put(BODY, parser.nextText());
+							}
+							break;
+						case XmlPullParser.END_TAG:
+							if (SMS.equals(parser.getName())) {
+								Cursor cursor = contentResolver.query(SMS_CONTENT_URI, new String[] { "count(1)" }, buildSelection(),
+										buildSelectionArgs(values), null);
+								if (cursor.moveToFirst() && cursor.getInt(0) == 0) {
+									contentResolver.insert(SMS_CONTENT_URI, values);
+								}
+								progressDialog.incrementProgressBy(1);
+								values.clear();
+								cursor.close();
+							}
+							break;
+						default:
+							break;
+						}
+						eventType = parser.next();
+					}
+				} catch (XmlPullParserException | NumberFormatException | IOException e) {
+					Log.i(TAG, e.getMessage());
+				}
+				return null;
+			}
+
+			private String buildSelection() {
+				return new StringBuilder().append(ADDRESS).append("=? and ").append(DATE).append("=? and ").append(TYPE).append("=? and ")
+						.append(BODY).append("=?").toString();
+			}
+
+			private String[] buildSelectionArgs(ContentValues values) {
+				String[] result = new String[values.size()];
+				result[0] = values.getAsString(ADDRESS);
+				result[1] = values.getAsString(DATE);
+				result[2] = values.getAsString(TYPE);
+				result[3] = values.getAsString(BODY);
+				return result;
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				Toast.makeText(getApplicationContext(), R.string.restore_success, Toast.LENGTH_SHORT).show();
+				progressDialog.dismiss();
+				progressDialog = null;
+			}
+
+		}.execute();
 
 	}
 

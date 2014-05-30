@@ -120,5 +120,8 @@
     <string name="restore_sms">Restore SMS</string>
     <string name="backuping_">Backuping...</string>
     <string name="current_progress_">Current progress:</string>
+    <string name="restoring_">Restoring...</string>
+    <string name="backup_success">backup success</string>
+    <string name="restore_success">restore success</string>
 
 </resources>
