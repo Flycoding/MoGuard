@@ -1,6 +1,5 @@
 package com.flyingh.engine.service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
 
@@ -20,7 +19,6 @@ import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.provider.CallLog.Calls;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
@@ -28,6 +26,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -67,21 +66,30 @@ public class PhoneNumberAttributionService extends Service {
 			private long startRingingTime;
 			private long endRingingTime;
 
+			@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 			@Override
 			public void onCallStateChanged(int state, final String incomingNumber) {
 				super.onCallStateChanged(state, incomingNumber);
 				switch (state) {
 				case TelephonyManager.CALL_STATE_IDLE:
 					endRingingTime = System.currentTimeMillis();
+					Log.i(TAG, "endRingingTime=" + endRingingTime);
 					boolean isRingOneTimeCall = startRingingTime > 0 && endRingingTime > startRingingTime && endRingingTime - startRingingTime < 5000;
+					Log.i(TAG, "endRingingTime - startRingingTime=" + (endRingingTime - startRingingTime));
 					if (isRingOneTimeCall) {
-						startRingingTime = 0;
-						showNotification(incomingNumber);
+						if (isInBlacklist(incomingNumber)) {
+							Log.i(TAG, "isInBlacklist");
+							showBlockBlacklistNumberNotification(incomingNumber);
+						} else {
+							showNotification(incomingNumber);
+						}
 					}
+					startRingingTime = 0;
 					removeView();
 					break;
 				case TelephonyManager.CALL_STATE_RINGING:
 					startRingingTime = System.currentTimeMillis();
+					Log.i(TAG, "startRingingTime=" + startRingingTime);
 					if (isInBlacklist(incomingNumber)) {
 						endCall();
 						getContentResolver().registerContentObserver(Calls.CONTENT_URI, true, new ContentObserver(new Handler()) {
@@ -110,6 +118,18 @@ public class PhoneNumberAttributionService extends Service {
 				default:
 					break;
 				}
+			}
+
+			@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+			private void showBlockBlacklistNumberNotification(final String incomingNumber) {
+				Notification notification = new Notification.Builder(PhoneNumberAttributionService.this).setTicker("block a number")
+						.setContentTitle("block a number in blacklist").setContentText(incomingNumber).setSubText("calls block")
+						.setContentInfo(String.format(DateUtils.isToday(System.currentTimeMillis()) ? "%tT" : "%1$tF %1$tT", Calendar.getInstance()))
+						.setAutoCancel(true).setDefaults(Notification.DEFAULT_LIGHTS)
+						.setLargeIcon(BitmapFactory.decodeResource(getResources(), Feature.PHONE_GUARD.getIconId()))
+						.setSmallIcon(android.R.drawable.star_on).setWhen(System.currentTimeMillis()).build();
+				NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+				notificationManager.notify(1, notification);
 			}
 
 			private void addView(String result) {
@@ -168,11 +188,13 @@ public class PhoneNumberAttributionService extends Service {
 		try {
 			Method getServiceMethod = Class.forName("android.os.ServiceManager").getMethod("getService", String.class);
 			getServiceMethod.setAccessible(true);
-			IBinder binder = (IBinder) getServiceMethod.invoke(null, NOTIFICATION_SERVICE);
+			IBinder binder = (IBinder) getServiceMethod.invoke(null, TELEPHONY_SERVICE);
 			ITelephony.Stub.asInterface(binder).endCall();
-		} catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| RemoteException e) {
-			Log.i(TAG, e.getMessage());
+		} catch (Exception e) {
+			Log.i(TAG, "here:" + e);
+			Intent intent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+			intent.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_HEADSETHOOK));
+			sendOrderedBroadcast(intent, "android.permission.CALL_PRIVILEGES");
 		}
 	}
 
