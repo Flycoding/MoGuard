@@ -1,16 +1,29 @@
 package com.flyingh.moguard;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlSerializer;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Point;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
+import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +31,24 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flyingh.engine.service.PhoneNumberAttributionService;
 import com.flyingh.moguard.util.Const;
 
 public class AdvancedToolsActivity extends Activity {
 
+	private static final String TAG = "AdvancedToolsActivity";
+
+	private static final String BACKUP_SMS_FILE_NAME = "smses.xml";
+	private static final String SMS = "sms";
+	private static final String SMSES = "smses";
+	private static final String _ID = "_id";
+	private static final String BODY = "body";
+	private static final String TYPE = "type";
+	private static final String DATE = "date";
+	private static final String ADDRESS = "address";
+	private static final Uri SMS_CONTENT_URI = Uri.parse("content://sms");
 	public static final int DEFAULT_SELECT_BACKGROUND_ITEM_INDEX = 1;
 	public static final int DEFAULT_SELECT_BACKGROUND_DRAWABLE_RES_ID = R.drawable.call_locate_orange;
 
@@ -34,6 +59,7 @@ public class AdvancedToolsActivity extends Activity {
 	private SharedPreferences sp;
 	private int height;
 	private int width;
+	private ProgressDialog progressDialog;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	@Override
@@ -84,6 +110,76 @@ public class AdvancedToolsActivity extends Activity {
 			showInfoTextView.setText(R.string.show_detail_information);
 			showDetailOrNotCheckBox.setChecked(true);
 		}
+	}
+
+	public void backupSms(View view) {
+		new AsyncTask<Void, Integer, Void>() {
+			@Override
+			protected void onPreExecute() {
+				progressDialog = new ProgressDialog(AdvancedToolsActivity.this);
+				progressDialog.setTitle(getString(R.string.backuping_));
+				progressDialog.setMessage(getString(R.string.current_progress_));
+				progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				progressDialog.show();
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				Cursor cursor = getContentResolver().query(SMS_CONTENT_URI, new String[] { _ID, ADDRESS, DATE, TYPE, BODY }, null, null, null);
+				progressDialog.setMax(cursor.getCount());
+				XmlSerializer serializer = Xml.newSerializer();
+				try {
+					serializer.setOutput(new FileOutputStream(new File(Environment.getExternalStorageDirectory(), BACKUP_SMS_FILE_NAME)), "UTF-8");
+					serializer.startDocument("UTF-8", true);
+					serializer.startTag(null, SMSES);
+					serializer.startTag(null, "count");
+					serializer.text(String.valueOf(cursor.getCount()));
+					serializer.endTag(null, "count");
+					while (cursor.moveToNext()) {
+						try {
+							serializer.startTag(null, SMS);
+							serializer.startTag(null, ADDRESS);
+							serializer.text(cursor.getString(cursor.getColumnIndex(ADDRESS)));
+							serializer.endTag(null, ADDRESS);
+
+							serializer.startTag(null, DATE);
+							serializer.text(cursor.getString(cursor.getColumnIndex(DATE)));
+							serializer.endTag(null, DATE);
+
+							serializer.startTag(null, TYPE);
+							serializer.text(cursor.getString(cursor.getColumnIndex(TYPE)));
+							serializer.endTag(null, TYPE);
+
+							serializer.startTag(null, BODY);
+							serializer.text(cursor.getString(cursor.getColumnIndex(BODY)));
+							serializer.endTag(null, BODY);
+							serializer.endTag(null, SMS);
+							progressDialog.incrementProgressBy(1);
+						} catch (Exception e) {
+							Log.i(TAG, e.getMessage());
+							Log.i(TAG, "_ID:" + cursor.getString(cursor.getColumnIndex(_ID)));
+						}
+					}
+					serializer.endTag(null, SMSES);
+					serializer.endDocument();
+				} catch (IllegalArgumentException | IllegalStateException | IOException e) {
+					Log.i(TAG, e.getMessage());
+				}
+				cursor.close();
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				Toast.makeText(getApplicationContext(), "backup success", Toast.LENGTH_SHORT).show();
+				progressDialog.dismiss();
+				progressDialog = null;
+			}
+		}.execute();
+	}
+
+	public void restoreSms(View view) {
+
 	}
 
 	public void selectPhoneAttributionStyle(View view) {

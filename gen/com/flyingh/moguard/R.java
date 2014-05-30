@@ -1349,6 +1349,8 @@ containing a value of this type.
         public static final int are_you_sure_to_cancel_the_download_=0x7f0c0029;
         public static final int are_you_sure_to_remove_the_blocking_number_=0x7f0c0079;
         public static final int area_=0x7f0c0059;
+        public static final int backup_sms=0x7f0c0082;
+        public static final int backuping_=0x7f0c0084;
         public static final int bind=0x7f0c0042;
         public static final int blacklist=0x7f0c0074;
         public static final int blue=0x7f0c0068;
@@ -1361,6 +1363,7 @@ containing a value of this type.
         public static final int city_=0x7f0c005a;
         public static final int confirm=0x7f0c002b;
         public static final int confirm_to_update_=0x7f0c0028;
+        public static final int current_progress_=0x7f0c0085;
         public static final int delete=0x7f0c007d;
         public static final int delete_success=0x7f0c007a;
         public static final int divide_line=0x7f0c0034;
@@ -1402,6 +1405,7 @@ containing a value of this type.
         public static final int remote_erase_data=0x7f0c0038;
         public static final int remote_lock_screen=0x7f0c0039;
         public static final int repeat_password=0x7f0c002e;
+        public static final int restore_sms=0x7f0c0083;
         public static final int second_process_setup_wizard=0x7f0c003f;
         public static final int security=0x7f0c0018;
         public static final int select=0x7f0c0046;

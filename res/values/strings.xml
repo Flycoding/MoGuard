@@ -116,5 +116,9 @@
     <string name="input_the_new_number">input the new number</string>
     <string name="update_success">update success</string>
     <string name="update_fail_the_number_may_already_exist">update fail,the number may already exist</string>
+    <string name="backup_sms">Backup SMS</string>
+    <string name="restore_sms">Restore SMS</string>
+    <string name="backuping_">Backuping...</string>
+    <string name="current_progress_">Current progress:</string>
 
 </resources>
