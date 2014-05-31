@@ -80,20 +80,36 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 		};
 	}
 
+	class ViewHolder {
+		ImageView iconImageView;
+		TextView labelTextView;
+		TextView totalSizeTextView;
+	}
+
 	@Override
 	public void onLoadFinished(Loader<List<App>> loader, final List<App> data) {
 		listView.setAdapter(new BaseAdapter() {
-
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				App app = getItem(position);
-				View view = convertView != null ? convertView : View.inflate(AppManagerActivity.this, R.layout.app_item, null);
-				ImageView imageView = (ImageView) view.findViewById(R.id.icon);
-				imageView.setImageDrawable(app.getIcon());
-				TextView labelTextView = (TextView) view.findViewById(R.id.label);
-				labelTextView.setText(app.getLabel());
-				TextView totalSizeTextView = (TextView) view.findViewById(R.id.totalSize);
-				totalSizeTextView.setText(app.getTotalSize());
+				View view = getView(convertView);
+				ViewHolder viewHolder = (ViewHolder) view.getTag();
+				viewHolder.iconImageView.setImageDrawable(app.getIcon());
+				viewHolder.labelTextView.setText(app.getLabel());
+				viewHolder.totalSizeTextView.setText(app.getTotalSize());
+				return view;
+			}
+
+			private View getView(View convertView) {
+				if (convertView != null) {
+					return convertView;
+				}
+				View view = View.inflate(AppManagerActivity.this, R.layout.app_item, null);
+				ViewHolder viewHolder = new ViewHolder();
+				viewHolder.iconImageView = (ImageView) view.findViewById(R.id.icon);
+				viewHolder.labelTextView = (TextView) view.findViewById(R.id.label);
+				viewHolder.totalSizeTextView = (TextView) view.findViewById(R.id.totalSize);
+				view.setTag(viewHolder);
 				return view;
 			}
 
