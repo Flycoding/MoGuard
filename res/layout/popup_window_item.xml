@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/popup_window"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/runTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:drawableTop="@drawable/run"
+        android:gravity="center"
+        android:padding="1dp"
+        android:text="@string/run"
+        android:textColor="#0f0"
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/divide_line" />
+
+    <TextView
+        android:id="@+id/uninstallTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:drawableTop="@drawable/run"
+        android:gravity="center"
+        android:padding="1dp"
+        android:text="@string/uninstall"
+        android:textColor="#0f0"
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/divide_line" />
+
+    <TextView
+        android:id="@+id/shareTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:drawableTop="@drawable/run"
+        android:gravity="center"
+        android:padding="1dp"
+        android:text="@string/share"
+        android:textColor="#0f0"
+        android:textSize="20sp" />
+
+</LinearLayout>

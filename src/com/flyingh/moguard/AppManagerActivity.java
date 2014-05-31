@@ -3,29 +3,40 @@ package com.flyingh.moguard;
 import java.util.List;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.AsyncTaskLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flyingh.engine.AppService;
 import com.flyingh.vo.App;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class AppManagerActivity extends Activity implements LoaderCallbacks<List<App>> {
+public class AppManagerActivity extends Activity implements LoaderCallbacks<List<App>>, OnClickListener {
 	private ListView listView;
 	private LinearLayout progressLinearLayout;
+	private PopupWindow popupWindow;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -35,6 +46,84 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 		listView = (ListView) findViewById(R.id.appsListView);
 		progressLinearLayout = (LinearLayout) findViewById(R.id.progressLinearLayout);
 		getLoaderManager().initLoader(0, null, this);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				showPopupWindow(view, position);
+			}
+
+		});
+		listView.setOnScrollListener(new OnScrollListener() {
+
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				resetPopupWindow();
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				resetPopupWindow();
+			}
+		});
+	}
+
+	private void showPopupWindow(View view, int position) {
+		resetPopupWindow();
+		popupWindow = new PopupWindow(initContentView(position), LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		int[] location = new int[2];
+		view.getLocationInWindow(location);
+		popupWindow.showAtLocation(view, Gravity.TOP | Gravity.LEFT, location[0] + 150, location[1]);
+	}
+
+	private View initContentView(int position) {
+		View popupWindowView = View.inflate(this, R.layout.popup_window_item, null);
+		TextView runTextView = (TextView) popupWindowView.findViewById(R.id.runTextView);
+		TextView uninstallTextView = (TextView) popupWindowView.findViewById(R.id.uninstallTextView);
+		TextView shareTextView = (TextView) popupWindowView.findViewById(R.id.shareTextView);
+		runTextView.setOnClickListener(this);
+		uninstallTextView.setOnClickListener(this);
+		shareTextView.setOnClickListener(this);
+
+		runTextView.setTag(position);
+		uninstallTextView.setTag(position);
+		shareTextView.setTag(position);
+		return popupWindowView;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.runTextView:
+			run(v);
+			break;
+		case R.id.uninstallTextView:
+			break;
+		case R.id.shareTextView:
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	private void run(View v) {
+		int position = (int) v.getTag();
+		App app = (App) listView.getItemAtPosition(position);
+		Intent launchIntentForPackage = getPackageManager().getLaunchIntentForPackage(app.getPackageName());
+		if (launchIntentForPackage == null) {
+			Toast.makeText(this, "can't run", Toast.LENGTH_LONG).show();
+			resetPopupWindow();
+			return;
+		}
+		startActivity(launchIntentForPackage);
+	}
+
+	private void resetPopupWindow() {
+		if (popupWindow != null) {
+			popupWindow.dismiss();
+			popupWindow = null;
+		}
 	}
 
 	@Override

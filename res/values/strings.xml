@@ -127,5 +127,8 @@
     <string name="app_manager">App Manager</string>
     <string name="loading_">Loading...</string>
     <string name="icon">icon</string>
+    <string name="run">Run</string>
+    <string name="uninstall">Uninstall</string>
+    <string name="share">Share</string>
 
 </resources>

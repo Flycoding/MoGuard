@@ -58,27 +58,31 @@ public final class R {
         public static final int next=0x7f020017;
         public static final int ok=0x7f020018;
         public static final int phone=0x7f020019;
-        public static final int previous=0x7f02001a;
-        public static final int security=0x7f02001b;
-        public static final int settings9=0x7f02001c;
-        public static final int setup1=0x7f02001d;
-        public static final int sysoptimize7=0x7f02001e;
-        public static final int taskmanager4=0x7f02001f;
-        public static final int trojan5=0x7f020020;
+        public static final int popup_window=0x7f02001a;
+        public static final int previous=0x7f02001b;
+        public static final int run=0x7f02001c;
+        public static final int security=0x7f02001d;
+        public static final int settings9=0x7f02001e;
+        public static final int setup1=0x7f02001f;
+        public static final int share=0x7f020020;
+        public static final int sysoptimize7=0x7f020021;
+        public static final int taskmanager4=0x7f020022;
+        public static final int trojan5=0x7f020023;
+        public static final int uninstall=0x7f020024;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0022;
+        public static final int action_settings=0x7f0b0025;
         public static final int appsListView=0x7f0b0005;
-        public static final int bind_check_box=0x7f0b001b;
-        public static final int bind_text_view=0x7f0b001a;
-        public static final int bound_phone_number=0x7f0b001c;
+        public static final int bind_check_box=0x7f0b001e;
+        public static final int bind_text_view=0x7f0b001d;
+        public static final int bound_phone_number=0x7f0b001f;
         public static final int bound_phone_number_text_view=0x7f0b000e;
         public static final int cancel_input_password=0x7f0b0018;
-        public static final int cancel_set_password=0x7f0b0020;
+        public static final int cancel_set_password=0x7f0b0023;
         public static final int confirm_input_password=0x7f0b0019;
-        public static final int confirm_set_password=0x7f0b0021;
+        public static final int confirm_set_password=0x7f0b0024;
         public static final int container=0x7f0b0000;
-        public static final int deleteMenuItem=0x7f0b0024;
+        public static final int deleteMenuItem=0x7f0b0027;
         public static final int feature_name=0x7f0b0016;
         public static final int grid_view=0x7f0b0009;
         public static final int hintTextView=0x7f0b000b;
@@ -89,20 +93,23 @@ public final class R {
         public static final int linear_layout=0x7f0b0010;
         public static final int listView=0x7f0b0008;
         public static final int number=0x7f0b0015;
-        public static final int password=0x7f0b001e;
+        public static final int password=0x7f0b0021;
         public static final int progressBar=0x7f0b0007;
         public static final int progressLinearLayout=0x7f0b0006;
         public static final int queryParamEditText=0x7f0b000c;
-        public static final int repeat_password=0x7f0b001f;
+        public static final int repeat_password=0x7f0b0022;
         public static final int resultTextView=0x7f0b000d;
+        public static final int runTextView=0x7f0b001a;
         public static final int serviceStatusTextView=0x7f0b0001;
+        public static final int shareTextView=0x7f0b001c;
         public static final int showDetailOrNotCheckBox=0x7f0b0004;
         public static final int showInfoTextView=0x7f0b0003;
         public static final int startOrNotCheckBox=0x7f0b0002;
         public static final int start_or_not_checkbox=0x7f0b000f;
-        public static final int start_status=0x7f0b001d;
+        public static final int start_status=0x7f0b0020;
         public static final int totalSize=0x7f0b0014;
-        public static final int updateMenuItem=0x7f0b0023;
+        public static final int uninstallTextView=0x7f0b001b;
+        public static final int updateMenuItem=0x7f0b0026;
         public static final int version_name=0x7f0b0011;
     }
     public static final class layout {
@@ -120,11 +127,12 @@ public final class R {
         public static final int change_security_feature_name=0x7f03000b;
         public static final int grid_view_item=0x7f03000c;
         public static final int input_security_password_dialog_view=0x7f03000d;
-        public static final int security_wizard=0x7f03000e;
-        public static final int security_wizard2=0x7f03000f;
-        public static final int security_wizard3=0x7f030010;
-        public static final int security_wizard4=0x7f030011;
-        public static final int set_security_password_dialog_view=0x7f030012;
+        public static final int popup_window_item=0x7f03000e;
+        public static final int security_wizard=0x7f03000f;
+        public static final int security_wizard2=0x7f030010;
+        public static final int security_wizard3=0x7f030011;
+        public static final int security_wizard4=0x7f030012;
+        public static final int set_security_password_dialog_view=0x7f030013;
     }
     public static final class menu {
         public static final int advanced_tools=0x7f0a0000;
@@ -218,6 +226,7 @@ public final class R {
         public static final int restore_sms=0x7f070076;
         public static final int restore_success=0x7f07007b;
         public static final int restoring_=0x7f070079;
+        public static final int run=0x7f070080;
         public static final int second_process_setup_wizard=0x7f070032;
         public static final int security=0x7f07000b;
         public static final int select=0x7f070039;
@@ -233,6 +242,7 @@ public final class R {
         public static final int set_password=0x7f07001f;
         public static final int set_phone_attribution_position=0x7f07005c;
         public static final int settings=0x7f070013;
+        public static final int share=0x7f070082;
         public static final int show_detail_information=0x7f070054;
         public static final int show_short_information=0x7f070053;
         public static final int sim_bound=0x7f070037;
@@ -260,6 +270,7 @@ public final class R {
         public static final int title_activity_security=0x7f070009;
         public static final int title_activity_security_wizard=0x7f070025;
         public static final int title_activity_select_contact=0x7f07003d;
+        public static final int uninstall=0x7f070081;
         public static final int update=0x7f07006f;
         public static final int update_fail_the_number_may_already_exist=0x7f070074;
         public static final int update_info_url=0x7f070000;
