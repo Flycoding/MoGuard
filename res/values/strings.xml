@@ -123,5 +123,9 @@
     <string name="restoring_">Restoring...</string>
     <string name="backup_success">backup success</string>
     <string name="restore_success">restore success</string>
+    <string name="title_activity_app_manager">AppManagerActivity</string>
+    <string name="app_manager">App Manager</string>
+    <string name="loading_">Loading...</string>
+    <string name="icon">icon</string>
 
 </resources>
