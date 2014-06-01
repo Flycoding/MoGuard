@@ -83,7 +83,7 @@ public final class R {
         public static final int confirm_input_password=0x7f0b001a;
         public static final int confirm_set_password=0x7f0b0025;
         public static final int container=0x7f0b0000;
-        public static final int deleteMenuItem=0x7f0b0028;
+        public static final int deleteMenuItem=0x7f0b002a;
         public static final int feature_name=0x7f0b0017;
         public static final int grid_view=0x7f0b000a;
         public static final int hintTextView=0x7f0b000c;
@@ -94,6 +94,8 @@ public final class R {
         public static final int linear_layout=0x7f0b0011;
         public static final int listView=0x7f0b0009;
         public static final int number=0x7f0b0016;
+        public static final int order_by_name=0x7f0b0027;
+        public static final int order_by_size=0x7f0b0028;
         public static final int password=0x7f0b0022;
         public static final int progressBar=0x7f0b0008;
         public static final int progressLinearLayout=0x7f0b0007;
@@ -110,7 +112,7 @@ public final class R {
         public static final int start_status=0x7f0b0021;
         public static final int totalSize=0x7f0b0015;
         public static final int uninstallTextView=0x7f0b001c;
-        public static final int updateMenuItem=0x7f0b0027;
+        public static final int updateMenuItem=0x7f0b0029;
         public static final int version_name=0x7f0b0012;
     }
     public static final class layout {
@@ -209,6 +211,8 @@ public final class R {
         public static final int not_started=0x7f07003b;
         public static final int ok=0x7f070016;
         public static final int orange=0x7f070063;
+        public static final int order_by_name=0x7f070086;
+        public static final int order_by_size=0x7f070087;
         public static final int password_is_wrong=0x7f070024;
         public static final int phone_guard=0x7f07000c;
         public static final int phone_nubmer_attribution_setup=0x7f070051;

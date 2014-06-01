@@ -30,5 +30,6 @@ public class Const {
 	public static final String PHONE_NUMBER_ATTRIBUTION_WIDTH = "phone_number_attribution_width";
 	public static final String PHONE_NUMBER_ATTRIBUTION_HEIGHT = "phone_number_attribution_height";
 	public static final String APP_MODE = "app_mode";
+	public static final String APP_ORDER_MODE = "app_order_mode";
 
 }

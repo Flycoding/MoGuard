@@ -11,6 +11,8 @@ public class App implements Comparable<App> {
 	private String packageName;
 	private boolean isSystemApp;
 
+	private long totalSizeLong;
+
 	public static class Builder {
 		private Drawable icon;
 		private String label;
@@ -100,6 +102,14 @@ public class App implements Comparable<App> {
 
 	public void setSystemApp(boolean isSystemApp) {
 		this.isSystemApp = isSystemApp;
+	}
+
+	public void setTotalSizeLong(long totalSizeLong) {
+		this.totalSizeLong = totalSizeLong;
+	}
+
+	public long getTotalSizeLong() {
+		return totalSizeLong;
 	}
 
 	@Override

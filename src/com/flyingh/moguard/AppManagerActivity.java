@@ -209,11 +209,26 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		switch (item.getItemId()) {
+		case R.id.order_by_name:
+			order(OrderMode.ORDER_BY_NAME.ordinal());
+			break;
+		case R.id.order_by_size:
+			order(OrderMode.ORDER_BY_SIZE.ordinal());
+			break;
+		default:
+			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void order(int ordinal) {
+		sp.edit().putInt(Const.APP_ORDER_MODE, ordinal).commit();
+		getLoaderManager().restartLoader(LOAD_ID, null, this);
+	}
+
+	public static enum OrderMode {
+		ORDER_BY_NAME, ORDER_BY_SIZE;
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
