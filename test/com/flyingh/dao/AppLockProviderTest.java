@@ -9,7 +9,7 @@ import com.flyingh.vo.AppLock;
 public class AppLockProviderTest extends AndroidTestCase {
 	public void testInsert() {
 		ContentValues values = new ContentValues();
-		values.put(AppLock.PACKAGE_NAME, "com.flyingh.hello");
+		values.put(AppLock.PACKAGE_NAME, "com.flyingh.moguard");
 		getContext().getContentResolver().insert(AppLock.INSERT_CONTENT_URI, values);
 	}
 
