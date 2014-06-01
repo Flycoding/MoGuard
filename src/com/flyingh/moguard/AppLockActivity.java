@@ -1,11 +1,11 @@
 package com.flyingh.moguard;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -25,12 +25,12 @@ import android.widget.TextView;
 
 import com.flyingh.vo.AppLock;
 
-@SuppressLint("NewApi")
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor> {
 	private static final String TAG = "AppLockActivity";
 
 	private static final int LOAD_ID = 0;
-
+	private static final int CODE_ADD_APP_LOCK = 0;
 	private ListView lockedAppListView;
 	private CursorAdapter adapter;
 
@@ -77,7 +77,13 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 	}
 
 	public void add(View view) {
-		// TODO add app to lock list
+		startActivityForResult(new Intent(this, AddAppLockActivity.class), CODE_ADD_APP_LOCK);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		// TODO result
 	}
 
 	@Override

@@ -137,6 +137,10 @@
             android:label="@string/title_activity_app_manager"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
+        <activity
+            android:name="com.flyingh.moguard.AddAppLockActivity"
+            android:label="@string/title_activity_add_app_to_lock_list" >
+        </activity>
     </application>
 
 </manifest>
