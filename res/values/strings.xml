@@ -140,5 +140,6 @@
     <string name="app_icon">app icon</string>
     <string name="add_app_lock">Add App Lock</string>
     <string name="the_selected_app_is_empty">the selected app is empty</string>
+    <string name="are_you_sure_to_delete_">"Are you sure to delete "</string>
 
 </resources>

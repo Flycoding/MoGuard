@@ -180,6 +180,7 @@ public final class R {
         public static final int app_name=0x7f070002;
         public static final int apps=0x7f07000d;
         public static final int are_you_sure_to_cancel_the_download_=0x7f07001c;
+        public static final int are_you_sure_to_delete_=0x7f07008d;
         public static final int are_you_sure_to_remove_the_blocking_number_=0x7f07006c;
         public static final int area_=0x7f07004c;
         public static final int backup_sms=0x7f070075;

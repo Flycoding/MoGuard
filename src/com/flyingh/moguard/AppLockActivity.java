@@ -2,9 +2,12 @@ package com.flyingh.moguard;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.ApplicationInfo;
@@ -19,9 +22,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flyingh.vo.AppLock;
 
@@ -42,6 +48,37 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 		lockedAppListView = (ListView) findViewById(R.id.lockedAppListView);
 		initAdapter();
 		lockedAppListView.setAdapter(adapter);
+		lockedAppListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				Cursor cursor = (Cursor) adapter.getItem(position);
+				final String packageName = cursor.getString(cursor.getColumnIndex(AppLock.PACKAGE_NAME));
+				try {
+					PackageManager pm = getPackageManager();
+					ApplicationInfo applicationInfo = pm.getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES);
+					String label = applicationInfo.loadLabel(pm).toString();
+					Drawable icon = applicationInfo.loadIcon(pm);
+					new AlertDialog.Builder(AppLockActivity.this).setIcon(icon).setTitle(R.string.confirm)
+							.setMessage(getString(R.string.are_you_sure_to_delete_) + label)
+							.setPositiveButton(R.string.delete, new OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									getContentResolver()
+											.delete(AppLock.DELETE_CONTENT_URI, AppLock.PACKAGE_NAME + "=?", new String[] { packageName });
+									Toast.makeText(AppLockActivity.this, R.string.delete_success, Toast.LENGTH_SHORT).show();
+									getLoaderManager().restartLoader(LOAD_ID, null, AppLockActivity.this);
+								}
+							}).setNegativeButton(R.string.cancel, null).show();
+				} catch (NameNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return true;
+			}
+
+		});
 		getLoaderManager().initLoader(LOAD_ID, null, this);
 	}
 
