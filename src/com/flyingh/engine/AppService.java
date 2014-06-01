@@ -21,7 +21,7 @@ import android.os.RemoteException;
 import android.text.format.Formatter;
 import android.util.Log;
 
-import com.flyingh.moguard.AppManagerActivity.AppMode;
+import com.flyingh.moguard.AppManagerActivity.DisplayMode;
 import com.flyingh.moguard.AppManagerActivity.OrderMode;
 import com.flyingh.moguard.util.Const;
 import com.flyingh.vo.App;
@@ -31,7 +31,7 @@ public class AppService {
 
 	public static List<App> loadApps(final Context context) {
 		sp = context.getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE);
-		int appModeIndex = sp.getInt(Const.APP_MODE, 0);
+		int appModeIndex = sp.getInt(Const.APP_DISPLAY_MODE, 0);
 		final PackageManager packageManager = context.getPackageManager();
 		List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
 		final List<App> apps = new ArrayList<>(installedApplications.size());
@@ -39,7 +39,7 @@ public class AppService {
 			Drawable icon = applicationInfo.loadIcon(packageManager);
 			String label = applicationInfo.loadLabel(packageManager).toString();
 			String packageName = applicationInfo.packageName;
-			if (AppMode.USER.ordinal() == appModeIndex && isSystemApp(applicationInfo) || AppMode.SYSTEM.ordinal() == appModeIndex
+			if (DisplayMode.USER.ordinal() == appModeIndex && isSystemApp(applicationInfo) || DisplayMode.SYSTEM.ordinal() == appModeIndex
 					&& !isSystemApp(applicationInfo)) {
 				continue;
 			}
@@ -82,37 +82,39 @@ public class AppService {
 	}
 
 	private static Comparator<App> getComparator() {
-		int orderIndex = sp.getInt(Const.APP_ORDER_MODE, OrderMode.ORDER_BY_NAME.ordinal());
-		if (orderByName(orderIndex)) {
-			return orderByNameDesc = Collections.reverseOrder(orderByNameDesc);
-		} else if (orderBySize(orderIndex)) {
-			return orderBySizeDesc = Collections.reverseOrder(orderBySizeDesc);
+		String orderMode = sp.getString(Const.APP_ORDER_MODE, OrderMode.ORDER_BY_NAME.name());
+		boolean orderMenuClicked = sp.getBoolean(Const.ORDER_MENU_CLICKED, false);
+		sp.edit().remove(Const.ORDER_MENU_CLICKED).commit();
+		if (orderByName(orderMode)) {
+			return orderMenuClicked ? orderByName = Collections.reverseOrder(orderByName) : orderByName;
+		} else if (orderBySize(orderMode)) {
+			return orderMenuClicked ? orderBySize = Collections.reverseOrder(orderBySize) : orderBySize;
 		}
 		return null;
 	}
 
-	private static boolean orderBySize(int orderIndex) {
-		return OrderMode.ORDER_BY_SIZE.ordinal() == orderIndex;
+	private static boolean orderBySize(String orderMode) {
+		return OrderMode.ORDER_BY_SIZE.name().equals(orderMode);
 	}
 
-	private static boolean orderByName(int orderIndex) {
-		return OrderMode.ORDER_BY_NAME.ordinal() == orderIndex;
+	private static boolean orderByName(String orderMode) {
+		return OrderMode.ORDER_BY_NAME.name().equals(orderMode);
 	}
 
-	private static Comparator<App> orderByNameDesc = new Comparator<App>() {
+	private static Comparator<App> orderByName = new Comparator<App>() {
 
 		@Override
 		public int compare(App lhs, App rhs) {
-			return Collator.getInstance().compare(rhs.getLabel(), lhs.getLabel());
+			return Collator.getInstance().compare(lhs.getLabel(), rhs.getLabel());
 		}
 	};
-	private static Comparator<App> orderBySizeDesc = new Comparator<App>() {
+	private static Comparator<App> orderBySize = new Comparator<App>() {
 
 		@Override
 		public int compare(App lhs, App rhs) {
 			long lhsSize = lhs.getTotalSizeLong();
 			long rhsSize = rhs.getTotalSizeLong();
-			return rhsSize < lhsSize ? -1 : rhsSize == lhsSize ? 0 : 1;
+			return lhsSize < rhsSize ? -1 : lhsSize == rhsSize ? 0 : 1;
 		}
 	};
 	private static SharedPreferences sp;

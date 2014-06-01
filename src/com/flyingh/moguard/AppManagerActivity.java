@@ -79,12 +79,12 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 			}
 		});
 		Spinner spinner = (Spinner) findViewById(R.id.appShowModeSpinner);
-		spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, AppMode.values()));
+		spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, DisplayMode.values()));
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				sp.edit().putInt(Const.APP_MODE, position).commit();
+				sp.edit().putInt(Const.APP_DISPLAY_MODE, position).commit();
 				getLoaderManager().restartLoader(LOAD_ID, null, AppManagerActivity.this);
 			}
 
@@ -94,7 +94,7 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 		});
 	}
 
-	public static enum AppMode {
+	public static enum DisplayMode {
 		USER_SYSTEM {
 			@Override
 			public String toString() {
@@ -211,10 +211,10 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
 		case R.id.order_by_name:
-			order(OrderMode.ORDER_BY_NAME.ordinal());
+			order(OrderMode.ORDER_BY_NAME.name());
 			break;
 		case R.id.order_by_size:
-			order(OrderMode.ORDER_BY_SIZE.ordinal());
+			order(OrderMode.ORDER_BY_SIZE.name());
 			break;
 		default:
 			break;
@@ -222,8 +222,8 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void order(int ordinal) {
-		sp.edit().putInt(Const.APP_ORDER_MODE, ordinal).commit();
+	private void order(String orderMode) {
+		sp.edit().putString(Const.APP_ORDER_MODE, orderMode).putBoolean(Const.ORDER_MENU_CLICKED, true).commit();
 		getLoaderManager().restartLoader(LOAD_ID, null, this);
 	}
 
@@ -243,6 +243,7 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 					deliverResult(result);
 				}
 				if (takeContentChanged() || result == null) {
+					progressLinearLayout.setVisibility(View.VISIBLE);
 					forceLoad();
 				}
 			}
