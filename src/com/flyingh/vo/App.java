@@ -113,6 +113,31 @@ public class App implements Comparable<App> {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((packageName == null) ? 0 : packageName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		App other = (App) obj;
+		if (packageName == null) {
+			if (other.packageName != null)
+				return false;
+		} else if (!packageName.equals(other.packageName))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return "App [icon=" + icon + ", label=" + label + ", totalSize=" + totalSize + ", packageName=" + packageName + ", isSystemApp="
 				+ isSystemApp + "]";

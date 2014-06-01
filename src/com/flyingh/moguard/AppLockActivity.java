@@ -65,8 +65,8 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 							cursor.getString(cursor.getColumnIndex(AppLock.PACKAGE_NAME)), PackageManager.GET_UNINSTALLED_PACKAGES);
 					lockedAppTextView.setText(applicationInfo.loadLabel(getPackageManager()));
 					Drawable divideLineDrawable = getResources().getDrawable(R.drawable.divide_line);
-					lockedAppTextView.setCompoundDrawablesWithIntrinsicBounds(applicationInfo.loadIcon(getPackageManager()), divideLineDrawable,
-							null, divideLineDrawable);
+					lockedAppTextView.setCompoundDrawablesWithIntrinsicBounds(applicationInfo.loadIcon(getPackageManager()),
+							cursor.getPosition() == 0 ? divideLineDrawable : null, null, divideLineDrawable);
 				} catch (NameNotFoundException e) {
 					Log.i(TAG, e.getMessage());
 					throw new RuntimeException(e);
@@ -83,7 +83,11 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		// TODO result
+		if (resultCode == RESULT_OK) {
+			if (requestCode == CODE_ADD_APP_LOCK) {
+				getLoaderManager().restartLoader(LOAD_ID, null, this);
+			}
+		}
 	}
 
 	@Override

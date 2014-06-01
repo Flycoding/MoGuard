@@ -137,5 +137,8 @@
     <string name="order_by_size">order by size</string>
     <string name="app_lock">App Lock</string>
     <string name="title_activity_add_app_to_lock_list">AddAppToLockListActivity</string>
+    <string name="app_icon">app icon</string>
+    <string name="add_app_lock">Add App Lock</string>
+    <string name="the_selected_app_is_empty">the selected app is empty</string>
 
 </resources>

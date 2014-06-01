@@ -6,7 +6,9 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -15,6 +17,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.RemoteException;
@@ -25,9 +28,32 @@ import com.flyingh.moguard.AppManagerActivity.DisplayMode;
 import com.flyingh.moguard.AppManagerActivity.OrderMode;
 import com.flyingh.moguard.util.Const;
 import com.flyingh.vo.App;
+import com.flyingh.vo.AppLock;
 
 public class AppService {
 	private static final String TAG = "AppService";
+
+	public static List<App> loadUnlockedApps(Context context) {
+		Set<App> set = new HashSet<>();
+		PackageManager pm = context.getPackageManager();
+		List<ApplicationInfo> installedApplications = pm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
+		for (ApplicationInfo appInfo : installedApplications) {
+			set.add(new App.Builder().icon(appInfo.loadIcon(pm)).label(appInfo.loadLabel(pm).toString()).packageName(appInfo.packageName).build());
+		}
+		set.removeAll(toApp(context.getContentResolver().query(AppLock.QUERY_CONTENT_URI, null, null, null, null)));
+		ArrayList<App> result = new ArrayList<>(set);
+		Collections.sort(result);
+		return result;
+	}
+
+	private static List<App> toApp(Cursor cursor) {
+		List<App> apps = new ArrayList<>();
+		while (cursor.moveToNext()) {
+			String packageName = cursor.getString(cursor.getColumnIndex(AppLock.PACKAGE_NAME));
+			apps.add(new App.Builder().packageName(packageName).build());
+		}
+		return apps;
+	}
 
 	public static List<App> loadApps(final Context context) {
 		sp = context.getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE);
@@ -122,4 +148,5 @@ public class AppService {
 	public static boolean isSystemApp(ApplicationInfo applicationInfo) {
 		return (applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
 	}
+
 }

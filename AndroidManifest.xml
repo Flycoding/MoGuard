@@ -139,7 +139,7 @@
         </activity>
         <activity
             android:name="com.flyingh.moguard.AddAppLockActivity"
-            android:label="@string/title_activity_add_app_to_lock_list" >
+            android:label="@string/add_app_lock" >
         </activity>
     </application>
 
