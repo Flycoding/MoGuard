@@ -9,6 +9,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.AsyncTaskLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -34,6 +35,8 @@ import com.flyingh.vo.App;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class AppManagerActivity extends Activity implements LoaderCallbacks<List<App>>, OnClickListener {
+	private static final int LOAD_ID = 0;
+	private static final int UNINSTALL_REQUEST_CODE = 0;
 	private ListView listView;
 	private LinearLayout progressLinearLayout;
 	private PopupWindow popupWindow;
@@ -45,7 +48,7 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 		setContentView(R.layout.activity_app_manager);
 		listView = (ListView) findViewById(R.id.appsListView);
 		progressLinearLayout = (LinearLayout) findViewById(R.id.progressLinearLayout);
-		getLoaderManager().initLoader(0, null, this);
+		getLoaderManager().initLoader(LOAD_ID, null, this);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -98,12 +101,27 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 			run(v);
 			break;
 		case R.id.uninstallTextView:
+			uninstall(v);
 			break;
 		case R.id.shareTextView:
 			break;
 
 		default:
 			break;
+		}
+	}
+
+	private void uninstall(View v) {
+		int position = (int) v.getTag();
+		App app = (App) listView.getItemAtPosition(position);
+		String packageName = app.getPackageName();
+		startActivityForResult(new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + packageName)), UNINSTALL_REQUEST_CODE);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == UNINSTALL_REQUEST_CODE) {
+			getLoaderManager().restartLoader(LOAD_ID, null, this);
 		}
 	}
 
