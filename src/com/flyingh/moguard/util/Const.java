@@ -29,5 +29,6 @@ public class Const {
 	public static final String PHONE_NUMBER_ATTRIBUTION_BACKGROUND_INDEX = "phone_number_attribution_background_index";
 	public static final String PHONE_NUMBER_ATTRIBUTION_WIDTH = "phone_number_attribution_width";
 	public static final String PHONE_NUMBER_ATTRIBUTION_HEIGHT = "phone_number_attribution_height";
+	public static final String APP_MODE = "app_mode";
 
 }

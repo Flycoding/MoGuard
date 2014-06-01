@@ -132,5 +132,6 @@
     <string name="share">Share</string>
     <string name="share_you_an_app_">share you an app:</string>
     <string name="can_t_run">can\'t run</string>
+    <string name="system_app_the_app_forbid_the_operation">System app,the app forbid the operation</string>
 
 </resources>

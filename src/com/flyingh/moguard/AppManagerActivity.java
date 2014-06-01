@@ -1,6 +1,8 @@
 package com.flyingh.moguard;
 
 import java.util.List;
+import java.util.Locale;
+
 import android.annotation.TargetApi;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
@@ -8,6 +10,8 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.AsyncTaskLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,14 +25,19 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.flyingh.engine.AppService;
+import com.flyingh.moguard.util.Const;
 import com.flyingh.vo.App;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -38,12 +47,14 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 	private ListView listView;
 	private LinearLayout progressLinearLayout;
 	private PopupWindow popupWindow;
+	private SharedPreferences sp;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_app_manager);
+		sp = getSharedPreferences(Const.CONFIG_FILE_NAME, MODE_PRIVATE);
 		listView = (ListView) findViewById(R.id.appsListView);
 		progressLinearLayout = (LinearLayout) findViewById(R.id.progressLinearLayout);
 		getLoaderManager().initLoader(LOAD_ID, null, this);
@@ -67,6 +78,34 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 				resetPopupWindow();
 			}
 		});
+		Spinner spinner = (Spinner) findViewById(R.id.appShowModeSpinner);
+		spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, AppMode.values()));
+		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				sp.edit().putInt(Const.APP_MODE, position).commit();
+				getLoaderManager().restartLoader(LOAD_ID, null, AppManagerActivity.this);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+	}
+
+	public static enum AppMode {
+		USER_SYSTEM {
+			@Override
+			public String toString() {
+				return "user&system";
+			}
+		},
+		USER, SYSTEM;
+		@Override
+		public String toString() {
+			return name().toLowerCase(Locale.getDefault());
+		}
 	}
 
 	private void showPopupWindow(View view, int position) {
@@ -123,6 +162,10 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 	private void uninstall(View v) {
 		int position = (int) v.getTag();
 		App app = (App) listView.getItemAtPosition(position);
+		if (app.isSystemApp()) {
+			Toast.makeText(this, R.string.system_app_the_app_forbid_the_operation, Toast.LENGTH_SHORT).show();
+			return;
+		}
 		String packageName = app.getPackageName();
 		startActivityForResult(new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + packageName)), UNINSTALL_REQUEST_CODE);
 	}
@@ -212,7 +255,9 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 				ViewHolder viewHolder = (ViewHolder) view.getTag();
 				viewHolder.iconImageView.setImageDrawable(app.getIcon());
 				viewHolder.labelTextView.setText(app.getLabel());
+				viewHolder.labelTextView.setTextColor(app.isSystemApp() ? Color.RED : Color.GREEN);
 				viewHolder.totalSizeTextView.setText(app.getTotalSize());
+				viewHolder.totalSizeTextView.setTextColor(app.isSystemApp() ? Color.RED : Color.GREEN);
 				return view;
 			}
 

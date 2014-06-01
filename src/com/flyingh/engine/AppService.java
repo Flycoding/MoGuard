@@ -8,6 +8,7 @@ import java.util.List;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
@@ -18,12 +19,17 @@ import android.os.RemoteException;
 import android.text.format.Formatter;
 import android.util.Log;
 
+import com.flyingh.moguard.AppManagerActivity.AppMode;
+import com.flyingh.moguard.util.Const;
 import com.flyingh.vo.App;
 
 public class AppService {
 	private static final String TAG = "AppService";
 
 	public static List<App> loadApps(final Context context) {
+
+		SharedPreferences sp = context.getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE);
+		int appModeIndex = sp.getInt(Const.APP_MODE, 0);
 		final PackageManager packageManager = context.getPackageManager();
 		List<ApplicationInfo> installedApplications = packageManager.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
 		final List<App> apps = new ArrayList<>(installedApplications.size());
@@ -31,6 +37,10 @@ public class AppService {
 			Drawable icon = applicationInfo.loadIcon(packageManager);
 			String label = applicationInfo.loadLabel(packageManager).toString();
 			String packageName = applicationInfo.packageName;
+			if (AppMode.USER.ordinal() == appModeIndex && isSystemApp(applicationInfo) || AppMode.SYSTEM.ordinal() == appModeIndex
+					&& !isSystemApp(applicationInfo)) {
+				continue;
+			}
 			final App app = new App.Builder().icon(icon).label(label).packageName(packageName).isSystemApp(isSystemApp(applicationInfo)).build();
 			apps.add(app);
 			try {
