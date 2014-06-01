@@ -1,7 +1,6 @@
 package com.flyingh.moguard;
 
 import java.util.List;
-
 import android.annotation.TargetApi;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
@@ -29,7 +28,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.flyingh.engine.AppService;
 import com.flyingh.vo.App;
 
@@ -104,11 +102,22 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 			uninstall(v);
 			break;
 		case R.id.shareTextView:
+			share(v);
 			break;
 
 		default:
 			break;
 		}
+	}
+
+	private void share(View v) {
+		int position = (int) v.getTag();
+		App app = (App) listView.getItemAtPosition(position);
+		Intent target = new Intent(Intent.ACTION_SEND);
+		target.putExtra(Intent.EXTRA_SUBJECT, R.string.share);
+		target.putExtra(Intent.EXTRA_TEXT, R.string.share_you_an_app_ + app.getLabel());
+		target.setType("text/plain");
+		startActivity(Intent.createChooser(target, getString(R.string.share)));
 	}
 
 	private void uninstall(View v) {
@@ -130,7 +139,7 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 		App app = (App) listView.getItemAtPosition(position);
 		Intent launchIntentForPackage = getPackageManager().getLaunchIntentForPackage(app.getPackageName());
 		if (launchIntentForPackage == null) {
-			Toast.makeText(this, "can't run", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.can_t_run, Toast.LENGTH_LONG).show();
 			resetPopupWindow();
 			return;
 		}

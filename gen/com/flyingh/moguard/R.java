@@ -171,6 +171,7 @@ public final class R {
         public static final int blacklist=0x7f070067;
         public static final int blue=0x7f07005b;
         public static final int bound_phone_number_is_=0x7f07003f;
+        public static final int can_t_run=0x7f070084;
         public static final int cancel=0x7f070015;
         public static final int cancel_=0x7f07001d;
         public static final int canceled=0x7f070008;
@@ -243,6 +244,7 @@ public final class R {
         public static final int set_phone_attribution_position=0x7f07005c;
         public static final int settings=0x7f070013;
         public static final int share=0x7f070082;
+        public static final int share_you_an_app_=0x7f070083;
         public static final int show_detail_information=0x7f070054;
         public static final int show_short_information=0x7f070053;
         public static final int sim_bound=0x7f070037;

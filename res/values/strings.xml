@@ -130,5 +130,7 @@
     <string name="run">Run</string>
     <string name="uninstall">Uninstall</string>
     <string name="share">Share</string>
+    <string name="share_you_an_app_">share you an app:</string>
+    <string name="can_t_run">can\'t run</string>
 
 </resources>
