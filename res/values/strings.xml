@@ -135,5 +135,6 @@
     <string name="system_app_the_app_forbid_the_operation">System app,the app forbid the operation</string>
     <string name="order_by_name">order by name</string>
     <string name="order_by_size">order by size</string>
+    <string name="app_lock">App Lock</string>
 
 </resources>

@@ -75,6 +75,10 @@
             android:name="com.flyingh.moguard.QueryPhoneNumberActivity"
             android:label="@string/title_activity_query_phone_number" >
         </activity>
+        <activity
+            android:name="com.flyingh.moguard.AppLockActivity"
+            android:label="@string/app_lock" >
+        </activity>
 
         <service android:name="com.flyingh.engine.service.PhoneNumberAttributionService" >
         </service>

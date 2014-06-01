@@ -119,6 +119,10 @@ public class AdvancedToolsActivity extends Activity {
 		}
 	}
 
+	public void startAppLock(View view) {
+		startActivity(new Intent(this, AppLockActivity.class));
+	}
+
 	public void backupSms(View view) {
 		new AsyncTask<Void, Integer, Void>() {
 			@Override
