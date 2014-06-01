@@ -115,6 +115,11 @@
             android:authorities="com.flyingh.moguard.blacklistprovider"
             android:exported="false" >
         </provider>
+        <provider
+            android:name="com.flyingh.moguard.provider.AppLockProvider"
+            android:authorities="com.flyingh.moguard.APP_LOCK_PROVIDER"
+            android:exported="false" >
+        </provider>
 
         <activity
             android:name="com.flyingh.moguard.PhoneAttributionPositionActivity"
