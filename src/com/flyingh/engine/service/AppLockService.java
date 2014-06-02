@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
+import android.app.KeyguardManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -46,6 +47,10 @@ public class AppLockService extends Service {
 			public void run() {
 				Log.i(TAG, "here");
 				String packageName = getTopPackageName();
+				KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+				if (keyguardManager.inKeyguardRestrictedInputMode()) {
+					tmpNotLockedPackageNames.clear();
+				}
 				if (lockedPackageNames.contains(packageName) && !tmpNotLockedPackageNames.contains(packageName)) {
 					Intent intent = new Intent(AppLockService.this, LockScreenActivity.class);
 					intent.putExtra(EXTRA_PACKAGE_NAME, packageName);
