@@ -173,6 +173,7 @@
             android:textSize="15sp" />
 
         <CheckBox
+            android:id="@+id/lockServiceCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="startAppLockServiceOrNot" />

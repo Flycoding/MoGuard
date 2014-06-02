@@ -32,5 +32,9 @@ public class Const {
 	public static final String APP_DISPLAY_MODE = "app_display_mode";
 	public static final String APP_ORDER_MODE = "app_order_mode";
 	public static final String ORDER_MENU_CLICKED = "order_menu_clicked";
+	public static final String APP_LOCK_SERVICE_STARTED = "app_lock_service_started";
+	public static final String APP_LOCK_PASSWORD = "app_lock_password";
+
+	public static final String DEFAULT_APP_LOCK_PASSWORD = "135246";
 
 }

@@ -7,6 +7,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import com.flyingh.db.AppLockOpenHelper;
 import com.flyingh.vo.AppLock;
@@ -36,6 +37,9 @@ public class AppLockProvider extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		check(uri, QUERY);
 		SQLiteDatabase db = helper.getReadableDatabase();
+		if (TextUtils.isEmpty(sortOrder)) {
+			sortOrder = AppLock.DEFAULT_SORT_ORDER;
+		}
 		return db.query(AppLock.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
 	}
 

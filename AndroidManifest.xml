@@ -33,6 +33,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:allowBackup="true"
@@ -142,6 +143,10 @@
         <activity
             android:name="com.flyingh.moguard.AddAppLockActivity"
             android:label="@string/add_app_lock" >
+        </activity>
+        <activity
+            android:name="com.flyingh.moguard.LockScreenActivity"
+            android:label="@string/title_activity_lock_screen" >
         </activity>
     </application>
 

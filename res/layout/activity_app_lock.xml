@@ -8,6 +8,30 @@
     tools:context="com.flyingh.moguard.AppLockActivity"
     tools:ignore="MergeRootFrame" >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/app_lock"
+            android:textColor="#0f0"
+            android:textSize="25sp" />
+
+        <ImageButton
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/key_icon"
+            android:onClick="setPassword"
+            android:src="@drawable/key"
+            android:text="@string/set_password" />
+    </RelativeLayout>
+
     <ListView
         android:id="@+id/lockedAppListView"
         android:layout_width="match_parent"

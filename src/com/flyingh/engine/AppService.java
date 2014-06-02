@@ -46,11 +46,22 @@ public class AppService {
 		return result;
 	}
 
+	public static final Set<String> loadLockedPackageNames(Context context) {
+		Cursor cursor = context.getContentResolver().query(AppLock.QUERY_CONTENT_URI, new String[] { AppLock.PACKAGE_NAME }, null, null, null);
+		Set<String> result = new HashSet<>();
+		while (cursor.moveToNext()) {
+			result.add(cursor.getString(cursor.getColumnIndex(AppLock.PACKAGE_NAME)));
+		}
+		cursor.close();
+		return result;
+	}
+
 	private static List<App> toApp(Cursor cursor) {
 		List<App> apps = new ArrayList<>();
 		while (cursor.moveToNext()) {
 			String packageName = cursor.getString(cursor.getColumnIndex(AppLock.PACKAGE_NAME));
-			apps.add(new App.Builder().packageName(packageName).build());
+			String label = cursor.getString(cursor.getColumnIndex(AppLock.LABEL));
+			apps.add(new App.Builder().packageName(packageName).label(label).build());
 		}
 		return apps;
 	}

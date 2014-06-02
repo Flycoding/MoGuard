@@ -71,6 +71,8 @@ public class AdvancedToolsActivity extends Activity {
 
 	private TextView lockServiceStatusTextView;
 
+	private CheckBox lockServiceCheckBox;
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +124,10 @@ public class AdvancedToolsActivity extends Activity {
 		}
 
 		lockServiceStatusTextView = (TextView) findViewById(R.id.lockServiceStatusTextView);
+		boolean appLockServiceStarted = sp.getBoolean(Const.APP_LOCK_SERVICE_STARTED, false);
+		lockServiceStatusTextView.setText(appLockServiceStarted ? R.string.service_started : R.string.service_not_starts);
+		lockServiceCheckBox = (CheckBox) findViewById(R.id.lockServiceCheckBox);
+		lockServiceCheckBox.setChecked(appLockServiceStarted);
 	}
 
 	public void startAppLock(View view) {
@@ -134,8 +140,10 @@ public class AdvancedToolsActivity extends Activity {
 		Intent service = new Intent(this, AppLockService.class);
 		if (appLockStatusCheckBox.isChecked()) {
 			startService(service);
+			sp.edit().putBoolean(Const.APP_LOCK_SERVICE_STARTED, true).commit();
 		} else {
 			stopService(service);
+			sp.edit().putBoolean(Const.APP_LOCK_SERVICE_STARTED, false).commit();
 		}
 	}
 

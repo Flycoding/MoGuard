@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -17,18 +18,25 @@ import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CursorAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flyingh.moguard.util.Const;
+import com.flyingh.moguard.util.StringUtils;
 import com.flyingh.vo.AppLock;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -40,11 +48,15 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 	private ListView lockedAppListView;
 	private CursorAdapter adapter;
 
+	private SharedPreferences sp;
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_app_lock);
+		sp = getSharedPreferences(Const.CONFIG_FILE_NAME, MODE_PRIVATE);
 		lockedAppListView = (ListView) findViewById(R.id.lockedAppListView);
 		initAdapter();
 		lockedAppListView.setAdapter(adapter);
@@ -80,6 +92,31 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 
 		});
 		getLoaderManager().initLoader(LOAD_ID, null, this);
+	}
+
+	public void setPassword(View view) {
+		final EditText editText = new EditText(this);
+		editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+		editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+		if (!sp.contains(Const.APP_LOCK_PASSWORD)) {
+			editText.setText(Const.DEFAULT_APP_LOCK_PASSWORD);
+		}
+		editText.setSelectAllOnFocus(true);
+		new AlertDialog.Builder(this).setIcon(R.drawable.key).setTitle(R.string.set_password)
+				.setMessage(!sp.contains(Const.APP_LOCK_PASSWORD) ? R.string.default_password_is_135246 : R.string.please_input_the_new_password)
+				.setView(editText).setPositiveButton(R.string.ok, new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String password = editText.getText().toString().trim();
+						if (TextUtils.isEmpty(password)) {
+							Toast.makeText(AppLockActivity.this, R.string.the_password_should_not_be_empty, Toast.LENGTH_SHORT).show();
+							return;
+						}
+						sp.edit().putString(Const.APP_LOCK_PASSWORD, StringUtils.md5(password)).commit();
+						Toast.makeText(AppLockActivity.this, R.string.save_success, Toast.LENGTH_SHORT).show();
+					}
+				}).setNegativeButton(R.string.cancel, null).setCancelable(false).show();
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)

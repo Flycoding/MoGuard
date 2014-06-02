@@ -30,7 +30,7 @@
     <string name="are_you_sure_to_cancel_the_download_">Are you sure to cancel the download?</string>
     <string name="cancel_">Cancel?</string>
     <string name="confirm">Confirm</string>
-    <string name="set_password">Set Password</string>
+    <string name="set_password">Set password</string>
     <string name="input_password">Input password</string>
     <string name="repeat_password">repeat password</string>
     <string name="the_password_and_the_repeat_password_are_not_the_same">the password and the repeat password are not the same</string>
@@ -141,5 +141,13 @@
     <string name="add_app_lock">Add App Lock</string>
     <string name="the_selected_app_is_empty">the selected app is empty</string>
     <string name="are_you_sure_to_delete_">"Are you sure to delete "</string>
+    <string name="title_activity_lock_screen">LockScreenActivity</string>
+    <string name="please_input_the_password">Please input the password</string>
+    <string name="enter">Enter</string>
+    <string name="key_icon">key icon</string>
+    <string name="the_password_should_not_be_empty">the password should not be empty</string>
+    <string name="default_password_is_135246">Default password is 135246</string>
+    <string name="please_input_the_new_password">please input the new password</string>
+    <string name="save_success">save success</string>
 
 </resources>
