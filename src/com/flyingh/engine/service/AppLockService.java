@@ -11,13 +11,16 @@ import android.app.ActivityManager.RunningTaskInfo;
 import android.app.KeyguardManager;
 import android.app.Service;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
 import com.flyingh.engine.AppService;
 import com.flyingh.engine.ILockService;
 import com.flyingh.moguard.LockScreenActivity;
+import com.flyingh.vo.AppLock;
 
 public class AppLockService extends Service {
 	public static final String EXTRA_PACKAGE_NAME = "packageName";
@@ -42,6 +45,13 @@ public class AppLockService extends Service {
 	public void onCreate() {
 		super.onCreate();
 		lockedPackageNames = AppService.loadLockedPackageNames(this);
+		getContentResolver().registerContentObserver(AppLock.CONTENT_URI, true, new ContentObserver(new Handler()) {
+			@Override
+			public void onChange(boolean selfChange) {
+				super.onChange(selfChange);
+				lockedPackageNames = AppService.loadLockedPackageNames(AppLockService.this);
+			}
+		});
 		Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {

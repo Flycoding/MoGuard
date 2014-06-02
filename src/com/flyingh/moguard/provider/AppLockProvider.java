@@ -59,7 +59,9 @@ public class AppLockProvider extends ContentProvider {
 		check(uri, INSERT);
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
-			return ContentUris.withAppendedId(uri, db.insert(AppLock.TABLE_NAME, null, values));
+			Uri insertUri = ContentUris.withAppendedId(uri, db.insert(AppLock.TABLE_NAME, null, values));
+			getContext().getContentResolver().notifyChange(AppLock.INSERT_CONTENT_URI, null);
+			return insertUri;
 		} finally {
 			db.close();
 		}
@@ -70,7 +72,9 @@ public class AppLockProvider extends ContentProvider {
 		check(uri, DELETE);
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
-			return db.delete(AppLock.TABLE_NAME, selection, selectionArgs);
+			int number = db.delete(AppLock.TABLE_NAME, selection, selectionArgs);
+			getContext().getContentResolver().notifyChange(AppLock.DELETE_CONTENT_URI, null);
+			return number;
 		} finally {
 			db.close();
 		}
@@ -81,7 +85,9 @@ public class AppLockProvider extends ContentProvider {
 		check(uri, UPDATE);
 		SQLiteDatabase db = helper.getWritableDatabase();
 		try {
-			return db.update(AppLock.TABLE_NAME, values, selection, selectionArgs);
+			int number = db.update(AppLock.TABLE_NAME, values, selection, selectionArgs);
+			getContext().getContentResolver().notifyChange(AppLock.UPDATE_CONTENT_URI, null);
+			return number;
 		} finally {
 			db.close();
 		}
