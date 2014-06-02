@@ -12,7 +12,7 @@ public class AppLockOpenHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("create table applock(_id integer primary key autoincrement,package_name varchar(50))");
+		db.execSQL("create table applock(_id integer primary key autoincrement,package_name varchar(50),label varchar(50))");
 	}
 
 	@Override

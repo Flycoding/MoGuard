@@ -100,7 +100,7 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 				try {
 					ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(
 							cursor.getString(cursor.getColumnIndex(AppLock.PACKAGE_NAME)), PackageManager.GET_UNINSTALLED_PACKAGES);
-					lockedAppTextView.setText(applicationInfo.loadLabel(getPackageManager()));
+					lockedAppTextView.setText(cursor.getString(cursor.getColumnIndex(AppLock.LABEL)));
 					Drawable divideLineDrawable = getResources().getDrawable(R.drawable.divide_line);
 					lockedAppTextView.setCompoundDrawablesWithIntrinsicBounds(applicationInfo.loadIcon(getPackageManager()),
 							cursor.getPosition() == 0 ? divideLineDrawable : null, null, divideLineDrawable);
@@ -149,7 +149,7 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		return new CursorLoader(this, AppLock.QUERY_CONTENT_URI, null, null, null, null);
+		return new CursorLoader(this, AppLock.QUERY_CONTENT_URI, null, null, null, AppLock.DEFAULT_SORT_ORDER);
 	}
 
 	@Override

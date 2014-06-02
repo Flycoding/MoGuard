@@ -38,6 +38,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flyingh.engine.service.AppLockService;
 import com.flyingh.engine.service.PhoneNumberAttributionService;
 import com.flyingh.moguard.util.Const;
 
@@ -67,6 +68,8 @@ public class AdvancedToolsActivity extends Activity {
 	private int height;
 	private int width;
 	private ProgressDialog progressDialog;
+
+	private TextView lockServiceStatusTextView;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	@Override
@@ -117,10 +120,23 @@ public class AdvancedToolsActivity extends Activity {
 			showInfoTextView.setText(R.string.show_detail_information);
 			showDetailOrNotCheckBox.setChecked(true);
 		}
+
+		lockServiceStatusTextView = (TextView) findViewById(R.id.lockServiceStatusTextView);
 	}
 
 	public void startAppLock(View view) {
 		startActivity(new Intent(this, AppLockActivity.class));
+	}
+
+	public void startAppLockServiceOrNot(View view) {
+		CheckBox appLockStatusCheckBox = (CheckBox) view;
+		lockServiceStatusTextView.setText(appLockStatusCheckBox.isChecked() ? R.string.service_started : R.string.service_not_starts);
+		Intent service = new Intent(this, AppLockService.class);
+		if (appLockStatusCheckBox.isChecked()) {
+			startService(service);
+		} else {
+			stopService(service);
+		}
 	}
 
 	public void backupSms(View view) {

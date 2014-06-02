@@ -38,7 +38,7 @@ public class AddAppLockActivity extends Activity implements LoaderCallbacks<List
 	private static final int LOAD_ID = 0;
 	private ListView unlockedAppListView;
 	private UnlockedAppBaseAdapter adapter;
-	private final Set<String> selectedApps = new HashSet<>();
+	private final Set<App> selectedApps = new HashSet<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +53,13 @@ public class AddAppLockActivity extends Activity implements LoaderCallbacks<List
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Log.i(TAG, "position:" + position);
 				App app = (App) unlockedAppListView.getItemAtPosition(position);
-				String packageName = app.getPackageName();
-				if (selectedApps.contains(packageName)) {
-					selectedApps.remove(packageName);
+				if (selectedApps.contains(app)) {
+					selectedApps.remove(app);
 				} else {
-					selectedApps.add(packageName);
+					selectedApps.add(app);
 				}
 				ViewHolder viewHolder = (ViewHolder) view.getTag();
-				viewHolder.appLockCheckBox.setChecked(selectedApps.contains(packageName));
+				viewHolder.appLockCheckBox.setChecked(selectedApps.contains(app));
 			}
 
 		});
@@ -108,7 +107,7 @@ public class AddAppLockActivity extends Activity implements LoaderCallbacks<List
 			ViewHolder viewHolder = (ViewHolder) view.getTag();
 			viewHolder.iconImageView.setImageDrawable(app.getIcon());
 			viewHolder.labelTextView.setText(app.getLabel());
-			viewHolder.appLockCheckBox.setChecked(selectedApps.contains(app.getPackageName()));
+			viewHolder.appLockCheckBox.setChecked(selectedApps.contains(app));
 			return view;
 		}
 
@@ -134,9 +133,10 @@ public class AddAppLockActivity extends Activity implements LoaderCallbacks<List
 			finish();
 			return;
 		}
-		for (String packageName : selectedApps) {
+		for (App app : selectedApps) {
 			ContentValues values = new ContentValues();
-			values.put(AppLock.PACKAGE_NAME, packageName);
+			values.put(AppLock.PACKAGE_NAME, app.getPackageName());
+			values.put(AppLock.LABEL, app.getLabel());
 			getContentResolver().insert(AppLock.INSERT_CONTENT_URI, values);
 		}
 		Toast.makeText(this, R.string.add_success, Toast.LENGTH_SHORT).show();

@@ -36,7 +36,7 @@ public class AppLockProvider extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 		check(uri, QUERY);
 		SQLiteDatabase db = helper.getReadableDatabase();
-		return db.query(AppLock.TABLE_NAME, null, selection, selectionArgs, null, null, null);
+		return db.query(AppLock.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
 	}
 
 	private void check(Uri uri, int code) {
