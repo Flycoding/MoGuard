@@ -146,7 +146,8 @@
         </activity>
         <activity
             android:name="com.flyingh.moguard.LockScreenActivity"
-            android:label="@string/title_activity_lock_screen" >
+            android:label="@string/title_activity_lock_screen"
+            android:launchMode="singleInstance" >
         </activity>
     </application>
 

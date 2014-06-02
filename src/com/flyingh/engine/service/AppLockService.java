@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import android.app.ActivityManager;
@@ -27,6 +28,7 @@ public class AppLockService extends Service {
 	private static final String TAG = "AppLockService";
 	private Set<String> lockedPackageNames;
 	private final Set<String> tmpNotLockedPackageNames = new HashSet<>();
+	private ScheduledExecutorService executorService;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -52,7 +54,8 @@ public class AppLockService extends Service {
 				lockedPackageNames = AppService.loadLockedPackageNames(AppLockService.this);
 			}
 		});
-		Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
+		executorService = Executors.newScheduledThreadPool(1);
+		executorService.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
 				Log.i(TAG, "here");
@@ -80,6 +83,7 @@ public class AppLockService extends Service {
 
 	@Override
 	public void onDestroy() {
+		executorService.shutdown();
 		super.onDestroy();
 	}
 
