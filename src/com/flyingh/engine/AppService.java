@@ -83,32 +83,7 @@ public class AppService {
 			final App app = new App.Builder().icon(icon).label(label).packageName(packageName).isSystemApp(isSystemApp(applicationInfo)).build();
 			apps.add(app);
 			try {
-				Method method = packageManager.getClass().getDeclaredMethod("getPackageSizeInfo", String.class, IPackageStatsObserver.class);
-				method.setAccessible(true);
-				method.invoke(packageManager, applicationInfo.packageName, new IPackageStatsObserver.Stub() {
-
-					@Override
-					public void onGetStatsCompleted(PackageStats pStats, boolean succeeded) throws RemoteException {
-						long totalSizeLong = getTotalSizeLong(pStats);
-						app.setTotalSizeLong(totalSizeLong);
-						app.setTotalSize(Formatter.formatFileSize(context, totalSizeLong));
-					}
-
-					@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-					private long getTotalSizeLong(PackageStats pStats) {
-						long totalSizeLong = 0;
-						totalSizeLong += pStats.cacheSize;
-						totalSizeLong += pStats.codeSize;
-						totalSizeLong += pStats.dataSize;
-						totalSizeLong += pStats.externalCacheSize;
-						totalSizeLong += pStats.externalCodeSize;
-						totalSizeLong += pStats.externalDataSize;
-						totalSizeLong += pStats.externalMediaSize;
-						totalSizeLong += pStats.externalObbSize;
-						return totalSizeLong;
-					}
-
-				});
+				setAppSize(context, applicationInfo.packageName, app);
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
 				Log.i(TAG, e.getMessage());
 				throw new RuntimeException(e);
@@ -116,6 +91,37 @@ public class AppService {
 		}
 		Collections.sort(apps, getComparator());
 		return apps;
+	}
+
+	private static void setAppSize(final Context context, String packageName, final App app) throws NoSuchMethodException, IllegalAccessException,
+			InvocationTargetException {
+		PackageManager packageManager = context.getPackageManager();
+		Method method = packageManager.getClass().getDeclaredMethod("getPackageSizeInfo", String.class, IPackageStatsObserver.class);
+		method.setAccessible(true);
+		method.invoke(packageManager, packageName, new IPackageStatsObserver.Stub() {
+
+			@Override
+			public void onGetStatsCompleted(PackageStats pStats, boolean succeeded) throws RemoteException {
+				long totalSizeLong = getTotalSizeLong(pStats);
+				app.setTotalSizeLong(totalSizeLong);
+				app.setTotalSize(Formatter.formatFileSize(context, totalSizeLong));
+			}
+
+			@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+			private long getTotalSizeLong(PackageStats pStats) {
+				long totalSizeLong = 0;
+				totalSizeLong += pStats.cacheSize;
+				totalSizeLong += pStats.codeSize;
+				totalSizeLong += pStats.dataSize;
+				totalSizeLong += pStats.externalCacheSize;
+				totalSizeLong += pStats.externalCodeSize;
+				totalSizeLong += pStats.externalDataSize;
+				totalSizeLong += pStats.externalMediaSize;
+				totalSizeLong += pStats.externalObbSize;
+				return totalSizeLong;
+			}
+
+		});
 	}
 
 	private static Comparator<App> getComparator() {
@@ -158,6 +164,21 @@ public class AppService {
 
 	public static boolean isSystemApp(ApplicationInfo applicationInfo) {
 		return (applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+	}
+
+	public static App getApp(Context context, String processName) {
+		try {
+			PackageManager pm = context.getPackageManager();
+			ApplicationInfo applicationInfo = pm.getApplicationInfo(processName.split(":")[0], PackageManager.GET_UNINSTALLED_PACKAGES);
+			App app = new App.Builder().icon(applicationInfo.loadIcon(pm)).label(applicationInfo.loadLabel(pm).toString())
+					.packageName(applicationInfo.packageName).isSystemApp(isSystemApp(applicationInfo)).build();
+			setAppSize(context, applicationInfo.packageName, app);
+			return app;
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+			// throw new RuntimeException(e);
+		}
+		return null;
 	}
 
 }

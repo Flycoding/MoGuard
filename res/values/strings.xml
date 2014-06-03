@@ -149,5 +149,9 @@
     <string name="default_password_is_135246">Default password is 135246</string>
     <string name="please_input_the_new_password">please input the new password</string>
     <string name="save_success">save success</string>
+    <string name="title_activity_task_manager">TaskManagerActivity</string>
+    <string name="clean">Clean</string>
+    <string name="setup">Setup</string>
+    <string name="process_icon">process icon</string>
 
 </resources>

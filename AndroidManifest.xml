@@ -149,6 +149,10 @@
             android:label="@string/title_activity_lock_screen"
             android:launchMode="singleInstance" >
         </activity>
+        <activity
+            android:name="com.flyingh.moguard.TaskManagerActivity"
+            android:label="@string/title_activity_task_manager" >
+        </activity>
     </application>
 
 </manifest>
