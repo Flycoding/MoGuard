@@ -144,7 +144,7 @@ public abstract class GroupAdapter<K, V extends Collection<E>, E extends Compara
 		keyPositions.clear();
 	}
 
-	private boolean isKeyPosition(int position) {
+	public boolean isKeyPosition(int position) {
 		return keyPositions.contains(position);
 	}
 

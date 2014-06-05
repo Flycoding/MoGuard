@@ -37,6 +37,7 @@
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <application
+        android:name="com.flyingh.moguard.app.MoGuardApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -113,6 +114,11 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+        <receiver android:name="com.flyingh.moguard.receiver.ScreenOffReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.SCREEN_OFF" />
+            </intent-filter>
+        </receiver>
 
         <provider
             android:name="com.flyingh.moguard.provider.BlacklistProvider"
@@ -157,6 +163,10 @@
         <activity
             android:name="com.flyingh.moguard.TaskManagerSettingsActivity"
             android:label="@string/title_activity_task_manager_settings" >
+        </activity>
+        <activity
+            android:name="com.flyingh.moguard.AppPermissionsActivity"
+            android:theme="@style/AppPermissionsTheme" >
         </activity>
     </application>
 

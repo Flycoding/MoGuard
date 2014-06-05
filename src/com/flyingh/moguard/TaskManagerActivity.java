@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,6 +41,7 @@ import android.widget.Toast;
 import com.flyingh.adapter.GroupAdapter;
 import com.flyingh.adapter.GroupAdapter.Transformer;
 import com.flyingh.engine.AppService;
+import com.flyingh.moguard.app.MoGuardApp;
 import com.flyingh.moguard.util.Const;
 import com.flyingh.vo.App;
 import com.flyingh.vo.Process;
@@ -86,7 +88,6 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(TaskManagerActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
 				if (isNotSelectable(position)) {
 					return;
 				}
@@ -102,6 +103,23 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 				viewHolder.checkBox.setChecked(checkedPositions.contains(position));
 			}
 
+		});
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				if (adapter.isKeyPosition(position)) {
+					return true;
+				}
+				Process process = (Process) adapter.getItem(position);
+				if (TextUtils.isEmpty(process.getApp().getPackageName())) {
+					return true;
+				}
+				MoGuardApp application = (MoGuardApp) getApplication();
+				application.process = process;
+				startActivity(new Intent(getApplicationContext(), AppPermissionsActivity.class));
+				return true;
+			}
 		});
 	}
 
