@@ -38,8 +38,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.flyingh.engine.service.AppLockService;
-import com.flyingh.engine.service.PhoneNumberAttributionService;
+import com.flyingh.moguard.service.AppLockService;
+import com.flyingh.moguard.service.PhoneNumberAttributionService;
 import com.flyingh.moguard.util.Const;
 
 public class AdvancedToolsActivity extends Activity {

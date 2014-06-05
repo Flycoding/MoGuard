@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flyingh.engine.ILockService;
-import com.flyingh.engine.service.AppLockService;
+import com.flyingh.moguard.service.AppLockService;
 import com.flyingh.moguard.util.Const;
 import com.flyingh.moguard.util.StringUtils;
 

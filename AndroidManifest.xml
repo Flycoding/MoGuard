@@ -81,9 +81,9 @@
             android:label="@string/app_lock" >
         </activity>
 
-        <service android:name="com.flyingh.engine.service.PhoneNumberAttributionService" >
+        <service android:name="com.flyingh.moguard.service.PhoneNumberAttributionService" >
         </service>
-        <service android:name="com.flyingh.engine.service.AppLockService" >
+        <service android:name="com.flyingh.moguard.service.AppLockService" >
         </service>
 
         <receiver
