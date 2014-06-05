@@ -16,6 +16,7 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import com.flyingh.adapter.GroupAdapter;
 import com.flyingh.adapter.GroupAdapter.Transformer;
 import com.flyingh.engine.AppService;
 import com.flyingh.moguard.util.Const;
+import com.flyingh.vo.App;
 import com.flyingh.vo.Process;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -55,12 +57,14 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 	private final Set<Integer> checkedPositions = new HashSet<>();
 	private final List<Process> processes = new ArrayList<>();
 	private LinearLayout progressLinearLayout;
+	private SharedPreferences sp;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_task_manager);
+		sp = getSharedPreferences(Const.CONFIG_FILE_NAME, MODE_PRIVATE);
 		processCountTextView = (TextView) findViewById(R.id.processCountTextView);
 		memoryTextView = (TextView) findViewById(R.id.memoryTextView);
 		listView = (ListView) findViewById(R.id.listView);
@@ -169,12 +173,15 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 
 	private List<Process> convert(List<RunningAppProcessInfo> runningAppProcesses) {
 		List<Process> result = new ArrayList<>();
+		boolean showSystemApp = sp.getBoolean(Const.SHOW_SYSTEM_APP, true);
 		for (RunningAppProcessInfo runningAppProcessInfo : runningAppProcesses) {
 			Log.i(TAG, runningAppProcessInfo.processName);
 			int totalPrivateDirty = am.getProcessMemoryInfo(new int[] { runningAppProcessInfo.pid })[0].getTotalPrivateDirty();
-			Process process = new Process(AppService.getApp(this, runningAppProcessInfo.processName), runningAppProcessInfo.pid,
-					totalPrivateDirty * 1024);
-			result.add(process);
+			App app = AppService.getApp(this, runningAppProcessInfo.processName);
+			if (showSystemApp || !app.isSystemApp()) {
+				Process process = new Process(app, runningAppProcessInfo.pid, totalPrivateDirty * 1024);
+				result.add(process);
+			}
 		}
 		return result;
 	}
@@ -215,6 +222,11 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 
 	public void setup(View view) {
 		startActivityForResult(new Intent(this, TaskManagerSettingsActivity.class), 0);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		getLoaderManager().restartLoader(LOAD_ID, null, this);
 	}
 
 	@Override
