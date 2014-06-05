@@ -157,7 +157,8 @@ public final class R {
         public static final int security_wizard4=0x7f030017;
         public static final int set_security_password_dialog_view=0x7f030018;
         public static final int task_item=0x7f030019;
-        public static final int unlocked_app_item=0x7f03001a;
+        public static final int toast=0x7f03001a;
+        public static final int unlocked_app_item=0x7f03001b;
     }
     public static final class menu {
         public static final int add_app_lock=0x7f0a0000;

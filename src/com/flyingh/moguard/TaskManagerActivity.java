@@ -18,6 +18,7 @@ import android.content.Loader;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.Gravity;
@@ -167,7 +168,27 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 	}
 
 	public void clean(View view) {
-
+		int killedProcessCount = 0;
+		long cleanedMemory = 0;
+		for (Integer checkedPosition : checkedPositions) {
+			Process process = (Process) adapter.getItem(checkedPosition);
+			String packageName = process.getApp().getPackageName();
+			if (!TextUtils.isEmpty(packageName)) {
+				am.killBackgroundProcesses(packageName);
+				++killedProcessCount;
+				cleanedMemory += process.getMemory();
+			}
+		}
+		Toast toast = new Toast(this);
+		TextView toastView = (TextView) View.inflate(this, R.layout.toast, null);
+		toastView.setText("killed process number:" + killedProcessCount + "\n");
+		toastView.append("cleaned memory:" + Formatter.formatFileSize(this, cleanedMemory));
+		toast.setView(toastView);
+		toast.setDuration(Toast.LENGTH_SHORT);
+		toast.show();
+		checkedPositions.clear();
+		setProcessAndMemoryInfo();
+		getLoaderManager().restartLoader(LOAD_ID, null, this);
 	}
 
 	public void setup(View view) {
