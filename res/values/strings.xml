@@ -164,5 +164,6 @@
     <string name="title_activity_app_permissions">AppPermissionsActivity</string>
     <string name="package_name">Package name</string>
     <string name="permissions">Permissions</string>
+    <string name="moguard">MoGuard</string>
 
 </resources>

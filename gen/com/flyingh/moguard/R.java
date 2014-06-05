@@ -68,38 +68,41 @@ public final class R {
         public static final int setup1=0x7f020021;
         public static final int share=0x7f020022;
         public static final int sysoptimize7=0x7f020023;
-        public static final int taskmanager4=0x7f020024;
-        public static final int trojan5=0x7f020025;
-        public static final int uninstall=0x7f020026;
+        public static final int task_manager_widget=0x7f020024;
+        public static final int taskmanager4=0x7f020025;
+        public static final int trojan5=0x7f020026;
+        public static final int uninstall=0x7f020027;
+        public static final int widget_bg_portrait=0x7f020028;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b003a;
-        public static final int appLockCheckBox=0x7f0b0039;
+        public static final int action_settings=0x7f0b003b;
+        public static final int appLockCheckBox=0x7f0b003a;
         public static final int appNameTextView=0x7f0b000d;
         public static final int appShowModeSpinner=0x7f0b0009;
         public static final int appsListView=0x7f0b000a;
-        public static final int bind_check_box=0x7f0b002e;
-        public static final int bind_text_view=0x7f0b002d;
-        public static final int bound_phone_number=0x7f0b002f;
+        public static final int bind_check_box=0x7f0b002f;
+        public static final int bind_text_view=0x7f0b002e;
+        public static final int bound_phone_number=0x7f0b0030;
         public static final int bound_phone_number_text_view=0x7f0b0018;
         public static final int cancel_input_password=0x7f0b0028;
-        public static final int cancel_set_password=0x7f0b0033;
-        public static final int checkBox=0x7f0b0038;
+        public static final int cancel_set_password=0x7f0b0034;
+        public static final int checkBox=0x7f0b0039;
+        public static final int cleanButton=0x7f0b002a;
         public static final int cleanModeCheckBox=0x7f0b0021;
         public static final int confirm_input_password=0x7f0b0029;
-        public static final int confirm_set_password=0x7f0b0034;
+        public static final int confirm_set_password=0x7f0b0035;
         public static final int container=0x7f0b0000;
-        public static final int deleteMenuItem=0x7f0b003e;
+        public static final int deleteMenuItem=0x7f0b003f;
         public static final int displayModeCheckBox=0x7f0b001f;
         public static final int feature_name=0x7f0b0026;
         public static final int grid_view=0x7f0b0013;
         public static final int hintTextView=0x7f0b0015;
         public static final int icon=0x7f0b0022;
-        public static final int iconImageView=0x7f0b0035;
+        public static final int iconImageView=0x7f0b0036;
         public static final int imageView=0x7f0b0014;
         public static final int input_password=0x7f0b0027;
         public static final int label=0x7f0b0023;
-        public static final int labelTextView=0x7f0b0036;
+        public static final int labelTextView=0x7f0b0037;
         public static final int linear_layout=0x7f0b001a;
         public static final int listView=0x7f0b0010;
         public static final int lockPasswordEditText=0x7f0b0012;
@@ -107,34 +110,34 @@ public final class R {
         public static final int lockServiceStatusTextView=0x7f0b0006;
         public static final int lockedAppListView=0x7f0b0008;
         public static final int lockedAppTextView=0x7f0b0011;
-        public static final int memTextView=0x7f0b0037;
+        public static final int memTextView=0x7f0b0038;
         public static final int memoryTextView=0x7f0b001d;
         public static final int number=0x7f0b0025;
-        public static final int order_by_name=0x7f0b003b;
-        public static final int order_by_size=0x7f0b003c;
+        public static final int order_by_name=0x7f0b003c;
+        public static final int order_by_size=0x7f0b003d;
         public static final int packageNameTextView=0x7f0b000e;
-        public static final int password=0x7f0b0031;
+        public static final int password=0x7f0b0032;
         public static final int processCountTextView=0x7f0b001c;
         public static final int progressBar=0x7f0b000c;
         public static final int progressLinearLayout=0x7f0b000b;
         public static final int queryParamEditText=0x7f0b0016;
-        public static final int repeat_password=0x7f0b0032;
+        public static final int repeat_password=0x7f0b0033;
         public static final int resultTextView=0x7f0b0017;
-        public static final int runTextView=0x7f0b002a;
+        public static final int runTextView=0x7f0b002b;
         public static final int scrollView=0x7f0b000f;
         public static final int serviceStatusTextView=0x7f0b0002;
-        public static final int shareTextView=0x7f0b002c;
+        public static final int shareTextView=0x7f0b002d;
         public static final int showCleanModeTextView=0x7f0b0020;
         public static final int showDetailOrNotCheckBox=0x7f0b0005;
         public static final int showDisplayModeTextView=0x7f0b001e;
         public static final int showInfoTextView=0x7f0b0004;
         public static final int startOrNotCheckBox=0x7f0b0003;
         public static final int start_or_not_checkbox=0x7f0b0019;
-        public static final int start_status=0x7f0b0030;
+        public static final int start_status=0x7f0b0031;
         public static final int totalSize=0x7f0b0024;
-        public static final int uninstallTextView=0x7f0b002b;
+        public static final int uninstallTextView=0x7f0b002c;
         public static final int unlockedAppListView=0x7f0b0001;
-        public static final int updateMenuItem=0x7f0b003d;
+        public static final int updateMenuItem=0x7f0b003e;
         public static final int version_name=0x7f0b001b;
     }
     public static final class layout {
@@ -158,16 +161,17 @@ public final class R {
         public static final int change_security_feature_name=0x7f030011;
         public static final int grid_view_item=0x7f030012;
         public static final int input_security_password_dialog_view=0x7f030013;
-        public static final int locked_app_item=0x7f030014;
-        public static final int popup_window_item=0x7f030015;
-        public static final int security_wizard=0x7f030016;
-        public static final int security_wizard2=0x7f030017;
-        public static final int security_wizard3=0x7f030018;
-        public static final int security_wizard4=0x7f030019;
-        public static final int set_security_password_dialog_view=0x7f03001a;
-        public static final int task_item=0x7f03001b;
-        public static final int toast=0x7f03001c;
-        public static final int unlocked_app_item=0x7f03001d;
+        public static final int layout_task_manager_widget=0x7f030014;
+        public static final int locked_app_item=0x7f030015;
+        public static final int popup_window_item=0x7f030016;
+        public static final int security_wizard=0x7f030017;
+        public static final int security_wizard2=0x7f030018;
+        public static final int security_wizard3=0x7f030019;
+        public static final int security_wizard4=0x7f03001a;
+        public static final int set_security_password_dialog_view=0x7f03001b;
+        public static final int task_item=0x7f03001c;
+        public static final int toast=0x7f03001d;
+        public static final int unlocked_app_item=0x7f03001e;
     }
     public static final class menu {
         public static final int add_app_lock=0x7f0a0000;
@@ -253,6 +257,7 @@ public final class R {
         public static final int key_icon=0x7f070091;
         public static final int kill_virus=0x7f07000f;
         public static final int loading_=0x7f07007e;
+        public static final int moguard=0x7f0700a5;
         public static final int mogurad=0x7f070019;
         public static final int need_update=0x7f07001a;
         public static final int network_is_not_available_=0x7f070018;
@@ -442,5 +447,6 @@ public final class R {
     }
     public static final class xml {
         public static final int security_device_admin=0x7f050000;
+        public static final int task_manager_widget=0x7f050001;
     }
 }

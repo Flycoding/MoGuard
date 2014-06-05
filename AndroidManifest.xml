@@ -87,6 +87,10 @@
         </service>
         <service android:name="com.flyingh.moguard.service.AppLockService" >
         </service>
+        <service android:name="com.flyingh.moguard.service.TaskManagerService" >
+        </service>
+        <service android:name="com.flyingh.moguard.service.KillBackgroundProcessesService" >
+        </service>
 
         <receiver
             android:name="com.flyingh.moguard.receiver.PhoneCallReceiver"
@@ -118,6 +122,15 @@
             <intent-filter android:priority="1000" >
                 <action android:name="android.intent.action.SCREEN_OFF" />
             </intent-filter>
+        </receiver>
+        <receiver android:name="com.flyingh.moguard.receiver.TaskManagerWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/task_manager_widget" />
         </receiver>
 
         <provider
