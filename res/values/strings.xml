@@ -153,5 +153,13 @@
     <string name="clean">Clean</string>
     <string name="setup">Setup</string>
     <string name="process_icon">process icon</string>
+    <string name="title_activity_task_manager_settings">TaskManagerSettingsActivity</string>
+    <string name="display_mode">Display mode</string>
+    <string name="show_user_app_only">Show user app only</string>
+    <string name="clean_mode">Clean mode</string>
+    <string name="don_t_clean_when_locked">Don\'t clean when locked</string>
+    <string name="show_user_system_app">Show user&amp;system app</string>
+    <string name="don_t_clean_when_lock_screen">Don\'t clean when lock screen</string>
+    <string name="clean_when_lock_screen">Clean when lock screen</string>
 
 </resources>

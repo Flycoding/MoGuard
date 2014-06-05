@@ -36,5 +36,8 @@ public class Const {
 	public static final String APP_LOCK_PASSWORD = "app_lock_password";
 
 	public static final String DEFAULT_APP_LOCK_PASSWORD = "135246";
+	public static final String PACKAGE_NAME = "com.flyingh.moguard";
+	public static final String SHOW_SYSTEM_APP = "show_system_app";
+	public static final String CLEAN_WHEN_LOCK = "clean_when_lock";
 
 }

@@ -14,6 +14,7 @@ import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.graphics.Color;
 import android.os.Build;
@@ -38,6 +39,7 @@ import android.widget.Toast;
 import com.flyingh.adapter.GroupAdapter;
 import com.flyingh.adapter.GroupAdapter.Transformer;
 import com.flyingh.engine.AppService;
+import com.flyingh.moguard.util.Const;
 import com.flyingh.vo.Process;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -81,6 +83,9 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Toast.makeText(TaskManagerActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+				if (isNotSelectable(position)) {
+					return;
+				}
 				ViewHolder viewHolder = (ViewHolder) view.getTag();
 				if (viewHolder == null) {
 					return;
@@ -92,7 +97,18 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 				}
 				viewHolder.checkBox.setChecked(checkedPositions.contains(position));
 			}
+
 		});
+	}
+
+	private boolean isNotSelectable(int position) {
+		Object item = adapter.getItem(position);
+		if (!Process.class.isInstance(item)) {
+			return false;
+		}
+		Process process = (Process) item;
+		String packageName = process.getApp().getPackageName();
+		return TextUtils.isEmpty(packageName) || TextUtils.equals(Const.PACKAGE_NAME, packageName);
 	}
 
 	private GroupAdapter<Boolean, Collection<Process>, Process> initAdapter(List<Process> processes) {
@@ -133,7 +149,13 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 				viewHolder.iconImageView.setImageDrawable(e.getApp().getIcon());
 				viewHolder.labelTextView.setText(e.getApp().getLabel());
 				viewHolder.memTextView.setText(Formatter.formatFileSize(context, e.getMemory()));
-				viewHolder.checkBox.setChecked(checkedPositions.contains(position));
+				if (isNotSelectable(position)) {
+					viewHolder.checkBox.setVisibility(View.GONE);
+					viewHolder.checkBox.setChecked(false);
+				} else {
+					viewHolder.checkBox.setVisibility(View.VISIBLE);
+					viewHolder.checkBox.setChecked(checkedPositions.contains(position));
+				}
 			}
 		};
 	}
@@ -192,7 +214,7 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 	}
 
 	public void setup(View view) {
-
+		startActivityForResult(new Intent(this, TaskManagerSettingsActivity.class), 0);
 	}
 
 	@Override

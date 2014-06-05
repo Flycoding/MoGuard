@@ -154,6 +154,10 @@
             android:name="com.flyingh.moguard.TaskManagerActivity"
             android:label="@string/title_activity_task_manager" >
         </activity>
+        <activity
+            android:name="com.flyingh.moguard.TaskManagerSettingsActivity"
+            android:label="@string/title_activity_task_manager_settings" >
+        </activity>
     </application>
 
 </manifest>
