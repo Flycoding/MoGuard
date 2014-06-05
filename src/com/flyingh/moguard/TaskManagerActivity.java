@@ -37,7 +37,6 @@ import android.widget.Toast;
 import com.flyingh.adapter.GroupAdapter;
 import com.flyingh.adapter.GroupAdapter.Transformer;
 import com.flyingh.engine.AppService;
-import com.flyingh.vo.App;
 import com.flyingh.vo.Process;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -69,8 +68,7 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 
 			@Override
 			public Boolean transform(Process e) {
-				App app = e.getApp();
-				return app == null ? false : app.isSystemApp();
+				return e.getApp().isSystemApp();
 			}
 		};
 		adapter = initAdapter(processes);
@@ -131,13 +129,8 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 			@Override
 			public void bindValueView(View view, int position, Context context, Process e) {
 				ViewHolder viewHolder = (ViewHolder) view.getTag();
-				if (e.getApp() != null) {
-					viewHolder.iconImageView.setImageDrawable(e.getApp().getIcon());
-					viewHolder.labelTextView.setText(e.getApp().getLabel());
-				} else {
-					viewHolder.iconImageView.setImageDrawable(null);
-					viewHolder.labelTextView.setText(null);
-				}
+				viewHolder.iconImageView.setImageDrawable(e.getApp().getIcon());
+				viewHolder.labelTextView.setText(e.getApp().getLabel());
 				viewHolder.memTextView.setText(Formatter.formatFileSize(context, e.getMemory()));
 				viewHolder.checkBox.setChecked(checkedPositions.contains(position));
 			}
@@ -158,9 +151,7 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 			int totalPrivateDirty = am.getProcessMemoryInfo(new int[] { runningAppProcessInfo.pid })[0].getTotalPrivateDirty();
 			Process process = new Process(AppService.getApp(this, runningAppProcessInfo.processName), runningAppProcessInfo.pid,
 					totalPrivateDirty * 1024);
-			if (process != null) {
-				result.add(process);
-			}
+			result.add(process);
 		}
 		return result;
 	}

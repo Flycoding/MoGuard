@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PackageStats;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -26,6 +27,7 @@ import android.util.Log;
 
 import com.flyingh.moguard.AppManagerActivity.DisplayMode;
 import com.flyingh.moguard.AppManagerActivity.OrderMode;
+import com.flyingh.moguard.R;
 import com.flyingh.moguard.util.Const;
 import com.flyingh.vo.App;
 import com.flyingh.vo.AppLock;
@@ -169,16 +171,17 @@ public class AppService {
 	public static App getApp(Context context, String processName) {
 		try {
 			PackageManager pm = context.getPackageManager();
-			ApplicationInfo applicationInfo = pm.getApplicationInfo(processName.split(":")[0], PackageManager.GET_UNINSTALLED_PACKAGES);
+			ApplicationInfo applicationInfo = pm.getApplicationInfo(processName, PackageManager.GET_UNINSTALLED_PACKAGES);
 			App app = new App.Builder().icon(applicationInfo.loadIcon(pm)).label(applicationInfo.loadLabel(pm).toString())
 					.packageName(applicationInfo.packageName).isSystemApp(isSystemApp(applicationInfo)).build();
 			setAppSize(context, applicationInfo.packageName, app);
 			return app;
+		} catch (NameNotFoundException e) {
+			Log.e(TAG, e.getMessage());
+			return new App.Builder().icon(context.getResources().getDrawable(R.drawable.android)).label(processName).build();
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());
-			// throw new RuntimeException(e);
 		}
 		return null;
 	}
-
 }
