@@ -167,7 +167,7 @@
     <string name="moguard">MoGuard</string>
     <string name="query_common_numbers">Query common numbers</string>
     <string name="title_activity_common_number">CommonNumberActivity</string>
-    <string name="title_activity_network">NetworkActivity</string>
+    <string name="title_activity_network_manager">Network</string>
     <string name="label">Label</string>
     <string name="tx">Tx</string>
     <string name="rx">Rx</string>

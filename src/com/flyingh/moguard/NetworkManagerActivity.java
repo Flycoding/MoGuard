@@ -1,6 +1,9 @@
 package com.flyingh.moguard;
 
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,17 +26,54 @@ public class NetworkManagerActivity extends Activity {
 	private List<ResolveInfo> resolveInfos;
 	private BaseAdapter adapter;
 	private PackageManager pm;
+	private TextView mobileTrafficTextView;
+	private TextView wifiTrafficTextView;
+	private ScheduledExecutorService executorService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_network_manager);
 		pm = getPackageManager();
+		mobileTrafficTextView = (TextView) findViewById(R.id.mobileTrafficTextView);
+		wifiTrafficTextView = (TextView) findViewById(R.id.wifiTrafficTextView);
+		setTrafficInfo();
 		listView = (ListView) findViewById(R.id.listView);
 		listView.addHeaderView(View.inflate(this, R.layout.network_manager_title, null));
 		resolveInfos = getData();
 		initAdapter();
 		listView.setAdapter(adapter);
+		executorService = Executors.newScheduledThreadPool(1);
+		executorService.scheduleAtFixedRate(new Runnable() {
+
+			@Override
+			public void run() {
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						setTrafficInfo();
+						resolveInfos = getData();
+						adapter.notifyDataSetChanged();
+					}
+				});
+			}
+		}, 0, 1, TimeUnit.SECONDS);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		executorService.shutdown();
+	}
+
+	private void setTrafficInfo() {
+		long mobileTxBytes = TrafficStats.getMobileTxBytes();
+		long mobileRxBytes = TrafficStats.getMobileRxBytes();
+		long totalTxBytes = TrafficStats.getTotalTxBytes();
+		long totalRxBytes = TrafficStats.getTotalRxBytes();
+		long totalMobileBytess = mobileTxBytes + mobileRxBytes;
+		mobileTrafficTextView.setText("2/3G:" + Formatter.formatFileSize(this, totalMobileBytess));
+		wifiTrafficTextView.setText("WIFI:" + Formatter.formatFileSize(this, totalTxBytes + totalRxBytes - totalMobileBytess));
 	}
 
 	private List<ResolveInfo> getData() {
@@ -52,8 +92,10 @@ public class NetworkManagerActivity extends Activity {
 				viewHolder.iconImageView.setImageDrawable(resolveInfo.loadIcon(pm));
 				viewHolder.labelTextView.setText(resolveInfo.loadLabel(pm));
 				int uid = resolveInfo.activityInfo.applicationInfo.uid;
-				viewHolder.txTextView.setText(Formatter.formatFileSize(NetworkManagerActivity.this, TrafficStats.getUidTxBytes(uid)));
-				viewHolder.rxTextView.setText(Formatter.formatFileSize(NetworkManagerActivity.this, TrafficStats.getUidRxBytes(uid)));
+				long uidTxBytes = TrafficStats.getUidTxBytes(uid);
+				viewHolder.txTextView.setText(Formatter.formatFileSize(NetworkManagerActivity.this, uidTxBytes != -1 ? uidTxBytes : 0));
+				long uidRxBytes = TrafficStats.getUidRxBytes(uid);
+				viewHolder.rxTextView.setText(Formatter.formatFileSize(NetworkManagerActivity.this, uidRxBytes != -1 ? uidRxBytes : 0));
 				return view;
 			}
 

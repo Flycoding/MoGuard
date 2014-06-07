@@ -187,7 +187,7 @@
         </activity>
         <activity
             android:name="com.flyingh.moguard.NetworkManagerActivity"
-            android:label="@string/title_activity_network" >
+            android:label="@string/title_activity_network_manager" >
         </activity>
     </application>
 
