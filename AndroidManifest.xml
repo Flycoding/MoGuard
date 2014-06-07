@@ -181,6 +181,10 @@
             android:name="com.flyingh.moguard.AppPermissionsActivity"
             android:theme="@style/AppPermissionsTheme" >
         </activity>
+        <activity
+            android:name="com.flyingh.moguard.CommonNumberActivity"
+            android:label="@string/title_activity_common_number" >
+        </activity>
     </application>
 
 </manifest>

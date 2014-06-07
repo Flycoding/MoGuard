@@ -295,6 +295,10 @@ public class AdvancedToolsActivity extends Activity {
 
 	}
 
+	public void queryCommonNumbers(View view) {
+		startActivity(new Intent(this, CommonNumberActivity.class));
+	}
+
 	public void selectPhoneAttributionStyle(View view) {
 		String[] items = new String[] { getString(R.string.gray), getString(R.string.orange), getString(R.string.green), getString(R.string.blue),
 				getString(R.string.white) };

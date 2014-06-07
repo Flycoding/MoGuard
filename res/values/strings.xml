@@ -165,5 +165,7 @@
     <string name="package_name">Package name</string>
     <string name="permissions">Permissions</string>
     <string name="moguard">MoGuard</string>
+    <string name="query_common_numbers">Query common numbers</string>
+    <string name="title_activity_common_number">CommonNumberActivity</string>
 
 </resources>

@@ -185,4 +185,13 @@
         android:background="@android:color/holo_blue_dark"
         tools:targetApi="14" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="queryCommonNumbers"
+        android:text="@string/query_common_numbers"
+        android:textColor="#0f0"
+        android:textSize="20sp" />
+
 </LinearLayout>
