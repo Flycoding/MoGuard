@@ -185,6 +185,10 @@
             android:name="com.flyingh.moguard.CommonNumberActivity"
             android:label="@string/title_activity_common_number" >
         </activity>
+        <activity
+            android:name="com.flyingh.moguard.NetworkManagerActivity"
+            android:label="@string/title_activity_network" >
+        </activity>
     </application>
 
 </manifest>

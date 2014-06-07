@@ -126,7 +126,7 @@
     <string name="title_activity_app_manager">AppManagerActivity</string>
     <string name="app_manager">App Manager</string>
     <string name="loading_">Loading...</string>
-    <string name="icon">icon</string>
+    <string name="icon">Icon</string>
     <string name="run">Run</string>
     <string name="uninstall">Uninstall</string>
     <string name="share">Share</string>
@@ -167,5 +167,9 @@
     <string name="moguard">MoGuard</string>
     <string name="query_common_numbers">Query common numbers</string>
     <string name="title_activity_common_number">CommonNumberActivity</string>
+    <string name="title_activity_network">NetworkActivity</string>
+    <string name="label">Label</string>
+    <string name="tx">Tx</string>
+    <string name="rx">Rx</string>
 
 </resources>
