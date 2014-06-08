@@ -90,6 +90,7 @@ public final class R {
         public static final int checkBox=0x7f0b0043;
         public static final int cleanButton=0x7f0b002f;
         public static final int cleanModeCheckBox=0x7f0b0024;
+        public static final int clear_external_cache=0x7f0b004a;
         public static final int codeSizeTextView=0x7f0b003f;
         public static final int confirm_input_password=0x7f0b002e;
         public static final int confirm_set_password=0x7f0b003e;
@@ -252,6 +253,7 @@ public final class R {
         public static final int clean=0x7f070097;
         public static final int clean_mode=0x7f07009d;
         public static final int clean_when_lock_screen=0x7f0700a1;
+        public static final int clear_external_cache=0x7f0700b0;
         public static final int codesize=0x7f0700ad;
         public static final int confirm=0x7f07001e;
         public static final int confirm_to_update_=0x7f07001b;

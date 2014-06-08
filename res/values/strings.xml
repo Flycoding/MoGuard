@@ -175,5 +175,6 @@
     <string name="codesize">codeSize</string>
     <string name="datasize">dataSize</string>
     <string name="cachesize">cacheSize</string>
+    <string name="clear_external_cache">Clear external cache</string>
 
 </resources>

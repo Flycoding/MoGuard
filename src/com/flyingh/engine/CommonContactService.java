@@ -3,8 +3,6 @@ package com.flyingh.engine;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,6 +15,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
 
+import com.flyingh.moguard.util.FileUtils;
 import com.flyingh.vo.CommonContact;
 import com.flyingh.vo.CommonContactType;
 
@@ -30,7 +29,7 @@ public class CommonContactService {
 		try {
 			File file = new File(Environment.getExternalStorageDirectory(), COMMONNUM_DB);
 			if (!file.exists()) {
-				copy(assets.open(COMMONNUM_DB), new FileOutputStream(file));
+				FileUtils.copy(assets.open(COMMONNUM_DB), new FileOutputStream(file));
 			}
 			SQLiteDatabase db = SQLiteDatabase.openDatabase(Environment.getExternalStorageDirectory() + "/" + COMMONNUM_DB, null,
 					SQLiteDatabase.OPEN_READONLY);
@@ -62,15 +61,5 @@ public class CommonContactService {
 		String id = cursor.getString(cursor.getColumnIndex(CommonContactType._ID));
 		String name = cursor.getString(cursor.getColumnIndex(CommonContactType.NAME));
 		return new CommonContactType(id, name);
-	}
-
-	private static void copy(InputStream is, OutputStream os) throws IOException {
-		byte[] buffer = new byte[1024 * 16];
-		int len = -1;
-		while ((len = is.read(buffer)) != -1) {
-			os.write(buffer, 0, len);
-		}
-		os.close();
-		is.close();
 	}
 }
