@@ -2,6 +2,7 @@ package com.flyingh.vo;
 
 import java.text.Collator;
 
+import android.content.pm.PackageStats;
 import android.graphics.drawable.Drawable;
 
 public class App implements Comparable<App> {
@@ -12,6 +13,7 @@ public class App implements Comparable<App> {
 	private boolean isSystemApp;
 
 	private long totalSizeLong;
+	private PackageStats packageStats;
 
 	public static class Builder {
 		private Drawable icon;
@@ -110,6 +112,14 @@ public class App implements Comparable<App> {
 
 	public long getTotalSizeLong() {
 		return totalSizeLong;
+	}
+
+	public void setPackageStats(PackageStats packageStats) {
+		this.packageStats = packageStats;
+	}
+
+	public PackageStats getPackageStats() {
+		return packageStats;
 	}
 
 	@Override

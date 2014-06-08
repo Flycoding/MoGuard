@@ -171,5 +171,9 @@
     <string name="label">Label</string>
     <string name="tx">Tx</string>
     <string name="rx">Rx</string>
+    <string name="title_activity_system_optimize">SystemOptimize</string>
+    <string name="codesize">codeSize</string>
+    <string name="datasize">dataSize</string>
+    <string name="cachesize">cacheSize</string>
 
 </resources>

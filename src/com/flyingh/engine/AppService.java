@@ -104,6 +104,7 @@ public class AppService {
 
 			@Override
 			public void onGetStatsCompleted(PackageStats pStats, boolean succeeded) throws RemoteException {
+				app.setPackageStats(pStats);
 				long totalSizeLong = getTotalSizeLong(pStats);
 				app.setTotalSizeLong(totalSizeLong);
 				app.setTotalSize(Formatter.formatFileSize(context, totalSizeLong));

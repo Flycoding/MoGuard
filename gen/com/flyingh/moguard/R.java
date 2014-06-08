@@ -75,8 +75,8 @@ public final class R {
         public static final int widget_bg_portrait=0x7f020028;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0042;
-        public static final int appLockCheckBox=0x7f0b0041;
+        public static final int action_settings=0x7f0b0045;
+        public static final int appLockCheckBox=0x7f0b0044;
         public static final int appNameTextView=0x7f0b000d;
         public static final int appShowModeSpinner=0x7f0b0009;
         public static final int appsListView=0x7f0b000a;
@@ -84,15 +84,18 @@ public final class R {
         public static final int bind_text_view=0x7f0b0037;
         public static final int bound_phone_number=0x7f0b0039;
         public static final int bound_phone_number_text_view=0x7f0b001b;
+        public static final int cacheSizeTextView=0x7f0b0041;
         public static final int cancel_input_password=0x7f0b002d;
         public static final int cancel_set_password=0x7f0b003d;
-        public static final int checkBox=0x7f0b0040;
+        public static final int checkBox=0x7f0b0043;
         public static final int cleanButton=0x7f0b002f;
         public static final int cleanModeCheckBox=0x7f0b0024;
+        public static final int codeSizeTextView=0x7f0b003f;
         public static final int confirm_input_password=0x7f0b002e;
         public static final int confirm_set_password=0x7f0b003e;
         public static final int container=0x7f0b0000;
-        public static final int deleteMenuItem=0x7f0b0046;
+        public static final int dataSizeTextView=0x7f0b0040;
+        public static final int deleteMenuItem=0x7f0b0049;
         public static final int displayModeCheckBox=0x7f0b0022;
         public static final int expandableListView=0x7f0b0011;
         public static final int feature_name=0x7f0b002b;
@@ -111,14 +114,14 @@ public final class R {
         public static final int lockServiceStatusTextView=0x7f0b0006;
         public static final int lockedAppListView=0x7f0b0008;
         public static final int lockedAppTextView=0x7f0b0012;
-        public static final int memTextView=0x7f0b003f;
+        public static final int memTextView=0x7f0b0042;
         public static final int memoryTextView=0x7f0b0020;
         public static final int mobileTrafficTextView=0x7f0b0015;
         public static final int nameTextView=0x7f0b0029;
         public static final int number=0x7f0b0028;
         public static final int numberTextView=0x7f0b002a;
-        public static final int order_by_name=0x7f0b0043;
-        public static final int order_by_size=0x7f0b0044;
+        public static final int order_by_name=0x7f0b0046;
+        public static final int order_by_size=0x7f0b0047;
         public static final int packageNameTextView=0x7f0b000e;
         public static final int password=0x7f0b003b;
         public static final int processCountTextView=0x7f0b001f;
@@ -143,7 +146,7 @@ public final class R {
         public static final int txTextView=0x7f0b0032;
         public static final int uninstallTextView=0x7f0b0035;
         public static final int unlockedAppListView=0x7f0b0001;
-        public static final int updateMenuItem=0x7f0b0045;
+        public static final int updateMenuItem=0x7f0b0048;
         public static final int version_name=0x7f0b001e;
         public static final int wifiTrafficTextView=0x7f0b0016;
     }
@@ -163,27 +166,30 @@ public final class R {
         public static final int activity_security=0x7f03000c;
         public static final int activity_select_contact=0x7f03000d;
         public static final int activity_splash=0x7f03000e;
-        public static final int activity_task_manager=0x7f03000f;
-        public static final int activity_task_manager_settings=0x7f030010;
-        public static final int app_item=0x7f030011;
-        public static final int blacklist_item=0x7f030012;
-        public static final int change_security_feature_name=0x7f030013;
-        public static final int common_number_child_item=0x7f030014;
-        public static final int grid_view_item=0x7f030015;
-        public static final int input_security_password_dialog_view=0x7f030016;
-        public static final int layout_task_manager_widget=0x7f030017;
-        public static final int locked_app_item=0x7f030018;
-        public static final int network_manager_item=0x7f030019;
-        public static final int network_manager_title=0x7f03001a;
-        public static final int popup_window_item=0x7f03001b;
-        public static final int security_wizard=0x7f03001c;
-        public static final int security_wizard2=0x7f03001d;
-        public static final int security_wizard3=0x7f03001e;
-        public static final int security_wizard4=0x7f03001f;
-        public static final int set_security_password_dialog_view=0x7f030020;
-        public static final int task_item=0x7f030021;
-        public static final int toast=0x7f030022;
-        public static final int unlocked_app_item=0x7f030023;
+        public static final int activity_system_optimize=0x7f03000f;
+        public static final int activity_task_manager=0x7f030010;
+        public static final int activity_task_manager_settings=0x7f030011;
+        public static final int app_item=0x7f030012;
+        public static final int blacklist_item=0x7f030013;
+        public static final int change_security_feature_name=0x7f030014;
+        public static final int common_number_child_item=0x7f030015;
+        public static final int grid_view_item=0x7f030016;
+        public static final int input_security_password_dialog_view=0x7f030017;
+        public static final int layout_task_manager_widget=0x7f030018;
+        public static final int locked_app_item=0x7f030019;
+        public static final int network_manager_item=0x7f03001a;
+        public static final int network_manager_title=0x7f03001b;
+        public static final int popup_window_item=0x7f03001c;
+        public static final int security_wizard=0x7f03001d;
+        public static final int security_wizard2=0x7f03001e;
+        public static final int security_wizard3=0x7f03001f;
+        public static final int security_wizard4=0x7f030020;
+        public static final int set_security_password_dialog_view=0x7f030021;
+        public static final int system_optimize_item=0x7f030022;
+        public static final int system_optimize_title=0x7f030023;
+        public static final int task_item=0x7f030024;
+        public static final int toast=0x7f030025;
+        public static final int unlocked_app_item=0x7f030026;
     }
     public static final class menu {
         public static final int add_app_lock=0x7f0a0000;
@@ -201,8 +207,9 @@ public final class R {
         public static final int security=0x7f0a000c;
         public static final int security_wizard=0x7f0a000d;
         public static final int select_contact=0x7f0a000e;
-        public static final int task_manager=0x7f0a000f;
-        public static final int task_manager_settings=0x7f0a0010;
+        public static final int system_optimize=0x7f0a000f;
+        public static final int task_manager=0x7f0a0010;
+        public static final int task_manager_settings=0x7f0a0011;
     }
     public static final class raw {
         public static final int hay=0x7f060000;
@@ -234,6 +241,7 @@ public final class R {
         public static final int blacklist=0x7f070067;
         public static final int blue=0x7f07005b;
         public static final int bound_phone_number_is_=0x7f07003f;
+        public static final int cachesize=0x7f0700af;
         public static final int can_t_run=0x7f070084;
         public static final int cancel=0x7f070015;
         public static final int cancel_=0x7f07001d;
@@ -244,9 +252,11 @@ public final class R {
         public static final int clean=0x7f070097;
         public static final int clean_mode=0x7f07009d;
         public static final int clean_when_lock_screen=0x7f0700a1;
+        public static final int codesize=0x7f0700ad;
         public static final int confirm=0x7f07001e;
         public static final int confirm_to_update_=0x7f07001b;
         public static final int current_progress_=0x7f070078;
+        public static final int datasize=0x7f0700ae;
         public static final int default_password_is_135246=0x7f070093;
         public static final int delete=0x7f070070;
         public static final int delete_success=0x7f07006d;
@@ -367,6 +377,7 @@ public final class R {
         public static final int title_activity_security=0x7f070009;
         public static final int title_activity_security_wizard=0x7f070025;
         public static final int title_activity_select_contact=0x7f07003d;
+        public static final int title_activity_system_optimize=0x7f0700ac;
         public static final int title_activity_task_manager=0x7f070096;
         public static final int title_activity_task_manager_settings=0x7f07009a;
         public static final int tx=0x7f0700aa;
