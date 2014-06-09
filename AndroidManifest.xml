@@ -193,6 +193,10 @@
             android:name="com.flyingh.moguard.SystemOptimizeActivity"
             android:label="@string/title_activity_system_optimize" >
         </activity>
+        <activity
+            android:name="com.flyingh.moguard.KillVirusActivity"
+            android:label="@string/title_activity_kill_virus" >
+        </activity>
     </application>
 
 </manifest>

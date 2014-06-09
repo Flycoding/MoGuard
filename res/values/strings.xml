@@ -176,5 +176,10 @@
     <string name="datasize">dataSize</string>
     <string name="cachesize">cacheSize</string>
     <string name="clear_external_cache">Clear external cache</string>
+    <string name="title_activity_kill_virus">KillVirusActivity</string>
+    <string name="no_virus_found">no virus found</string>
+    <string name="found_">"found "</string>
+    <string name="_virus">" virus"</string>
+    <string name="_viruses">" viruses"</string>
 
 </resources>
