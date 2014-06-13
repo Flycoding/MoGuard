@@ -2,11 +2,12 @@ package com.flyingh.moguard;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -27,7 +28,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,50 +39,65 @@ public class SplashActivity extends Activity {
 	private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
 	private static final String TAG = "SplashActivity";
 	private TextView versionNameTextView;
-	private Handler handler = new Handler();
+	private final Handler handler = new Handler();
 	private ProgressDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
-		AlphaAnimation animation = new AlphaAnimation(0, 1);
-		animation.setDuration(2000);
-		findViewById(R.id.linear_layout).startAnimation(animation);
-		progressDialog = new ProgressDialog(this);
-		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		progressDialog.setMessage(getString(R.string.downloading_));
-		versionNameTextView = (TextView) findViewById(R.id.version_name);
+		startAnimation();
 		try {
-			final PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-			versionNameTextView.setText(packageInfo.versionName);
-			new Timer().schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					handler.post(new Runnable() {
-
-						@Override
-						public void run() {
-							ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-							NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-							if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
-								Toast.makeText(SplashActivity.this, R.string.network_is_not_available_, Toast.LENGTH_SHORT).show();
-								enter();
-								return;
-							}
-							new Thread(new CheckUpdateRunnable(packageInfo.versionCode)).start();
-						}
-					});
-				}
-			}, 2000);
+			final PackageInfo packageInfo = getPackageInfo();
+			initVersionNameTextView(packageInfo.versionName);
+			checkUpdateDelayed(packageInfo.versionCode, 2000);
 		} catch (NameNotFoundException e) {
 			Log.i(TAG, e.getMessage());
 		}
 	}
 
+	private void checkUpdateDelayed(final int versionCode, long delayMillis) {
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if (!isNetworkConnected()) {
+					showNetworkNotAvailableToast();
+					enterMainUI();
+					return;
+				}
+				checkUpdate(versionCode);
+			}
+		}, delayMillis);
+	}
+
+	private void checkUpdate(final int versionCode) {
+		new Thread(new CheckUpdateRunnable(versionCode)).start();
+	}
+
+	private void initVersionNameTextView(String versionName) {
+		versionNameTextView = (TextView) findViewById(R.id.version_name);
+		versionNameTextView.setText(versionName);
+	}
+
+	private PackageInfo getPackageInfo() throws NameNotFoundException {
+		return getPackageManager().getPackageInfo(getPackageName(), 0);
+	}
+
+	private void initProgressDialog() {
+		progressDialog = new ProgressDialog(this);
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		progressDialog.setMessage(getString(R.string.downloading_));
+		progressDialog.setCancelable(false);
+	}
+
+	private void startAnimation() {
+		AlphaAnimation animation = new AlphaAnimation(0, 1);
+		animation.setDuration(2000);
+		findViewById(R.id.linear_layout).startAnimation(animation);
+	}
+
 	class CheckUpdateRunnable implements Runnable {
-		private int currentVersionCode;
+		private final int currentVersionCode;
 
 		public CheckUpdateRunnable(int currentVersionCode) {
 			super();
@@ -91,64 +106,57 @@ public class SplashActivity extends Activity {
 
 		@Override
 		public void run() {
-
 			try {
-				final UpdateInfo info = new UpdateInfoService(SplashActivity.this).getUpdateInfo();
-				if (needUpdate(info.getVersion())) {
-					Log.i(TAG, "need update!");
+				final UpdateInfo info = getUpdateInfo();
+				if (hasUpdate(info.getVersion())) {
 					handler.post(new Runnable() {
-
 						@Override
 						public void run() {
-							Toast.makeText(SplashActivity.this, R.string.need_update, Toast.LENGTH_SHORT).show();
-							new AlertDialog.Builder(SplashActivity.this).setIcon(R.drawable.ic_launcher).setTitle(R.string.confirm_to_update_)
-									.setMessage(info.getDescription()).setCancelable(false).setPositiveButton(R.string.ok, new OnClickListener() {
-
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											Log.i(TAG, "start to download the apk...");
-											new DownloadAsyncTask().execute(info.getUrl());
-										}
-									}).setNegativeButton(R.string.cancel, new OnClickListener() {
-
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											enter();
-										}
-
-									}).show();
+							showHasUpdateToast();
+							showHasUpdateAlertDialog(info);
 						}
+
 					});
 				} else {
-					Log.i(TAG, "no need to update,enter!");
-					enter();
+					enterMainUI();
 				}
 			} catch (Exception e) {
-				Log.i(TAG, e.getMessage());
 				handler.post(new Runnable() {
 
 					@Override
 					public void run() {
-						Toast.makeText(SplashActivity.this, R.string.get_update_information_failed, Toast.LENGTH_SHORT).show();
-						enter();
+						showUpdateFailedToast();
+						enterMainUI();
 					}
 				});
 			}
 
 		}
 
-		private boolean needUpdate(String version) {
+		private UpdateInfo getUpdateInfo() throws IOException, XmlPullParserException {
+			return new UpdateInfoService(SplashActivity.this).getUpdateInfo();
+		}
+
+		private boolean hasUpdate(String version) {
 			return version.compareTo(String.valueOf(currentVersionCode)) > 0;
 		}
 
+	}
+
+	private void showHasUpdateToast() {
+		Toast.makeText(SplashActivity.this, R.string.has_update, Toast.LENGTH_SHORT).show();
 	}
 
 	class DownloadAsyncTask extends AsyncTask<String, Integer, File> {
 
 		@Override
 		protected void onPreExecute() {
+			initProgressDialog();
+			setOnKeyListener();
 			progressDialog.show();
-			progressDialog.setCancelable(false);
+		}
+
+		private void setOnKeyListener() {
 			progressDialog.setOnKeyListener(new OnKeyListener() {
 
 				@Override
@@ -156,25 +164,27 @@ public class SplashActivity extends Activity {
 					switch (event.getAction()) {
 					case KeyEvent.ACTION_UP:
 						if (keyCode == KeyEvent.KEYCODE_BACK) {
-							new AlertDialog.Builder(SplashActivity.this).setIcon(R.drawable.ic_launcher).setTitle(R.string.cancel_)
-									.setMessage(R.string.are_you_sure_to_cancel_the_download_)
-									.setPositiveButton(R.string.confirm, new OnClickListener() {
-
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											cancel(true);
-										}
-									}).setNegativeButton(R.string.cancel, null).show();
-
+							showConfirmCancelDownloadingDialog();
 						}
 						break;
-
 					default:
 						break;
 					}
 					return false;
 				}
+
 			});
+		}
+
+		private void showConfirmCancelDownloadingDialog() {
+			new AlertDialog.Builder(SplashActivity.this).setIcon(R.drawable.ic_launcher).setTitle(R.string.cancel_)
+					.setMessage(R.string.are_you_sure_to_cancel_the_download_).setPositiveButton(R.string.confirm, new OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							cancel(true);
+						}
+					}).setNegativeButton(R.string.cancel, null).show();
 		}
 
 		@Override
@@ -183,9 +193,9 @@ public class SplashActivity extends Activity {
 				String path = params[0];
 				URL url = new URL(path);
 				URLConnection conn = url.openConnection();
-				int contentLength = conn.getContentLength();
+				progressDialog.setMax(conn.getContentLength());
 				InputStream is = url.openStream();
-				if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+				if (isMediaMounted()) {
 					File file = new File(Environment.getExternalStorageDirectory(), getFileName(path));
 					FileOutputStream fos = new FileOutputStream(file);
 					byte[] buf = new byte[1024];
@@ -196,7 +206,7 @@ public class SplashActivity extends Activity {
 							break;
 						}
 						fos.write(buf, 0, len);
-						publishProgress(contentLength, len);
+						progressDialog.incrementProgressBy(len);
 					}
 					fos.close();
 					return file;
@@ -208,13 +218,7 @@ public class SplashActivity extends Activity {
 		}
 
 		private String getFileName(String path) {
-			return path.substring(path.lastIndexOf("/") + 1);
-		}
-
-		@Override
-		protected void onProgressUpdate(Integer... values) {
-			progressDialog.setMax(values[0]);
-			progressDialog.setProgress(progressDialog.getProgress() + values[1]);
+			return path.substring(path.lastIndexOf(File.separator) + 1);
 		}
 
 		@SuppressLint("NewApi")
@@ -222,8 +226,12 @@ public class SplashActivity extends Activity {
 		protected void onCancelled(File result) {
 			super.onCancelled(result);
 			progressDialog.dismiss();
+			showCanceledToast();
+			enterMainUI();
+		}
+
+		private void showCanceledToast() {
 			Toast.makeText(SplashActivity.this, R.string.canceled, Toast.LENGTH_SHORT).show();
-			enter();
 		}
 
 		@Override
@@ -235,7 +243,7 @@ public class SplashActivity extends Activity {
 
 	}
 
-	public void enter() {
+	public void enterMainUI() {
 		startActivity(new Intent(this, MainActivity.class));
 		finish();
 	}
@@ -245,13 +253,46 @@ public class SplashActivity extends Activity {
 		intent.setDataAndType(Uri.fromFile(result), APK_MIME_TYPE);
 		finish();
 		startActivity(intent);
-	};
+	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	private boolean isNetworkConnected() {
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	}
+
+	private void showNetworkNotAvailableToast() {
+		Toast.makeText(this, R.string.network_is_not_available_, Toast.LENGTH_SHORT).show();
+	}
+
+	private void showHasUpdateAlertDialog(final UpdateInfo info) {
+		new AlertDialog.Builder(this).setIcon(R.drawable.ic_launcher).setTitle(R.string.confirm_to_update_).setMessage(info.getDescription())
+				.setCancelable(false).setPositiveButton(R.string.ok, new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						download(info.getUrl());
+					}
+				}).setNegativeButton(R.string.cancel, new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						enterMainUI();
+					}
+
+				}).show();
+	}
+
+	private void showUpdateFailedToast() {
+		Toast.makeText(this, R.string.get_update_information_failed, Toast.LENGTH_SHORT).show();
+	}
+
+	private void download(String url) {
+		new DownloadAsyncTask().execute(url);
+	}
+
+	private boolean isMediaMounted() {
+		return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
 	}
 
 }

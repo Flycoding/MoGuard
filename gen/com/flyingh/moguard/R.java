@@ -286,6 +286,7 @@ public final class R {
         public static final int gps_tracker=0x7f07002a;
         public static final int gray=0x7f070061;
         public static final int green=0x7f07005a;
+        public static final int has_update=0x7f07001a;
         public static final int hello_world=0x7f070004;
         public static final int icon=0x7f07007f;
         public static final int image=0x7f070028;
@@ -297,7 +298,6 @@ public final class R {
         public static final int loading_=0x7f07007e;
         public static final int moguard=0x7f0700a5;
         public static final int mogurad=0x7f070019;
-        public static final int need_update=0x7f07001a;
         public static final int network_is_not_available_=0x7f070018;
         public static final int network_manager=0x7f070010;
         public static final int next=0x7f07002e;
