@@ -19,7 +19,6 @@
     <string name="system_optimize">System Optimize</string>
     <string name="advanced_tools">Advanced Tools</string>
     <string name="settings">Settings</string>
-    <string name="the_feature_name_should_not_be_empty_">the feature name should not be empty!</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="change_the_feature_s_name_">Change the feature\'s name?</string>
