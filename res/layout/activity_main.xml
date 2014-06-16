@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B1C30B"
+    android:background="#000"
     android:orientation="vertical" >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/main_title_background"
+        android:drawableBottom="@drawable/divide_line"
         android:gravity="center"
         android:text="@string/mogurad"
         android:textColor="#0f0"
@@ -19,7 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:numColumns="3" >
+        android:horizontalSpacing="5dp"
+        android:numColumns="3"
+        android:verticalSpacing="5dp" >
     </GridView>
 
 </LinearLayout>

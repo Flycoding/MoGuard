@@ -3,10 +3,10 @@
     android:id="@+id/feature_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/feature_item_selector"
     android:gravity="center_horizontal"
     android:paddingBottom="10dp"
     android:paddingTop="10dp"
+    android:textColor="#ff0"
     tools:context=".MainActivity" >
 
 </TextView>

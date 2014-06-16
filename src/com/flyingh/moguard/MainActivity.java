@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -87,10 +86,9 @@ public class MainActivity extends Activity {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				TextView view = (TextView) (convertView != null ? convertView : View.inflate(MainActivity.this, R.layout.grid_view_item, null));
-				view.setCompoundDrawablesRelativeWithIntrinsicBounds(0, Feature.getIconId(position), 0, 0);
+				view.setCompoundDrawablesRelativeWithIntrinsicBounds(0, Feature.getIconId(position), 0, R.drawable.divide_line);
 				view.setText(sp.contains(SECURITY_FEATURE_NAME) && Feature.SECURITY.ordinal() == position ? sp.getString(SECURITY_FEATURE_NAME, null)
 						: getItem(position));
-				view.setTextColor(Color.BLUE);
 				return view;
 			}
 
