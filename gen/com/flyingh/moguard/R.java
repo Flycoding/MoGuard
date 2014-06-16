@@ -211,12 +211,11 @@ public final class R {
         public static final int network=0x7f0a0008;
         public static final int phone_attribution_position=0x7f0a0009;
         public static final int query_phone_number=0x7f0a000a;
-        public static final int security=0x7f0a000b;
-        public static final int security_wizard=0x7f0a000c;
-        public static final int select_contact=0x7f0a000d;
-        public static final int system_optimize=0x7f0a000e;
-        public static final int task_manager=0x7f0a000f;
-        public static final int task_manager_settings=0x7f0a0010;
+        public static final int security_wizard=0x7f0a000b;
+        public static final int select_contact=0x7f0a000c;
+        public static final int system_optimize=0x7f0a000d;
+        public static final int task_manager=0x7f0a000e;
+        public static final int task_manager_settings=0x7f0a000f;
     }
     public static final class raw {
         public static final int hay=0x7f060000;

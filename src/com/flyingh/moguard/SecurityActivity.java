@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,7 +19,6 @@ import com.flyingh.moguard.util.Const;
 import com.flyingh.moguard.util.StringUtils;
 
 public class SecurityActivity extends Activity {
-	private static final String TAG = "SecurityActivity";
 	private SharedPreferences sp;
 	private CheckBox startOrNotCheckBox;
 	private TextView boundPhoneNumberTextView;
@@ -31,10 +28,8 @@ public class SecurityActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		sp = getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE);
 		if (hasSecurityPasswordSetted()) {
-			Log.i(TAG, "enter password to enter");
 			showInputSecurityPasswordDialog();
 		} else {
-			Log.i(TAG, "set security password");
 			showSetSecurityPasswordDialog();
 		}
 	}
@@ -92,13 +87,11 @@ public class SecurityActivity extends Activity {
 				}
 				dialog.dismiss();
 				if (hasWizardUsed()) {
-					Log.i(TAG, "wizard used!");
 					setContentView(R.layout.activity_security);
 					boundPhoneNumberTextView = (TextView) findViewById(R.id.bound_phone_number_text_view);
 					startOrNotCheckBox = (CheckBox) findViewById(R.id.start_or_not_checkbox);
 					setInfo();
 				} else {
-					Log.i(TAG, "wizard not used!");
 					finish();
 					startActivity(new Intent(SecurityActivity.this, SecurityWizardActivity.class));
 				}
@@ -126,7 +119,7 @@ public class SecurityActivity extends Activity {
 							.show();
 					return;
 				}
-				if (!StringUtils.equals(password, repeatPassword)) {
+				if (!TextUtils.equals(password, repeatPassword)) {
 					Toast.makeText(SecurityActivity.this, R.string.the_password_and_the_repeat_password_are_not_the_same, Toast.LENGTH_SHORT).show();
 					return;
 				}
@@ -151,12 +144,4 @@ public class SecurityActivity extends Activity {
 	private boolean hasSecurityPasswordSetted() {
 		return sp.contains(Const.SECURITY_PASSWORD) && !TextUtils.isEmpty(sp.getString(Const.SECURITY_PASSWORD, null));
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.security, menu);
-		return true;
-	}
-
 }
