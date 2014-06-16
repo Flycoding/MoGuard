@@ -109,7 +109,7 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.flyingh.moguard.receiver.SecurityDeviceAdminReceiver" >
+        <receiver android:name="android.app.admin.DeviceAdminReceiver" >
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/security_device_admin" />

@@ -180,5 +180,7 @@
     <string name="found_">"found "</string>
     <string name="_virus">" virus"</string>
     <string name="_viruses">" viruses"</string>
+    <string name="confirm_">Confirm?</string>
+    <string name="are_you_sure_not_to_start_">Are you sure not to start?</string>
 
 </resources>

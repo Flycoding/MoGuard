@@ -211,11 +211,10 @@ public final class R {
         public static final int network=0x7f0a0008;
         public static final int phone_attribution_position=0x7f0a0009;
         public static final int query_phone_number=0x7f0a000a;
-        public static final int security_wizard=0x7f0a000b;
-        public static final int select_contact=0x7f0a000c;
-        public static final int system_optimize=0x7f0a000d;
-        public static final int task_manager=0x7f0a000e;
-        public static final int task_manager_settings=0x7f0a000f;
+        public static final int select_contact=0x7f0a000b;
+        public static final int system_optimize=0x7f0a000c;
+        public static final int task_manager=0x7f0a000d;
+        public static final int task_manager_settings=0x7f0a000e;
     }
     public static final class raw {
         public static final int hay=0x7f060000;
@@ -238,6 +237,7 @@ public final class R {
         public static final int app_manager=0x7f07007c;
         public static final int app_name=0x7f070002;
         public static final int apps=0x7f07000d;
+        public static final int are_you_sure_not_to_start_=0x7f0700b6;
         public static final int are_you_sure_to_cancel_the_download_=0x7f07001b;
         public static final int are_you_sure_to_delete_=0x7f07008c;
         public static final int are_you_sure_to_remove_the_blocking_number_=0x7f07006b;
@@ -263,6 +263,7 @@ public final class R {
         public static final int clear_external_cache=0x7f0700af;
         public static final int codesize=0x7f0700ac;
         public static final int confirm=0x7f07001d;
+        public static final int confirm_=0x7f0700b5;
         public static final int confirm_to_update_=0x7f07001a;
         public static final int current_progress_=0x7f070077;
         public static final int datasize=0x7f0700ad;

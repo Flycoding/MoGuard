@@ -2,6 +2,7 @@ package com.flyingh.moguard;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,13 +16,11 @@ import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.telephony.TelephonyManager;
-import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.flyingh.moguard.receiver.SecurityDeviceAdminReceiver;
 import com.flyingh.moguard.util.Const;
 
 public class SecurityWizardActivity extends Activity {
@@ -49,21 +48,21 @@ public class SecurityWizardActivity extends Activity {
 		if (startOrNotCheckBox.isChecked()) {
 			finishSetting();
 		} else {
-			new AlertDialog.Builder(this).setTitle("Confirm?").setMessage("Are you sure not to start?")
-					.setPositiveButton("OK", new OnClickListener() {
+			new AlertDialog.Builder(this).setTitle(R.string.confirm_).setMessage(R.string.are_you_sure_not_to_start_)
+					.setPositiveButton(R.string.ok, new OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							finishSetting();
 						}
-					}).setNegativeButton("Cancel", null).show();
+					}).setNegativeButton(R.string.cancel, null).show();
 		}
 	}
 
 	private void finishSetting() {
 		sp.edit().putBoolean(Const.SECURITY_WIZARD_USED, true).commit();
 		DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
-		ComponentName componentName = new ComponentName(this, SecurityDeviceAdminReceiver.class);
+		ComponentName componentName = new ComponentName(this, DeviceAdminReceiver.class);
 		if (!dpm.isAdminActive(componentName)) {
 			Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
 			intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
@@ -154,13 +153,6 @@ public class SecurityWizardActivity extends Activity {
 		default:
 			break;
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.security_wizard, menu);
-		return true;
 	}
 
 }
