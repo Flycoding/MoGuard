@@ -204,17 +204,15 @@ public final class R {
         public static final int advanced_tools=0x7f0a0001;
         public static final int app_lock=0x7f0a0002;
         public static final int app_manager=0x7f0a0003;
-        public static final int app_permissions=0x7f0a0004;
-        public static final int blacklist_item_context_menu=0x7f0a0005;
-        public static final int common_number=0x7f0a0006;
-        public static final int lock_screen=0x7f0a0007;
-        public static final int network=0x7f0a0008;
-        public static final int phone_attribution_position=0x7f0a0009;
-        public static final int query_phone_number=0x7f0a000a;
-        public static final int select_contact=0x7f0a000b;
-        public static final int system_optimize=0x7f0a000c;
-        public static final int task_manager=0x7f0a000d;
-        public static final int task_manager_settings=0x7f0a000e;
+        public static final int blacklist_item_context_menu=0x7f0a0004;
+        public static final int common_number=0x7f0a0005;
+        public static final int lock_screen=0x7f0a0006;
+        public static final int network=0x7f0a0007;
+        public static final int phone_attribution_position=0x7f0a0008;
+        public static final int query_phone_number=0x7f0a0009;
+        public static final int select_contact=0x7f0a000a;
+        public static final int system_optimize=0x7f0a000b;
+        public static final int task_manager_settings=0x7f0a000c;
     }
     public static final class raw {
         public static final int hay=0x7f060000;
@@ -363,6 +361,7 @@ public final class R {
         public static final int started=0x7f07003d;
         public static final int system_app_the_app_forbid_the_operation=0x7f070084;
         public static final int system_optimize=0x7f070011;
+        public static final int system_process=0x7f0700b7;
         public static final int task_manager=0x7f07000e;
         public static final int the_number_is_exists=0x7f070063;
         public static final int the_number_should_not_be_empty=0x7f07006d;
@@ -399,6 +398,7 @@ public final class R {
         public static final int update_info_url=0x7f070000;
         public static final int update_success=0x7f070072;
         public static final int update_the_number=0x7f070070;
+        public static final int user_process=0x7f0700b8;
         public static final int welcome_to_use_security_setup_wizard=0x7f07002f;
         public static final int when_the_device_is_missing_send_code_to_the_phone_=0x7f070041;
         public static final int white=0x7f070061;

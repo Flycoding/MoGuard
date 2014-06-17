@@ -24,8 +24,6 @@ import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -150,7 +148,7 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 			@Override
 			public void bindKeyView(View view, int position, Context context, Boolean k) {
 				TextView textView = (TextView) view;
-				textView.setText(k ? "System Process" : "User Process");
+				textView.setText(k ? R.string.system_process : R.string.user_process);
 			}
 
 			@Override
@@ -245,26 +243,6 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		getLoaderManager().restartLoader(LOAD_ID, null, this);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.task_manager, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
