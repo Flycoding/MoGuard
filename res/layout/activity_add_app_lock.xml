@@ -24,19 +24,19 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:onClick="add"
-            android:text="@string/add"
+            android:onClick="cancel"
+            android:text="@string/cancel"
             android:textColor="#0f0" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:onClick="cancel"
-            android:text="@string/cancel"
+            android:onClick="add"
+            android:text="@string/add"
             android:textColor="#0f0" />
     </LinearLayout>
 

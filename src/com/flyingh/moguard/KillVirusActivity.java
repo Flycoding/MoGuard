@@ -92,7 +92,7 @@ public class KillVirusActivity extends Activity {
 								+ cursor.getString(cursor.getColumnIndex(COLUMN_DESC)));
 					}
 					cursor.close();
-					SystemClock.sleep(300);
+					SystemClock.sleep(100);
 				}
 				result.add("com.flyingh.haha:virus9527\nthis is a virus");
 				result.add("com.flyingh.haha:virus9527\nthis is a virus");
@@ -101,7 +101,7 @@ public class KillVirusActivity extends Activity {
 
 			@Override
 			protected void onProgressUpdate(String... values) {
-				progressTextView.setText("Scanning " + values[0]);
+				progressTextView.setText(getString(R.string.scanning_) + values[0]);
 				progressBar.incrementProgressBy(1);
 				scannedPackages.addFirst(values[0]);
 				changeData(scannedPackages);
@@ -131,8 +131,8 @@ public class KillVirusActivity extends Activity {
 					adapter.clear();
 					progressTextView.setText(R.string.no_virus_found);
 				} else {
-					progressTextView.setText(getString(R.string.found_) + result.size()
-							+ (result.size() == 1 ? getString(R.string._virus) : getString(R.string._viruses)));
+					progressTextView.setText(getString(R.string.found_)
+							+ (result.size() == 1 ? getString(R.string._virus) : getString(R.string._viruses)) + ":" + result.size());
 					changeData(result);
 				}
 			}

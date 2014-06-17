@@ -7,12 +7,13 @@ import com.flyingh.moguard.KillVirusActivity;
 import com.flyingh.moguard.NetworkManagerActivity;
 import com.flyingh.moguard.R;
 import com.flyingh.moguard.SecurityActivity;
+import com.flyingh.moguard.SettingsActivity;
 import com.flyingh.moguard.SystemOptimizeActivity;
 import com.flyingh.moguard.TaskManagerActivity;
 
 public enum Feature {
 	//@formatter:off
-	SECURITY(R.drawable.security, R.string.security, SecurityActivity.class),
+	SECURITY(R.drawable.security, R.string.anti_theft, SecurityActivity.class),
 	PHONE_GUARD (R.drawable.callmsgsafe2, R.string.phone_guard, BlacklistActivity.class),
 	APPS(R.drawable.app3, R.string.apps, AppManagerActivity.class),
 	TASK_MANAGER(R.drawable.taskmanager4, R.string.task_manager, TaskManagerActivity.class),
@@ -20,7 +21,7 @@ public enum Feature {
 	NETWORK_MANAGER(R.drawable.netmanager6, R.string.network_manager, NetworkManagerActivity.class),
 	SYSTEM_OPTIMIZE(R.drawable.sysoptimize7, R.string.system_optimize, SystemOptimizeActivity.class),
 	ADVANCED_TOOLS(R.drawable.atools8, R.string.advanced_tools, AdvancedToolsActivity.class),
-	SETTINGS(R.drawable.settings9, R.string.settings, null);
+	SETTINGS(R.drawable.settings9, R.string.settings, SettingsActivity.class);
 	//@formatter:on
 	private int iconId;
 	private int featureNameId;

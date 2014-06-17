@@ -55,7 +55,6 @@
         </activity>
         <activity
             android:name="com.flyingh.moguard.MainActivity"
-            android:label="@string/title_activity_main"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
@@ -65,10 +64,6 @@
         <activity
             android:name="com.flyingh.moguard.SecurityWizardActivity"
             android:label="@string/title_activity_security_wizard" >
-        </activity>
-        <activity
-            android:name="com.flyingh.moguard.SelectContactActivity"
-            android:label="@string/title_activity_select_contact" >
         </activity>
         <activity
             android:name="com.flyingh.moguard.AdvancedToolsActivity"
@@ -196,6 +191,10 @@
         <activity
             android:name="com.flyingh.moguard.KillVirusActivity"
             android:label="@string/title_activity_kill_virus" >
+        </activity>
+        <activity
+            android:name="com.flyingh.moguard.SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 

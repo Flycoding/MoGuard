@@ -205,10 +205,10 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private void setProcessAndMemoryInfo() {
 		List<RunningAppProcessInfo> runningAppProcesses = am.getRunningAppProcesses();
-		processCountTextView.setText("current process:" + runningAppProcesses.size());
+		processCountTextView.setText(getString(R.string.current_process_) + runningAppProcesses.size());
 		MemoryInfo outInfo = new MemoryInfo();
 		am.getMemoryInfo(outInfo);
-		memoryTextView.setText("avail/total:" + Formatter.formatFileSize(this, outInfo.availMem) + "/"
+		memoryTextView.setText(getString(R.string.avail_total_) + Formatter.formatFileSize(this, outInfo.availMem) + "/"
 				+ Formatter.formatFileSize(this, outInfo.totalMem));
 	}
 
@@ -226,8 +226,8 @@ public class TaskManagerActivity extends Activity implements LoaderCallbacks<Lis
 		}
 		Toast toast = new Toast(this);
 		TextView toastView = (TextView) View.inflate(this, R.layout.toast, null);
-		toastView.setText("killed process number:" + killedProcessCount + "\n");
-		toastView.append("cleaned memory:" + Formatter.formatFileSize(this, cleanedMemory));
+		toastView.setText(getString(R.string.killed_process_number_) + killedProcessCount + "\n");
+		toastView.append(getString(R.string.cleaned_memory_) + Formatter.formatFileSize(this, cleanedMemory));
 		toast.setView(toastView);
 		toast.setDuration(Toast.LENGTH_SHORT);
 		toast.show();

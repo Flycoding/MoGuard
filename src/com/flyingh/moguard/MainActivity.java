@@ -87,8 +87,8 @@ public class MainActivity extends Activity {
 			public View getView(int position, View convertView, ViewGroup parent) {
 				TextView view = (TextView) (convertView != null ? convertView : View.inflate(MainActivity.this, R.layout.grid_view_item, null));
 				view.setCompoundDrawablesRelativeWithIntrinsicBounds(0, Feature.getIconId(position), 0, R.drawable.divide_line);
-				view.setText(sp.contains(SECURITY_FEATURE_NAME) && Feature.SECURITY.ordinal() == position ? sp.getString(SECURITY_FEATURE_NAME, null)
-						: getItem(position));
+				view.setText(sp.contains(SECURITY_FEATURE_NAME) && Feature.SECURITY.ordinal() == position ? sp.getString(SECURITY_FEATURE_NAME,
+						getString(R.string.anti_theft)) : getItem(position));
 				return view;
 			}
 

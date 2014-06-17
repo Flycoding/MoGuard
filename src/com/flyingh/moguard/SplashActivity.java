@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flyingh.engine.UpdateInfoService;
+import com.flyingh.moguard.util.LocaleUtils;
 import com.flyingh.vo.UpdateInfo;
 
 public class SplashActivity extends Activity {
@@ -46,6 +47,7 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+		LocaleUtils.changeLocale(this);
 		startAnimation();
 		try {
 			final PackageInfo packageInfo = getPackageInfo();
