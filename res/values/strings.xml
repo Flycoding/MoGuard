@@ -190,5 +190,7 @@
     <string name="block_a_call">block a call</string>
     <string name="catch_a_call_ringing_one_time">catch a call ringing one time</string>
     <string name="click_to_add_to_blacklist">click to add to blacklist</string>
+    <string name="network_is_not_available">network is not available</string>
+    <string name="download_failed">download failed</string>
 
 </resources>

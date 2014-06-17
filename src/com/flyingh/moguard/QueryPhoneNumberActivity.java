@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,7 +21,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.flyingh.engine.QueryNumberService;
 import com.flyingh.moguard.util.Const;
 
@@ -48,13 +46,13 @@ public class QueryPhoneNumberActivity extends Activity {
 			@Override
 			protected void onPreExecute() {
 				dialog = new ProgressDialog(QueryPhoneNumberActivity.this);
-				dialog.setTitle("Downloading...");
-				dialog.setMessage("Current progress:");
+				dialog.setTitle(getString(R.string.downloading_));
+				dialog.setMessage(getString(R.string.current_progress_));
 				dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 				dialog.setIndeterminate(false);
 				dialog.show();
 				if (!isNetworkAvailable()) {
-					Toast.makeText(QueryPhoneNumberActivity.this, "network is not available", Toast.LENGTH_SHORT).show();
+					Toast.makeText(QueryPhoneNumberActivity.this, R.string.network_is_not_available, Toast.LENGTH_SHORT).show();
 					cancel(true);
 					finish();
 				}
@@ -105,7 +103,7 @@ public class QueryPhoneNumberActivity extends Activity {
 			@Override
 			protected void onProgressUpdate(Integer... values) {
 				if (values[0] == ERROR) {
-					Toast.makeText(QueryPhoneNumberActivity.this, "download failed", Toast.LENGTH_LONG).show();
+					Toast.makeText(QueryPhoneNumberActivity.this, R.string.download_failed, Toast.LENGTH_LONG).show();
 					cancel(true);
 					finish();
 				} else {

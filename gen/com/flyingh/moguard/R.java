@@ -267,6 +267,7 @@ public final class R {
         public static final int divide_line=0x7f070026;
         public static final int don_t_clean_when_lock_screen=0x7f07009f;
         public static final int don_t_clean_when_locked=0x7f07009d;
+        public static final int download_failed=0x7f0700c0;
         public static final int downloading_=0x7f070007;
         public static final int drag_to_the_position_you_like=0x7f07005e;
         public static final int enter=0x7f07008f;
@@ -289,6 +290,7 @@ public final class R {
         public static final int loading_=0x7f07007d;
         public static final int moguard=0x7f0700a4;
         public static final int mogurad=0x7f070018;
+        public static final int network_is_not_available=0x7f0700bf;
         public static final int network_is_not_available_=0x7f070017;
         public static final int network_manager=0x7f070010;
         public static final int next=0x7f07002d;

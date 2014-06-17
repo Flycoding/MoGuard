@@ -18,7 +18,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.flyingh.engine.ILockService;
 import com.flyingh.moguard.service.AppLockService;
 import com.flyingh.moguard.util.Const;
@@ -73,7 +72,7 @@ public class LockScreenActivity extends Activity {
 		String password = lockPasswordEditText.getText().toString().trim();
 		if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
 			lockPasswordEditText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake));
-			Toast.makeText(this, "password is wrong", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.password_is_wrong, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		lockService.unlock(packageName);
