@@ -27,7 +27,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -48,6 +47,7 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 	private LinearLayout progressLinearLayout;
 	private PopupWindow popupWindow;
 	private SharedPreferences sp;
+	private ArrayAdapter<App> adapter;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -56,6 +56,8 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 		setContentView(R.layout.activity_app_manager);
 		sp = getSharedPreferences(Const.CONFIG_FILE_NAME, MODE_PRIVATE);
 		listView = (ListView) findViewById(R.id.appsListView);
+		initAdapter();
+		listView.setAdapter(adapter);
 		progressLinearLayout = (LinearLayout) findViewById(R.id.progressLinearLayout);
 		getLoaderManager().initLoader(LOAD_ID, null, this);
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -92,6 +94,36 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
+	}
+
+	private void initAdapter() {
+		adapter = new ArrayAdapter<App>(this, R.layout.app_item) {
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				App app = getItem(position);
+				View view = getView(convertView);
+				ViewHolder viewHolder = (ViewHolder) view.getTag();
+				viewHolder.iconImageView.setImageDrawable(app.getIcon());
+				viewHolder.labelTextView.setText(app.getLabel());
+				viewHolder.labelTextView.setTextColor(app.isSystemApp() ? Color.RED : Color.GREEN);
+				viewHolder.totalSizeTextView.setText(app.getTotalSize());
+				viewHolder.totalSizeTextView.setTextColor(app.isSystemApp() ? Color.RED : Color.GREEN);
+				return view;
+			}
+
+			private View getView(View convertView) {
+				if (convertView != null) {
+					return convertView;
+				}
+				View view = View.inflate(AppManagerActivity.this, R.layout.app_item, null);
+				ViewHolder viewHolder = new ViewHolder();
+				viewHolder.iconImageView = (ImageView) view.findViewById(R.id.icon);
+				viewHolder.labelTextView = (TextView) view.findViewById(R.id.label);
+				viewHolder.totalSizeTextView = (TextView) view.findViewById(R.id.totalSize);
+				view.setTag(viewHolder);
+				return view;
+			}
+		};
 	}
 
 	public static enum DisplayMode {
@@ -263,53 +295,16 @@ public class AppManagerActivity extends Activity implements LoaderCallbacks<List
 
 	@Override
 	public void onLoadFinished(Loader<List<App>> loader, final List<App> data) {
-		listView.setAdapter(new BaseAdapter() {
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				App app = getItem(position);
-				View view = getView(convertView);
-				ViewHolder viewHolder = (ViewHolder) view.getTag();
-				viewHolder.iconImageView.setImageDrawable(app.getIcon());
-				viewHolder.labelTextView.setText(app.getLabel());
-				viewHolder.labelTextView.setTextColor(app.isSystemApp() ? Color.RED : Color.GREEN);
-				viewHolder.totalSizeTextView.setText(app.getTotalSize());
-				viewHolder.totalSizeTextView.setTextColor(app.isSystemApp() ? Color.RED : Color.GREEN);
-				return view;
-			}
-
-			private View getView(View convertView) {
-				if (convertView != null) {
-					return convertView;
-				}
-				View view = View.inflate(AppManagerActivity.this, R.layout.app_item, null);
-				ViewHolder viewHolder = new ViewHolder();
-				viewHolder.iconImageView = (ImageView) view.findViewById(R.id.icon);
-				viewHolder.labelTextView = (TextView) view.findViewById(R.id.label);
-				viewHolder.totalSizeTextView = (TextView) view.findViewById(R.id.totalSize);
-				view.setTag(viewHolder);
-				return view;
-			}
-
-			@Override
-			public long getItemId(int position) {
-				return position;
-			}
-
-			@Override
-			public App getItem(int position) {
-				return data.get(position);
-			}
-
-			@Override
-			public int getCount() {
-				return data.size();
-			}
-		});
+		adapter.setNotifyOnChange(false);
+		adapter.clear();
+		adapter.addAll(data);
+		adapter.notifyDataSetChanged();
 		progressLinearLayout.setVisibility(View.GONE);
 	}
 
 	@Override
 	public void onLoaderReset(Loader<List<App>> loader) {
+		adapter.clear();
 	}
 
 }
