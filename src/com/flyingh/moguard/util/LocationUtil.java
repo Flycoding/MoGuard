@@ -12,14 +12,8 @@ public class LocationUtil {
 
 	public static String getLocation(final Context context) {
 		final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		criteria.setAccuracy(Criteria.ACCURACY_FINE);
-		criteria.setAltitudeRequired(false);
-		criteria.setCostAllowed(true);
-		criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
-		criteria.setSpeedRequired(true);
-		final SharedPreferences sharedPreferences = context.getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE);
-		locationManager.requestLocationUpdates(locationManager.getBestProvider(criteria, true), 60000, 50, new LocationListener() {
+		final SharedPreferences sp = context.getSharedPreferences(Const.CONFIG_FILE_NAME, Context.MODE_PRIVATE);
+		locationManager.requestLocationUpdates(locationManager.getBestProvider(configCriteria(), true), 60000, 50, new LocationListener() {
 
 			@Override
 			public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -38,9 +32,19 @@ public class LocationUtil {
 			public void onLocationChanged(Location location) {
 				double longitude = location.getLongitude();
 				double latitude = location.getLatitude();
-				sharedPreferences.edit().putString(Const.PREVIOUS_LOCATION, longitude + "," + latitude).commit();
+				sp.edit().putString(Const.PREVIOUS_LOCATION, longitude + "," + latitude).commit();
 			}
 		});
-		return sharedPreferences.getString(Const.PREVIOUS_LOCATION, null);
+		return sp.getString(Const.PREVIOUS_LOCATION, null);
+	}
+
+	private static Criteria configCriteria() {
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_FINE);
+		criteria.setAltitudeRequired(false);
+		criteria.setCostAllowed(true);
+		criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+		criteria.setSpeedRequired(true);
+		return criteria;
 	}
 }
