@@ -22,8 +22,6 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -60,7 +58,12 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 		lockedAppListView = (ListView) findViewById(R.id.lockedAppListView);
 		initAdapter();
 		lockedAppListView.setAdapter(adapter);
-		lockedAppListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+		lockedAppListView.setOnItemLongClickListener(newOnItemLongClickListener());
+		getLoaderManager().initLoader(LOAD_ID, null, this);
+	}
+
+	private OnItemLongClickListener newOnItemLongClickListener() {
+		return new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,14 +87,12 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 								}
 							}).setNegativeButton(R.string.cancel, null).show();
 				} catch (NameNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Log.i(TAG, e.getMessage());
 				}
 				return true;
 			}
 
-		});
-		getLoaderManager().initLoader(LOAD_ID, null, this);
+		};
 	}
 
 	public void setPassword(View view) {
@@ -162,26 +163,6 @@ public class AppLockActivity extends Activity implements LoaderCallbacks<Cursor>
 				getLoaderManager().restartLoader(LOAD_ID, null, this);
 			}
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.app_lock, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

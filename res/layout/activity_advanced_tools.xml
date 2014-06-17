@@ -17,7 +17,7 @@
         android:onClick="queryPhoneNumber"
         android:padding="3dp"
         android:text="@string/query_phone_number_attribution"
-        android:textColor="#0f0"
+        android:textColor="#ff0"
         android:textSize="20sp" />
 
     <View
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:padding="3dp"
         android:text="@string/phone_nubmer_attribution_setup"
-        android:textColor="#0f0"
+        android:textColor="#ff0"
         android:textSize="20sp" />
 
     <TableLayout
@@ -90,7 +90,7 @@
         android:onClick="selectPhoneAttributionStyle"
         android:padding="3dp"
         android:text="@string/select_phone_attribution_style"
-        android:textColor="#0f0"
+        android:textColor="#ff0"
         android:textSize="20sp" />
 
     <View
@@ -106,7 +106,7 @@
         android:onClick="setPhoneAttributionPosition"
         android:padding="3dp"
         android:text="@string/set_phone_attribution_position"
-        android:textColor="#0f0"
+        android:textColor="#ff0"
         android:textSize="20sp" />
 
     <View
@@ -128,7 +128,7 @@
             android:layout_weight="1"
             android:onClick="backupSms"
             android:text="@string/backup_sms"
-            android:textColor="#0f0" />
+            android:textColor="#ff0" />
 
         <Button
             android:layout_width="wrap_content"
@@ -138,7 +138,7 @@
             android:layout_weight="1"
             android:onClick="restoreSms"
             android:text="@string/restore_sms"
-            android:textColor="#0f0" />
+            android:textColor="#ff0" />
     </LinearLayout>
 
     <View
@@ -154,7 +154,7 @@
         android:onClick="startAppLock"
         android:padding="3dp"
         android:text="@string/app_lock"
-        android:textColor="#0f0"
+        android:textColor="#ff0"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -191,7 +191,7 @@
         android:clickable="true"
         android:onClick="queryCommonNumbers"
         android:text="@string/query_common_numbers"
-        android:textColor="#0f0"
+        android:textColor="#ff0"
         android:textSize="20sp" />
 
 </LinearLayout>

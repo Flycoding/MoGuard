@@ -184,5 +184,11 @@
     <string name="are_you_sure_not_to_start_">Are you sure not to start?</string>
     <string name="system_process">System Process</string>
     <string name="user_process">User Process</string>
+    <string name="block_a_number">block a number</string>
+    <string name="block_a_number_in_blacklist">block a number in blacklist</string>
+    <string name="calls_block">calls block</string>
+    <string name="block_a_call">block a call</string>
+    <string name="catch_a_call_ringing_one_time">catch a call ringing one time</string>
+    <string name="click_to_add_to_blacklist">click to add to blacklist</string>
 
 </resources>

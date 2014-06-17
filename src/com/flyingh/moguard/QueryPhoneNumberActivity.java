@@ -17,8 +17,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -56,8 +54,7 @@ public class QueryPhoneNumberActivity extends Activity {
 				dialog.setIndeterminate(false);
 				dialog.show();
 				if (!isNetworkAvailable()) {
-					Toast.makeText(QueryPhoneNumberActivity.this, "network is not available", Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(QueryPhoneNumberActivity.this, "network is not available", Toast.LENGTH_SHORT).show();
 					cancel(true);
 					finish();
 				}
@@ -92,8 +89,7 @@ public class QueryPhoneNumberActivity extends Activity {
 			}
 
 			private void save(InputStream is) throws FileNotFoundException, IOException {
-				FileOutputStream fos = new FileOutputStream(new File(Environment.getExternalStorageDirectory(),
-						Const.ADDRESS_DB_NAME));
+				FileOutputStream fos = new FileOutputStream(new File(Environment.getExternalStorageDirectory(), Const.ADDRESS_DB_NAME));
 				try {
 					int len = 0;
 					byte[] buffer = new byte[1024 * 16];
@@ -142,26 +138,6 @@ public class QueryPhoneNumberActivity extends Activity {
 		}
 		String result = QueryNumberService.query(this, queryParam);
 		resultTextView.setText(TextUtils.isEmpty(result) ? getString(R.string.no_result) : result);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.query_phone_number, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 }

@@ -185,7 +185,7 @@ public class SystemOptimizeActivity extends ListActivity implements LoaderCallba
 							}
 						});
 						result += delete(new File(filePath));
-						SystemClock.sleep(500);
+						SystemClock.sleep(100);
 						dialog.incrementProgressBy(1);
 					}
 				}
@@ -246,7 +246,6 @@ public class SystemOptimizeActivity extends ListActivity implements LoaderCallba
 		adapter.clear();
 		adapter.addAll(data);
 		adapter.notifyDataSetChanged();
-		setListAdapter(adapter);
 		progressLinearLayout.setVisibility(View.GONE);
 	}
 

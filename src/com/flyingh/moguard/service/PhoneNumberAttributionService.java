@@ -2,7 +2,6 @@ package com.flyingh.moguard.service;
 
 import java.lang.reflect.Method;
 import java.util.Calendar;
-
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -30,12 +29,12 @@ import android.view.KeyEvent;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.TextView;
-
 import com.android.internal.telephony.ITelephony;
 import com.flyingh.dao.BlacklistDao;
 import com.flyingh.engine.QueryNumberService;
 import com.flyingh.moguard.AdvancedToolsActivity;
 import com.flyingh.moguard.BlacklistActivity;
+import com.flyingh.moguard.R;
 import com.flyingh.moguard.util.Const;
 import com.flyingh.vo.Feature;
 
@@ -122,8 +121,8 @@ public class PhoneNumberAttributionService extends Service {
 
 			@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 			private void showBlockBlacklistNumberNotification(final String incomingNumber) {
-				Notification notification = new Notification.Builder(PhoneNumberAttributionService.this).setTicker("block a number")
-						.setContentTitle("block a number in blacklist").setContentText(incomingNumber).setSubText("calls block")
+				Notification notification = new Notification.Builder(PhoneNumberAttributionService.this).setTicker(getString(R.string.block_a_number))
+						.setContentTitle(getString(R.string.block_a_number_in_blacklist)).setContentText(incomingNumber).setSubText(getString(R.string.calls_block))
 						.setContentInfo(String.format(DateUtils.isToday(System.currentTimeMillis()) ? "%tT" : "%1$tF %1$tT", Calendar.getInstance()))
 						.setAutoCancel(true).setDefaults(Notification.DEFAULT_LIGHTS)
 						.setLargeIcon(BitmapFactory.decodeResource(getResources(), Feature.PHONE_GUARD.getIconId()))
@@ -174,8 +173,8 @@ public class PhoneNumberAttributionService extends Service {
 	protected void showNotification(String incomingNumber) {
 		Intent intent = new Intent(this, BlacklistActivity.class);
 		intent.putExtra(INCOMING_NUMBER, incomingNumber);
-		Notification notification = new Notification.Builder(this).setTicker("block a call").setContentTitle("catch a call ringing one time")
-				.setContentText(incomingNumber).setSubText("click to add to blacklist")
+		Notification notification = new Notification.Builder(this).setTicker(getString(R.string.block_a_call)).setContentTitle(getString(R.string.catch_a_call_ringing_one_time))
+				.setContentText(incomingNumber).setSubText(getString(R.string.click_to_add_to_blacklist))
 				.setContentInfo(String.format(DateUtils.isToday(System.currentTimeMillis()) ? "%tT" : "%1$tF %1$tT", Calendar.getInstance()))
 				.setAutoCancel(true).setContentIntent(PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT))
 				.setDefaults(Notification.DEFAULT_LIGHTS).setLargeIcon(BitmapFactory.decodeResource(getResources(), Feature.PHONE_GUARD.getIconId()))

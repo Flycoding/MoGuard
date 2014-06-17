@@ -81,7 +81,6 @@ public final class R {
         public static final int widget_bg_portrait=0x7f02002e;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b0046;
         public static final int appLockCheckBox=0x7f0b0045;
         public static final int appNameTextView=0x7f0b000d;
         public static final int appShowModeSpinner=0x7f0b0009;
@@ -96,13 +95,13 @@ public final class R {
         public static final int checkBox=0x7f0b0044;
         public static final int cleanButton=0x7f0b0030;
         public static final int cleanModeCheckBox=0x7f0b0025;
-        public static final int clear_external_cache=0x7f0b004b;
+        public static final int clear_external_cache=0x7f0b004a;
         public static final int codeSizeTextView=0x7f0b0040;
         public static final int confirm_input_password=0x7f0b002f;
         public static final int confirm_set_password=0x7f0b003f;
         public static final int container=0x7f0b0000;
         public static final int dataSizeTextView=0x7f0b0041;
-        public static final int deleteMenuItem=0x7f0b004a;
+        public static final int deleteMenuItem=0x7f0b0049;
         public static final int displayModeCheckBox=0x7f0b0023;
         public static final int expandableListView=0x7f0b0011;
         public static final int feature_name=0x7f0b002c;
@@ -127,8 +126,8 @@ public final class R {
         public static final int nameTextView=0x7f0b002a;
         public static final int number=0x7f0b0029;
         public static final int numberTextView=0x7f0b002b;
-        public static final int order_by_name=0x7f0b0047;
-        public static final int order_by_size=0x7f0b0048;
+        public static final int order_by_name=0x7f0b0046;
+        public static final int order_by_size=0x7f0b0047;
         public static final int packageNameTextView=0x7f0b000e;
         public static final int password=0x7f0b003c;
         public static final int processCountTextView=0x7f0b0020;
@@ -154,7 +153,7 @@ public final class R {
         public static final int txTextView=0x7f0b0033;
         public static final int uninstallTextView=0x7f0b0036;
         public static final int unlockedAppListView=0x7f0b0001;
-        public static final int updateMenuItem=0x7f0b0049;
+        public static final int updateMenuItem=0x7f0b0048;
         public static final int version_name=0x7f0b001f;
         public static final int wifiTrafficTextView=0x7f0b0018;
     }
@@ -200,19 +199,9 @@ public final class R {
         public static final int unlocked_app_item=0x7f030026;
     }
     public static final class menu {
-        public static final int add_app_lock=0x7f0a0000;
-        public static final int advanced_tools=0x7f0a0001;
-        public static final int app_lock=0x7f0a0002;
-        public static final int app_manager=0x7f0a0003;
-        public static final int blacklist_item_context_menu=0x7f0a0004;
-        public static final int common_number=0x7f0a0005;
-        public static final int lock_screen=0x7f0a0006;
-        public static final int network=0x7f0a0007;
-        public static final int phone_attribution_position=0x7f0a0008;
-        public static final int query_phone_number=0x7f0a0009;
-        public static final int select_contact=0x7f0a000a;
-        public static final int system_optimize=0x7f0a000b;
-        public static final int task_manager_settings=0x7f0a000c;
+        public static final int app_manager=0x7f0a0000;
+        public static final int blacklist_item_context_menu=0x7f0a0001;
+        public static final int system_optimize=0x7f0a0002;
     }
     public static final class raw {
         public static final int hay=0x7f060000;
@@ -245,20 +234,26 @@ public final class R {
         public static final int backuping_=0x7f070076;
         public static final int bind=0x7f070034;
         public static final int blacklist=0x7f070066;
+        public static final int block_a_call=0x7f0700bc;
+        public static final int block_a_number=0x7f0700b9;
+        public static final int block_a_number_in_blacklist=0x7f0700ba;
         public static final int blue=0x7f07005a;
         public static final int bound_phone_number_is_=0x7f07003e;
         public static final int cachesize=0x7f0700ae;
+        public static final int calls_block=0x7f0700bb;
         public static final int can_t_run=0x7f070083;
         public static final int cancel=0x7f070014;
         public static final int cancel_=0x7f07001c;
         public static final int canceled=0x7f070008;
         public static final int cardtype_=0x7f07004d;
+        public static final int catch_a_call_ringing_one_time=0x7f0700bd;
         public static final int change_the_feature_s_name_=0x7f070016;
         public static final int city_=0x7f07004c;
         public static final int clean=0x7f070096;
         public static final int clean_mode=0x7f07009c;
         public static final int clean_when_lock_screen=0x7f0700a0;
         public static final int clear_external_cache=0x7f0700af;
+        public static final int click_to_add_to_blacklist=0x7f0700be;
         public static final int codesize=0x7f0700ac;
         public static final int confirm=0x7f07001d;
         public static final int confirm_=0x7f0700b5;
